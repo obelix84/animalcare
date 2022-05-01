@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.88.1">
+    <title>Heroes · Bootstrap v5.1</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/heroes/">
+
+
+
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+
+
+    <!-- Custom styles for this template -->
+    <link href="heroes.css" rel="stylesheet">
+</head>
+<body>
+
+<main>
+    <div class="b-example-divider"></div>
+    <h1 class="visually-hidden">Heroes examples</h1>
+
+    <div class="px-4 py-5 my-5 text-center">
+        <img class="d-block mx-auto mb-4" src="/img/bootstrap-logo.svg" alt="" width="72" height="57">
+        <h1 class="display-5 fw-bold">Animal Care</h1>
+        <div class="col-lg-6 mx-auto">
+            <p class="lead mb-4">This is Boootsrap template for spring security test. Please click the button bellow.</p>
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                <a th:href="@{/public}"  role="button" class="btn btn-primary btn-lg px-4 gap-3">Public</a>
+                <a th:href="@{/authenticated}"  role="button" class="btn btn-outline-secondary btn-lg px-4">Private</a>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="b-example-divider mb-0"></div>
+</main>
+
+
+<script src="/js/bootstrap.bundle.min.js"></script>
+
+
+</body>
+</html>
