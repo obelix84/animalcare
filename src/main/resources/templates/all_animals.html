@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Animals</title>
+</head>
+
+<body>
+    <h3>All Animals</h3>
+
+    <p></p>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Kind</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Gender</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">Condition</th>
+                    <th scope="col">Description</th>
+                </tr>
+            </thead>
+            <tr th:each="animal : ${animals}">
+                <th scope="row">
+                    <p th:utext="${animal.id}">
+                </th>
+                <td>
+                    <p th:utext="${animal.kind}">
+                </td>
+                <td>
+                    <p th:utext="${animal.name}">
+                </td>
+                <td>
+                    <p th:utext="${animal.gender}">
+                </td>
+                <td>
+                    <p th:utext="${animal.age}">
+                </td>
+                <td>
+                    <p th:utext="${animal.condition}">
+                </td>
+                <td>
+                    <p th:utext="${animal.description}">
+                </td>
+            </tr>
+        </table>
+    </div>
+
+</body>
+
+</html>

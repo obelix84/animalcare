@@ -30,3 +30,19 @@ insert into AUTHORITIES values('user', 'USER');
 insert into AUTHORITIES values('user1', 'USER');
 insert into AUTHORITIES values('manager', 'MANAGER');
 insert into AUTHORITIES values('admin', 'ADMIN');
+
+CREATE TABLE animals (
+    id                      bigserial PRIMARY KEY,
+    kind                    VARCHAR(80) NOT NULL,
+    name                    VARCHAR(40) NOT NULL,
+    gender                  VARCHAR(10) NOT NULL,
+    age                     INT NOT NULL,
+    condition               VARCHAR(255) NOT NULL,
+    description             CHARACTER VARYING
+);
+
+INSERT INTO animals (kind, name, gender, age, condition, description)
+VALUES
+('Cat', 'Felix', 'Male', 5, 'Good', 'Looking for a host'),
+('Cat', 'Kassandra', 'Female', 4, 'Good', 'Looking for a host'),
+('Dog', 'Rex', 'Female', 7, 'Good', 'Looking for a host');
