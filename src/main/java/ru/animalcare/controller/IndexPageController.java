@@ -1,5 +1,6 @@
 package ru.animalcare.controller;
 
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,9 +10,12 @@ import ru.animalcare.service.AnimalService;
 
 import java.util.List;
 
+import java.security.Principal;
+
 @Controller
 @RequiredArgsConstructor
 public class IndexPageController {
+
     private final AnimalService animalService;
 
     @GetMapping("/")
@@ -24,8 +28,10 @@ public class IndexPageController {
         return "public";
     }
 
+    //@PreAuthorize("hasAuthority('ROLE_USER')")
     @GetMapping("/authenticated")
-    public String privatePage() {
+    public String privatePage(Model model, Principal principal) {
+        model.addAttribute("user", principal.getName());
         return "authenticated";
     }
 
@@ -48,5 +54,12 @@ public class IndexPageController {
 //    public String profileAnimal(){
 //        return "redirect:/profile_animal";
 //    }
+
+
+    @GetMapping("/login")
+    public String loginPage() {
+        return "login";
+    }
+
 
 }
