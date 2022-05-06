@@ -5,7 +5,12 @@
     <title>Title</title>
 </head>
 <body>
-private
+<h1 th:text="Welcome + ' ' + ${user}"></h1>
+<form name="f" th:action="@{/logout}" method="post">
+    <fieldset>
+            <button type="submit" class="btn">Logout</button>
+    </fieldset>
+</form>
 
 </body>
 </html>
