@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import ru.animalcare.models.Animal;
 import ru.animalcare.services.AnimalService;
 
@@ -35,5 +36,18 @@ public class IndexPageController {
         model.addAttribute("animals", animals);
         return "all_animals";
     }
+
+    // todo: доработать
+//    @GetMapping("/profile_animal")
+//    public String profileAnimal(Model model, @RequestParam Long id){
+//        Animal currentAnimal = animalService.findAnimalById(id);
+//        model.addAttribute("current_animal", currentAnimal);
+//        return "redirect: profile_animal";
+//    }
+
+//    @GetMapping("/profile_animal")
+//    public String profileAnimal(){
+//        return "redirect:/profile_animal";
+//    }
 
 }

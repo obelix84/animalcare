@@ -6,6 +6,7 @@ import ru.animalcare.models.Animal;
 import ru.animalcare.repositories.AnimalRepository;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 @RequiredArgsConstructor
@@ -14,5 +15,9 @@ public class AnimalService {
 
     public List<Animal> findAll(){
         return animalRepository.findAll();
+    }
+
+    public Animal findAnimalById(Long id){
+        return animalRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Animal for ID: " + id + " not found"));
     }
 }

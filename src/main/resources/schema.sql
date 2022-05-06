@@ -45,4 +45,4 @@ INSERT INTO animals (kind, name, gender, age, condition, description)
 VALUES
 ('Cat', 'Felix', 'Male', 5, 'Good', 'Looking for a host'),
 ('Cat', 'Kassandra', 'Female', 4, 'Good', 'Looking for a host'),
-('Dog', 'Rex', 'Female', 7, 'Good', 'Looking for a host');
+('Dog', 'Rex', 'Male', 7, 'Good', 'Looking for a host');
