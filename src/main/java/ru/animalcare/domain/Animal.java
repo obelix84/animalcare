@@ -1,4 +1,4 @@
-package ru.animalcare.models;
+package ru.animalcare.domain;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -1,9 +1,9 @@
-package ru.animalcare.services;
+package ru.animalcare.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.animalcare.models.Animal;
-import ru.animalcare.repositories.AnimalRepository;
+import ru.animalcare.domain.Animal;
+import ru.animalcare.repository.AnimalRepository;
 
 import java.util.List;
 import java.util.NoSuchElementException;

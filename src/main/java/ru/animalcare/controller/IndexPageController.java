@@ -1,12 +1,11 @@
-package ru.animalcare.controllers;
+package ru.animalcare.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import ru.animalcare.models.Animal;
-import ru.animalcare.services.AnimalService;
+import ru.animalcare.domain.Animal;
+import ru.animalcare.service.AnimalService;
 
 import java.util.List;
 
