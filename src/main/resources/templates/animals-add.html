@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Edit</title>
+</head>
+
+<body>
+<h1>Edit Animal</h1>
+<form th:action="@{/animals-add}" th:object="${animals}" method="post">
+    <table>
+        <tr>
+            <td>Кличка:</td>
+            <td><input required type="text" th:field="*{name}"/></td>
+        </tr>
+        <tr>
+            <td>Возраст:</td>
+            <td><input required type="text" input th:field="*{age}"/>
+
+            </td>
+        </tr>
+        <tr>
+            <td>Категория:</td>
+            <td>
+                <input required type="text"  th:object="${typeOfAnimal}" th:field="${typeOfAnimal}"/>
+                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                    <option selected>Выберите категорию</option>
+                    <option th:each="typeName : ${typeOfAnimal}" th:value="${typeName.id}"
+                            th:text="${animals.typeOfAnimals}"></option>
+                </select>
+
+            </td>
+        </tr>
+        <tr>
+            <td>Пол:</td>
+            <td><input required type="text" input th:field="*{gender}"/></td>
+        </tr>
+        <tr>
+            <td>Состояние:</td>
+            <td><input required type="text" input th:field="*{condition}"/></td>
+        </tr>
+        <tr>
+            <td>Текстовое описание:</td>
+            <td><input required type="text" input th:field="*{description}"/></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <button type="submit" class="btn btn-primary">Сохранить</button>
+            </td>
+        </tr>
+    </table>
+    <a href="main.html" th:href="@{/home}">Back to Home Page</a>
+</form>
+</body>
+</html>

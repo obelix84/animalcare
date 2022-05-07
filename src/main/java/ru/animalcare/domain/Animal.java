@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "animals")
@@ -15,9 +16,6 @@ public class Animal {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-
-    @Column(name = "kind")
-    private String kind;
 
     @Column(name = "name")
     private String name;
@@ -33,5 +31,8 @@ public class Animal {
 
     @Column(name = "description")
     private String description;
+
+    @OneToMany
+    List<TypeOfAnimal> typeOfAnimals;
 
 }
