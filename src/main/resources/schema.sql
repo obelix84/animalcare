@@ -33,7 +33,6 @@ insert into AUTHORITIES values('admin', 'ADMIN');
 
 CREATE TABLE animals (
     id                      bigserial PRIMARY KEY,
-    kind                    VARCHAR(80) NOT NULL,
     name                    VARCHAR(40) NOT NULL,
     gender                  VARCHAR(10) NOT NULL,
     age                     INT NOT NULL,
@@ -41,8 +40,17 @@ CREATE TABLE animals (
     description             CHARACTER VARYING
 );
 
-INSERT INTO animals (kind, name, gender, age, condition, description)
+INSERT INTO animals ( name, gender, age, condition, description)
 VALUES
-('Cat', 'Felix', 'Male', 5, 'Good', 'Looking for a host'),
-('Cat', 'Kassandra', 'Female', 4, 'Good', 'Looking for a host'),
-('Dog', 'Rex', 'Male', 7, 'Good', 'Looking for a host');
+( 'Felix', 'Male', 5, 'Good', 'Looking for a host'),
+( 'Kassandra', 'Female', 4, 'Good', 'Looking for a host'),
+( 'Rex', 'Male', 7, 'Good', 'Looking for a host');
+
+CREATE TABLE typeOfAnimal (
+                         id                      bigserial PRIMARY KEY,
+                         typeName                VARCHAR(80) NOT NULL,
+);
+INSERT INTO typeOfAnimal (typeName)
+VALUES
+    ('Cat'),
+    ('Dog');
