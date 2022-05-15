@@ -14,10 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity(debug = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/css/**", "/js/**","/img/**", "/h2-console/**");
-    }
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -40,9 +37,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     }
 
-    @Bean
-    protected PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/css/**", "/js/**","/img/**", "/h2-console/**");
     }
+
+//    @Bean
+//    protected PasswordEncoder passwordEncoder() {
+//        return new BCryptPasswordEncoder();
+//    }
 
 }

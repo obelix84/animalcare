@@ -53,9 +53,6 @@ public class RegistrationController {
         userForm.setAuthorities(Arrays.asList(authority));
         userService.save(userForm);
         userService.loadUserByUsername(userForm.getUsername());
-
-        //Тут нужно перенаправить в authenticated или main?
-        //return "redirect:/authenticated";
         return "redirect:/";
     }
 }

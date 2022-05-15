@@ -12,16 +12,27 @@ import java.util.List;
 @Table(name = "USERS")
 @Data
 public class User {
+
     @Id
     @Column(name = "id", unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
+
     @Column(name = "username", unique = true)
     String username;
+
     @Column(name = "password", nullable = false)
     String password;
+
+    @Column(name = "firstName")
+    private String firstName;
+
+    @Column(name = "lastName")
+    private String lastName;
+
     @Column(name = "email", nullable = false)
     String email;
+
     @Column(name = "enabled", nullable = false)
     boolean enabled;
 
