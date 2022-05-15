@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+<html lang="en" itemscope itemtype="http://schema.org/WebPage" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 
@@ -61,6 +61,11 @@
                                 <h6 class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-1">
                                     Landing Pages
                                 </h6>
+
+                                <a  th:href="@{/animals}" class="dropdown-item border-radius-md">
+                                    <span>All Animals</span>
+                                </a>
+
                                 <a href="./pages/about-us.html" class="dropdown-item border-radius-md">
                                     <span>About Us</span>
                                 </a>
