@@ -24,10 +24,10 @@ public class User {
     @Column(name = "password", nullable = false)
     String password;
 
-    @Column(name = "firstName")
+    @Column(name = "first_name")
     private String firstName;
 
-    @Column(name = "lastName")
+    @Column(name = "last_name")
     private String lastName;
 
     @Column(name = "email", nullable = false)
@@ -36,6 +36,7 @@ public class User {
     @Column(name = "enabled", nullable = false)
     boolean enabled;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
+//    cascade = {CascadeType.PERSIST, CascadeType.MERGE}
+    @ManyToMany(fetch = FetchType.LAZY)
     private Collection<Authority> authorities;
 }

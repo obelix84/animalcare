@@ -2,6 +2,8 @@ create table USERS(
     id bigint not null primary key auto_increment,
     username varchar(50) not null,
     password varchar(80) not null,
+    first_name varchar(80) not null,
+    last_name varchar(80) not null,
     email varchar(100) not null,
     enabled boolean not null
 );
@@ -25,16 +27,16 @@ create table USERS_AUTHORITIES
 -- пароль везде одинаковый
 -- admin password
 -- insert into USERS(username, password, email, enabled)  values('admin', '$2a$10$yMK04o.HsK9N2Xv.ENsrDe3HiXUqZhoeQxYqMum8oHzL.U5uglREm', 'admin@mail.ru', true);
-insert into USERS(username, password, email, enabled)  values('admin', '$2a$10$BoAjnAXDD9xiR34FPSTP2.BMu..hYqhymJp46K/7j9aRzGowlgpBO', 'admin@mail.ru', true);
+insert into USERS(first_name,last_name,username, password, email, enabled)  values('admin','admin','admin', '$2a$10$BoAjnAXDD9xiR34FPSTP2.BMu..hYqhymJp46K/7j9aRzGowlgpBO', 'admin@mail.ru', true);
 -- user password
-insert into USERS(username, password, email, enabled)  values('user', '$2a$10$BoAjnAXDD9xiR34FPSTP2.BMu..hYqhymJp46K/7j9aRzGowlgpBO', 'user@mail.ru', true);
+insert into USERS(first_name,last_name,username, password, email, enabled)  values('user','user','user', '$2a$10$BoAjnAXDD9xiR34FPSTP2.BMu..hYqhymJp46K/7j9aRzGowlgpBO', 'user@mail.ru', true);
 -- user1 password
-insert into USERS(username, password, email, enabled)  values('user1', '$2a$10$BoAjnAXDD9xiR34FPSTP2.BMu..hYqhymJp46K/7j9aRzGowlgpBO', 'user1@mail.ru', true);
+insert into USERS(first_name,last_name,username, password, email, enabled)  values('user1','user1','user1', '$2a$10$BoAjnAXDD9xiR34FPSTP2.BMu..hYqhymJp46K/7j9aRzGowlgpBO', 'user1@mail.ru', true);
 -- manager password
-insert into USERS(username, password, email, enabled) values('manager', '$2a$10$BoAjnAXDD9xiR34FPSTP2.BMu..hYqhymJp46K/7j9aRzGowlgpBO', 'manager@mail.ru', true);
+insert into USERS(first_name,last_name,username, password, email, enabled) values('manager','manager','manager', '$2a$10$BoAjnAXDD9xiR34FPSTP2.BMu..hYqhymJp46K/7j9aRzGowlgpBO', 'manager@mail.ru', true);
 
 CREATE TABLE animals (
-    id                      bigserial PRIMARY KEY,
+    id                      long PRIMARY KEY,
     kind                    VARCHAR(80) NOT NULL,
     name                    VARCHAR(40) NOT NULL,
     gender                  VARCHAR(10) NOT NULL,
@@ -43,11 +45,11 @@ CREATE TABLE animals (
     description             CHARACTER VARYING
 );
 
-INSERT INTO animals (kind, name, gender, age, condition, description)
+INSERT INTO animals (id,kind, name, gender, age, condition, description)
 VALUES
-('Cat', 'Felix', 'Male', 5, 'Good', 'Looking for a host'),
-('Cat', 'Kassandra', 'Female', 4, 'Good', 'Looking for a host'),
-('Dog', 'Rex', 'Male', 7, 'Good', 'Looking for a host');
+(1,'Cat', 'Felix', 'Male', 5, 'Good', 'Looking for a host'),
+(2,'Cat', 'Kassandra', 'Female', 4, 'Good', 'Looking for a host'),
+(3,'Dog', 'Rex', 'Male', 7, 'Good', 'Looking for a host');
 
 -- Роли:
 --  USER обычный пользоватьель, может регистрироватьс и создавать объявления

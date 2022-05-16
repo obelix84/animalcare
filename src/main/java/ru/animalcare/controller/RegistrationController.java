@@ -41,7 +41,7 @@ public class RegistrationController {
 
     @PostMapping("/register")
     public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult) {
-        userValidator.validate(userForm, bindingResult);
+   //     userValidator.validate(userForm, bindingResult);
 
         if (bindingResult.hasErrors()) {
             logger.error(String.valueOf(bindingResult.getFieldError()));
@@ -49,9 +49,12 @@ public class RegistrationController {
         }
         Authority authority = new Authority();
         authority.setAuthority("USER");
-        //authority.setId(1L);
+        authority.setId(1L);
         userForm.setAuthorities(Arrays.asList(authority));
         userService.save(userForm);
+        System.out.println("-----------------------------------------------------");
+        System.out.println("registration done for user:" + userForm.getUsername());
+        System.out.println("-----------------------------------------------------");
         userService.loadUserByUsername(userForm.getUsername());
         return "redirect:/";
     }

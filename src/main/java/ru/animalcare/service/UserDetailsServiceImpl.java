@@ -44,8 +44,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
     public void save(User user) {
-         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setPassword(user.getPassword());
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepo.save(user);
     }
 
