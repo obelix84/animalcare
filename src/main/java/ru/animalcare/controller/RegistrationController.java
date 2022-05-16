@@ -56,6 +56,6 @@ public class RegistrationController {
         System.out.println("registration done for user:" + userForm.getUsername());
         System.out.println("-----------------------------------------------------");
         userService.loadUserByUsername(userForm.getUsername());
-        return "redirect:/";
+        return "redirect:/authenticated";
     }
 }
