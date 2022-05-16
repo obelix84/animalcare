@@ -2,6 +2,7 @@ package ru.animalcare.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +14,7 @@ import ru.animalcare.service.TypeService;
 import java.util.ArrayList;
 import java.util.List;
 
-@RestController
+@Controller
 @RequiredArgsConstructor
 public class AnimalController {
     private final AnimalService animalService;
@@ -46,9 +47,8 @@ public class AnimalController {
     public String displayingTheAnimals(Model model) {
         List<TypeOfAnimal> type = new ArrayList<>();
         typeService.findAll().forEach(type::add);
-        model.addAttribute("animals",new Animal() );
+        model.addAttribute("animals", new Animal());
         model.addAttribute("type", type);
-
-        return "/animals-add";
+        return "animals-add";
     }
 }
