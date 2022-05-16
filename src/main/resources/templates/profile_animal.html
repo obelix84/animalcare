@@ -12,7 +12,11 @@
     <h3>Profile Animal</h3>
 
     <p></p>
-        <table border="1">
+    <form th:object="${current_animal}">
+        <p th:utext="${current_animal.id}">
+    </form>
+
+    <table border="1">
             <thead>
                 <tr>
                     <th scope="col">ID</th>

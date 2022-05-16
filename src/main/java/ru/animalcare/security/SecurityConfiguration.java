@@ -2,7 +2,6 @@ package ru.animalcare.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -21,14 +20,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-//                .authorizeRequests().antMatchers("/","/public","/login").permitAll()
-//                .antMatchers("/authenticated", "/admin").authenticated().and()
-//                .formLogin();
-                .authorizeRequests().antMatchers("/","/public","/login").permitAll()
+        http .csrf().disable()
+                .authorizeRequests().antMatchers("/","/public").permitAll()
                 .antMatchers("/authenticated", "/admin").authenticated().and()
                 .formLogin()
-                .loginPage("/login")
+                .loginPage("/login").usernameParameter("login").passwordParameter("entry")
                 .permitAll()
                 .and()
                 .logout()
