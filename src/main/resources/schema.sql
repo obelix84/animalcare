@@ -31,26 +31,47 @@ insert into AUTHORITIES values('user1', 'USER');
 insert into AUTHORITIES values('manager', 'MANAGER');
 insert into AUTHORITIES values('admin', 'ADMIN');
 
+
+create table TYPE_OF_ANIMAL  (
+            id    long not null primary key,
+            name  VARCHAR(100) NOT NULL
+);
+
+INSERT INTO TYPE_OF_ANIMAL (id, name)
+VALUES
+    (1, 'Cat'),
+    (2, 'Dog');
+
+
 CREATE TABLE animals (
-    id                      bigserial PRIMARY KEY,
+    id                      bigint PRIMARY KEY,
     name                    VARCHAR(40) NOT NULL,
     gender                  VARCHAR(10) NOT NULL,
     age                     INT NOT NULL,
     condition               VARCHAR(255) NOT NULL,
-    description             CHARACTER VARYING
+    description             VARCHAR(255) NOT NULL,
+    username                varchar(50) not null,
+    typeOfAnimalId          int,
+    constraint fk_user_animals foreign key(username) references users(username),
+    constraint fk_typeOfAnimal foreign key(typeOfAnimalId) references TYPE_OF_ANIMAL(id)
 );
 
-INSERT INTO animals ( name, gender, age, condition, description)
+INSERT INTO animals ( id, name, gender, age, condition, description, username, typeOfAnimalId)
 VALUES
-( 'Felix', 'Male', 5, 'Good', 'Looking for a host'),
-( 'Kassandra', 'Female', 4, 'Good', 'Looking for a host'),
-( 'Rex', 'Male', 7, 'Good', 'Looking for a host');
+( 1, 'Felix', 'Male', 5, 'Good', 'Looking for a host', 'user', 1),
+( 2, 'Kassandra', 'Female', 4, 'Good', 'Looking for a host', 'user1', 2),
+( 3, 'Rex', 'Male', 7, 'Good', 'Looking for a host', 'user1', 2);
 
-CREATE TABLE typeOfAnimal (
-                         id                      bigserial PRIMARY KEY,
-                         typeName                VARCHAR(80) NOT NULL,
+
+CREATE TABLE photos (
+                         id                      long auto_increment primary key ,
+                         name                    varchar(255) not null ,
+                         size                    long not null ,
+                         keyPhoto                varchar(255) not null,
+                         uploadDate              datetime,
+                         comment                 varchar(255) not null ,
+                         animalsId               bigint not null ,
+                         constraint fk_photo_animals foreign key(animalsId) references animals(id)
 );
-INSERT INTO typeOfAnimal (typeName)
-VALUES
-    ('Cat'),
-    ('Dog');
+
+

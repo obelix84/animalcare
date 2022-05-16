@@ -33,6 +33,11 @@ public class Animal {
     private String description;
 
     @OneToMany
+    @JoinColumn(
+            name = "type_id",
+            nullable = false,
+            foreignKey = @ForeignKey(name = "fk_typeOfAnimal")
+    )
     List<TypeOfAnimal> typeOfAnimals;
 
 }

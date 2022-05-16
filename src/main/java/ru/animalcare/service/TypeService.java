@@ -44,7 +44,7 @@ public class TypeService {
             throw new EntityNotFoundException("tape animal no found by id: " + typeOfAnimal.getId());
         }
     }
-
+    // удалить
     public boolean saveOrUpdate(Long typeId) {
         TypeOfAnimal typeOfAnimal = findById(typeId);
         if (typeOfAnimal == null) {
