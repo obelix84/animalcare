@@ -10,6 +10,13 @@
 
 <body>
 <h1>Edit Animal</h1>
+<body>
+<form th:action="upload" enctype="multipart/form-data" method="post" th:object="${photo}">
+    <p>Загрузите ваши фотографии на сервер</p>
+    <p><input type="file" name="uploadPhoto" multiple accept="image/*,image/jpeg">
+        <input type="submit" value="Отправить"></p>
+</form>
+</body>
 <form th:action="@{/animals-add}" th:object="${animals}" method="post" enctype="multipart/form-data" >
 
     <table>
@@ -26,10 +33,10 @@
         <tr>
             <td>Категория:</td>
             <td>
-                <input required type="text"  th:object="${typeOfAnimals}" th:field="${type}"/>
+                <input required type="text"  th:object="${types}" th:field="${types}"/>
                 <select class="form-select form-select-sm" aria-label=".form-select-sm example">
                     <option selected>Выберите категорию</option>
-                    <option th:each="typeName : ${name}" th:value="${typeName.id}"
+                    <option th:each="type : ${types}" th:value="${type.id}"
                             th:text="${animals.typeOfAnimals}"></option>
                 </select>
 
@@ -47,6 +54,7 @@
             <td>Текстовое описание:</td>
             <td><input required type="text" input th:field="*{description}"/></td>
         </tr>
+
         <tr>
             <td colspan="2">
                 <button type="submit" class="btn btn-primary">Сохранить</button>

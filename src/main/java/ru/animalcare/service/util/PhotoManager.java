@@ -12,7 +12,7 @@ import java.nio.file.Paths;
 
 @Component
 public class PhotoManager {
-    private static final String DIRECTORY_PATH = "src/main/resources/img";
+    private static final String DIRECTORY_PATH = "src/main/resources/img/";
 
     public void upload(byte[] resource, String keyName) throws IOException {
         Path path = Paths.get(DIRECTORY_PATH, keyName);
