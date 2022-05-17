@@ -44,6 +44,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
     public void save(User user) {
+        //TODO enabled = true
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepo.save(user);
     }
