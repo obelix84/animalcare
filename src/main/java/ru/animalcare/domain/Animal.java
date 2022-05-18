@@ -17,16 +17,25 @@ public class Animal {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
+
     @Column(name = "name")
     private String name;
+
     @Column(name = "gender")
     private String gender;
+
     @Column(name = "age")
     private int age;
+
     @Column(name = "condition")
     private String condition;
+
     @Column(name = "description")
     private String description;
+
+    @OneToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
 
     @OneToMany
     @JoinColumn(

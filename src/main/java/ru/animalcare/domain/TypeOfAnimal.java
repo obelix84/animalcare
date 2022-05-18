@@ -12,11 +12,11 @@ public class TypeOfAnimal {
     @Id
     @GeneratedValue
     @Column(name = "id")
-    private long id;
+    private Long id;
     @Column(name = "name")
     private String name;
 
-    public TypeOfAnimal (@Value("id") long id,
+    public TypeOfAnimal (@Value("id") Long id,
                          @Value("name") String name) {
         this.id = id;
         this.name = name;

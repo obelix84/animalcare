@@ -37,7 +37,7 @@ insert into USERS(username, password, email, enabled) values('manager', '$2a$10$
 
 
 create table TYPE_OF_ANIMAL  (
-            id    long not null primary key,
+            id    bigint not null primary key,
             name  VARCHAR(100) NOT NULL
 );
 
@@ -54,17 +54,19 @@ CREATE TABLE animals (
     age                     INT NOT NULL,
     condition               VARCHAR(255) NOT NULL,
     description             VARCHAR(255) NOT NULL,
-    username                varchar(50) not null,
-    typeOfAnimalId          int,
-    constraint fk_user_animals foreign key(username) references users(username),
-    constraint fk_typeOfAnimal foreign key(typeOfAnimalId) references TYPE_OF_ANIMAL(id)
+    user_id                 bigint not null,
+    typeOfAnimalId          bigint not null,
+--    constraint fk_user_animals foreign key(username) references users(username),
+--    constraint fk_typeOfAnimal foreign key(typeOfAnimalId) references TYPE_OF_ANIMAL(id)
+    foreign key(user_id) references users(id),
+    foreign key(typeOfAnimalId) references TYPE_OF_ANIMAL(id)
 );
 
-INSERT INTO animals (name, gender, age, condition, description, username, typeOfAnimalId)
+INSERT INTO animals (name, gender, age, condition, description, user_id, typeOfAnimalId)
 VALUES
-( 'Felix', 'Male', 5, 'Good', 'Looking for a host', 'user', 1),
-( 'Kassandra', 'Female', 4, 'Good', 'Looking for a host', 'user1', 2),
-( 'Rex', 'Male', 7, 'Good', 'Looking for a host', 'user1', 2);
+( 'Felix', 'Male', 5, 'Good', 'Looking for a host', 1, 1),
+( 'Kassandra', 'Female', 4, 'Good', 'Looking for a host', 2, 2),
+( 'Rex', 'Male', 7, 'Good', 'Looking for a host', 3, 2);
 
 -- Роли:
 --  USER обычный пользоватьель, может регистрироватьс и создавать объявления
@@ -81,14 +83,10 @@ insert into USERS_AUTHORITIES values(2, 2);
 insert into USERS_AUTHORITIES values(3, 2);
 insert into USERS_AUTHORITIES values(4, 3);
 
-
-
-
-
 CREATE TABLE photos (
-                         id                      long auto_increment primary key ,
+                         id                      bigint auto_increment primary key ,
                          name                    varchar(255) not null ,
-                         size                    long not null ,
+                         size                    bigint not null ,
                          keyPhoto                varchar(255) not null,
                          uploadDate              datetime,
                          comment                 varchar(255) not null ,

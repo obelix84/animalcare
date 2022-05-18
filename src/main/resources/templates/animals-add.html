@@ -17,7 +17,7 @@
         <input type="submit" value="Отправить"></p>
 </form>
 </body>
-<form th:action="@{/animals-add}" th:object="${animals}" method="post" enctype="multipart/form-data" >
+<form th:action="@{animals/animals-add}" th:object="${animal}" method="post" enctype="multipart/form-data" >
 
     <table>
         <tr>
@@ -37,7 +37,7 @@
                 <select class="form-select form-select-sm" aria-label=".form-select-sm example">
                     <option selected>Выберите категорию</option>
                     <option th:each="type : ${types}" th:value="${type.id}"
-                            th:text="${animals.typeOfAnimals}"></option>
+                            th:text="${animal.typeOfAnimals}"></option>
                 </select>
 
             </td>

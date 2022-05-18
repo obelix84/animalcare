@@ -55,9 +55,10 @@ public class AnimalController {
     public String displayingTheAnimals(Model model) {
         List<TypeOfAnimal> type = new ArrayList<>();
         typeService.findAll().forEach(type::add);
-        model.addAttribute("animals",new Animal() );
+        model.addAttribute("animal",new Animal() );
         model.addAttribute("type", type);
 
-        return "/animals-add";
+//        return "/animals-add";
+        return "animals-add";
     }
 }
