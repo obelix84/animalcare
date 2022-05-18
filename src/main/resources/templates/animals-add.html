@@ -33,10 +33,11 @@
         <tr>
             <td>Категория:</td>
             <td>
-                <input required type="text"  th:object="${types}" th:field="${types}"/>
+                <!-- В форме есть какие-то косяки проверить type, передовалось typeS-->
+                <input required type="text"  th:object="${type}" th:field="${type}"/>
                 <select class="form-select form-select-sm" aria-label=".form-select-sm example">
                     <option selected>Выберите категорию</option>
-                    <option th:each="type : ${types}" th:value="${type.id}"
+                    <option th:each="t : ${type}" th:value="${t.id}"
                             th:text="${animal.typeOfAnimals}"></option>
                 </select>
 

@@ -4,10 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
 import ru.animalcare.domain.Animal;
 import ru.animalcare.domain.TypeOfAnimal;
 import ru.animalcare.service.AnimalService;
@@ -43,7 +40,7 @@ public class AnimalController {
                        @RequestParam(value = "type", required = false) TypeOfAnimal type,
                        BindingResult result) {
         if (result.hasErrors()) {
-            return "/animals-add";
+            return "animals-add";
         }
         animalService.save(animal);
         return "redirect:/main";
@@ -56,9 +53,7 @@ public class AnimalController {
         List<TypeOfAnimal> type = new ArrayList<>();
         typeService.findAll().forEach(type::add);
         model.addAttribute("animal",new Animal() );
-        model.addAttribute("type", type);
-
-//        return "/animals-add";
+        model.addAttribute("types", type);
         return "animals-add";
     }
 }
