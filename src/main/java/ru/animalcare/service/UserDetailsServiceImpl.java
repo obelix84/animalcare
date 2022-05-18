@@ -4,11 +4,12 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.animalcare.domain.User;
 import ru.animalcare.repository.UserRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -20,6 +21,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private final PasswordEncoder passwordEncoder;
 
     public UserDetailsServiceImpl(UserRepository userRepo,PasswordEncoder passwordEncoder) {
+
         this.userRepo = userRepo;
         this.passwordEncoder = passwordEncoder;
     }
@@ -42,6 +44,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
     public void save(User user) {
+        //TODO enabled = true
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepo.save(user);
     }

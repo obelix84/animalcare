@@ -36,6 +36,8 @@ public class User {
     @Column(name = "enabled", nullable = false)
     boolean enabled;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
+    //cascade = {CascadeType.PERSIST, CascadeType.MERGE}
+    //не надо использовать эти 2, либо только MERGE, либо ничего.
+    @ManyToMany(cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
     private Collection<Authority> authorities;
 }
