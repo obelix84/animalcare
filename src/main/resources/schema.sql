@@ -1,16 +1,18 @@
 create table USERS(
-    id bigint not null primary key auto_increment,
-    username varchar(50) not null,
-    password varchar(80) not null,
-    email varchar(100) not null,
-    enabled boolean not null
+     id bigint not null primary key auto_increment,
+     username varchar(50) not null,
+     password varchar(80) not null,
+     email varchar(100) not null,
+     enabled boolean not null
 );
+
 create unique index ix_users_username on users (username);
 
 create table AUTHORITIES (
     id bigint not null primary key auto_increment,
     authority varchar(50) not null
 );
+
 create unique index ix_auth_authority on authorities (authority);
 
 create table USERS_AUTHORITIES
@@ -33,21 +35,36 @@ insert into USERS(username, password, email, enabled)  values('user1', '$2a$10$B
 -- manager password
 insert into USERS(username, password, email, enabled) values('manager', '$2a$10$BoAjnAXDD9xiR34FPSTP2.BMu..hYqhymJp46K/7j9aRzGowlgpBO', 'manager@mail.ru', true);
 
+
+create table TYPE_OF_ANIMAL  (
+            id    long not null primary key,
+            name  VARCHAR(100) NOT NULL
+);
+
+INSERT INTO TYPE_OF_ANIMAL (id, name)
+VALUES
+    (1, 'Cat'),
+    (2, 'Dog');
+
+
 CREATE TABLE animals (
     id                      bigserial PRIMARY KEY,
-    kind                    VARCHAR(80) NOT NULL,
     name                    VARCHAR(40) NOT NULL,
     gender                  VARCHAR(10) NOT NULL,
     age                     INT NOT NULL,
     condition               VARCHAR(255) NOT NULL,
-    description             CHARACTER VARYING
+    description             VARCHAR(255) NOT NULL,
+    username                varchar(50) not null,
+    typeOfAnimalId          int,
+    constraint fk_user_animals foreign key(username) references users(username),
+    constraint fk_typeOfAnimal foreign key(typeOfAnimalId) references TYPE_OF_ANIMAL(id)
 );
 
-INSERT INTO animals (kind, name, gender, age, condition, description)
+INSERT INTO animals (name, gender, age, condition, description, username, typeOfAnimalId)
 VALUES
-('Cat', 'Felix', 'Male', 5, 'Good', 'Looking for a host'),
-('Cat', 'Kassandra', 'Female', 4, 'Good', 'Looking for a host'),
-('Dog', 'Rex', 'Male', 7, 'Good', 'Looking for a host');
+( 'Felix', 'Male', 5, 'Good', 'Looking for a host', 'user', 1),
+( 'Kassandra', 'Female', 4, 'Good', 'Looking for a host', 'user1', 2),
+( 'Rex', 'Male', 7, 'Good', 'Looking for a host', 'user1', 2);
 
 -- Роли:
 --  USER обычный пользоватьель, может регистрироватьс и создавать объявления
@@ -63,4 +80,20 @@ insert into USERS_AUTHORITIES values(1, 3);
 insert into USERS_AUTHORITIES values(2, 2);
 insert into USERS_AUTHORITIES values(3, 2);
 insert into USERS_AUTHORITIES values(4, 3);
+
+
+
+
+
+CREATE TABLE photos (
+                         id                      long auto_increment primary key ,
+                         name                    varchar(255) not null ,
+                         size                    long not null ,
+                         keyPhoto                varchar(255) not null,
+                         uploadDate              datetime,
+                         comment                 varchar(255) not null ,
+                         animalsId               bigint not null ,
+                         constraint fk_photo_animals foreign key(animalsId) references animals(id)
+);
+
 
