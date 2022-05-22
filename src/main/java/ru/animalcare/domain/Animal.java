@@ -37,12 +37,16 @@ public class Animal {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
-    @OneToMany
-    @JoinColumn(
-            name = "type_id",
-            nullable = false,
-            foreignKey = @ForeignKey(name = "fk_typeOfAnimal")
-    )
-    List<TypeOfAnimal> typeOfAnimals;
+    @OneToMany(mappedBy = "animal")
+    //@Cascade(org.hibernate.annotations.CascadeType.ALL)
+    private List<TypeOfAnimal> typeOfAnimal;
+
+//    @OneToMany
+//    @JoinColumn(
+//            name = "type_id",
+//            nullable = false,
+//            foreignKey = @ForeignKey(name = "fk_typeOfAnimal")
+//    )
+//    List<TypeOfAnimal> typeOfAnimals;
 
 }

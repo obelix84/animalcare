@@ -16,7 +16,7 @@ public class TypeService {
     private final TypeRepository typeRepository;
 
     public List<TypeOfAnimal> findAll() {
-        return StreamSupport.stream(typeRepository.findAll().spliterator(), true).toList();
+        return typeRepository.findAll();
     }
 
     public TypeOfAnimal findById(long id) {
@@ -44,6 +44,7 @@ public class TypeService {
             throw new EntityNotFoundException("tape animal no found by id: " + typeOfAnimal.getId());
         }
     }
+
     // удалить
     public boolean saveOrUpdate(Long typeId) {
         TypeOfAnimal typeOfAnimal = findById(typeId);

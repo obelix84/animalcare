@@ -10,14 +10,14 @@
 
 <body>
 <h1>Edit Animal</h1>
-<body>
-<form th:action="upload" enctype="multipart/form-data" method="post" th:object="${photo}">
-    <p>Загрузите ваши фотографии на сервер</p>
-    <p><input type="file" name="uploadPhoto" multiple accept="image/*,image/jpeg">
-        <input type="submit" value="Отправить"></p>
-</form>
-</body>
-<form th:action="@{animals/animals-add}" th:object="${animal}" method="post" enctype="multipart/form-data" >
+<!--<body>-->
+<!--<form th:action="upload" enctype="multipart/form-data" method="post" th:object="${photo}">-->
+<!--    <p>Загрузите ваши фотографии на сервер</p>-->
+<!--    <p><input type="file" name="uploadPhoto" multiple accept="image/*,image/jpeg">-->
+<!--        <input type="submit" value="Отправить"></p>-->
+<!--</form>-->
+<!--</body>-->
+<form th:action="@{animals/add}" th:object="${animal}" method="post" enctype="multipart/form-data" >
 
     <table>
         <tr>
@@ -37,8 +37,8 @@
                 <input required type="text"  th:object="${type}" th:field="${type}"/>
                 <select class="form-select form-select-sm" aria-label=".form-select-sm example">
                     <option selected>Выберите категорию</option>
-                    <option th:each="t : ${type}" th:value="${t.id}"
-                            th:text="${animal.typeOfAnimals}"></option>
+                    <option th:each="t : ${type}" th:value="${t}"
+                            th:text="${animal.typeOfAnimal}"></option>
                 </select>
 
             </td>

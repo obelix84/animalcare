@@ -63,12 +63,12 @@ CREATE TABLE animals
     condition      VARCHAR(255) NOT NULL,
     description    VARCHAR(255) NOT NULL,
     user_id        bigint       not null,
-    typeOfAnimalId bigint       not null,
+    type_of_animal_id bigint       not null,
     foreign key (user_id) references users (id),
-    foreign key (typeOfAnimalId) references TYPE_OF_ANIMAL (id)
+    foreign key (type_of_animal_id) references TYPE_OF_ANIMAL (id)
 );
 
-INSERT INTO animals (name, gender, age, condition, description, user_id, typeOfAnimalId)
+INSERT INTO animals (name, gender, age, condition, description, user_id, type_of_animal_id)
 VALUES
 ( 'Felix', 'Male', 5, 'Good', 'Looking for a host', 1, 1),
 ( 'Kassandra', 'Female', 4, 'Good', 'Looking for a host', 2, 2),
