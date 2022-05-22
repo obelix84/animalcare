@@ -8,6 +8,7 @@ import ru.animalcare.repository.TypeRepository;
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.stream.StreamSupport;
 
 @Service
@@ -16,7 +17,7 @@ public class TypeService {
     private final TypeRepository typeRepository;
 
     public List<TypeOfAnimal> findAll() {
-        return StreamSupport.stream(typeRepository.findAll().spliterator(), true).toList();
+        return typeRepository.findAll();
     }
 
     public TypeOfAnimal findById(long id) {
@@ -25,6 +26,10 @@ public class TypeService {
         } catch (NoSuchElementException e) {
             throw new EntityNotFoundException("type animal no found by id: " + id);
         }
+    }
+
+    public Optional<TypeOfAnimal> findTypeAnimalByName(String name) {
+        return typeRepository.findByName(name);
     }
 
     public boolean deleteById(Long id) {
@@ -44,6 +49,7 @@ public class TypeService {
             throw new EntityNotFoundException("tape animal no found by id: " + typeOfAnimal.getId());
         }
     }
+
     // удалить
     public boolean saveOrUpdate(Long typeId) {
         TypeOfAnimal typeOfAnimal = findById(typeId);

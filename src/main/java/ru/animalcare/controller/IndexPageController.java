@@ -36,13 +36,6 @@ public class IndexPageController {
         return "authenticated";
     }
 
-    @GetMapping("/all_animals")
-    public String allAnimals(Model model) {
-        List<Animal> animals = animalService.findAll();
-        model.addAttribute("animals", animals);
-        return "all_animals";
-    }
-
     @RequestMapping("/login")
     public String loginPage() {
         return "login";

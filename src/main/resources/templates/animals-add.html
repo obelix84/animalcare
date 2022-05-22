@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,15 +11,15 @@
 
 <body>
 <h1>Edit Animal</h1>
-<body>
-<form th:action="upload" enctype="multipart/form-data" method="post" th:object="${photo}">
-    <p>Загрузите ваши фотографии на сервер</p>
-    <p><input type="file" name="uploadPhoto" multiple accept="image/*,image/jpeg">
-        <input type="submit" value="Отправить"></p>
-</form>
-</body>
-<form th:action="@{animals/animals-add}" th:object="${animal}" method="post" enctype="multipart/form-data" >
-
+<!--<body>-->
+<!--<form th:action="upload" enctype="multipart/form-data" method="post" th:object="${photo}">-->
+<!--    <p>Загрузите ваши фотографии на сервер</p>-->
+<!--    <p><input type="file" name="uploadPhoto" multiple accept="image/*,image/jpeg">-->
+<!--        <input type="submit" value="Отправить"></p>-->
+<!--</form>-->
+<!--</body>-->
+<!--<form th:action="@{animals/add}" th:object="${animal}" method="post" enctype="multipart/form-data" >-->
+<form th:action="@{add}" th:object="${animal}" th:method="post" enctype="multipart/form-data" >
     <table>
         <tr>
             <td>Кличка:</td>
@@ -33,13 +34,18 @@
         <tr>
             <td>Категория:</td>
             <td>
+                <input required type="text" input th:field="*{typeOfAnimal}"/>
                 <!-- В форме есть какие-то косяки проверить type, передовалось typeS-->
-                <input required type="text"  th:object="${type}" th:field="${type}"/>
-                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                    <option selected>Выберите категорию</option>
-                    <option th:each="t : ${type}" th:value="${t.id}"
-                            th:text="${animal.typeOfAnimals}"></option>
-                </select>
+<!--                <input required type="text"  th:object="${types}" th:field="${types}"/>-->
+<!--                <select class="form-select form-select-sm" aria-label=".form-select-sm example">-->
+<!--                    <option selected>Выберите категорию</option>-->
+<!--                    <option th:each="t : ${types}" th:value="${t}"-->
+<!--                            th:text="${animal.typeOfAnimals}"></option>-->
+<!--                <input required type="text"  th:object="${animal}" th:field="*{typeOfAnimals}"/>-->
+<!--                <select class="form-select form-select-sm" aria-label=".form-select-sm example">-->
+<!--                    <option th:each="t : ${types}" th:value="${t}"-->
+<!--                            th:text="${t}"></option>-->
+<!--                </select>-->
 
             </td>
         </tr>
@@ -61,6 +67,34 @@
                 <button type="submit" class="btn btn-primary">Сохранить</button>
             </td>
         </tr>
+
+
+<!--        <form th:action="@{/animals/add}" th:object="${animal}" th:method="post">-->
+<!--            <div>-->
+<!--                <label>Кличка:</label>-->
+<!--                <input type="text" th:field="*{name}"/>-->
+
+<!--                <label>Возраст:</label>-->
+<!--                <input type="text" th:field="*{age}"/>-->
+
+<!--                <label>Категория:</label>-->
+<!--                <input type="text" th:field="*{typeOfAnimal}"/>-->
+
+<!--                <label>Пол:</label>-->
+<!--                <input type="text" th:field="*{gender}"/>-->
+
+<!--                <label>Состояние:</label>-->
+<!--                <input type="text" th:field="*{condition}"/>-->
+
+<!--                <label>Текстовое описание:</label>-->
+<!--                <input type="text" th:field="*{description}"/>-->
+
+<!--            </div>-->
+<!--            <div>-->
+<!--                <button type="submit">Сохранить</button>-->
+<!--            </div>-->
+<!--        </form>-->
+
     </table>
     <a href="main.html" th:href="@{/home}">Back to Home Page</a>
 </form>
