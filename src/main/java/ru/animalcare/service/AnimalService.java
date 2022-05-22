@@ -12,17 +12,28 @@ import ru.animalcare.repository.TypeRepository;
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 
 @Service
 @RequiredArgsConstructor
 public class AnimalService {
     private final AnimalRepository animalRepository;
-    private final TypeRepository typeRepository;
+    private final TypeService typeService;
 
     public List<Animal> findAll() {
+
         return animalRepository.findAll();
     }
+
+    public List<AnimalDto> findAllAnimalDto() {
+
+        return animalRepository.findAll()
+                .stream()
+                .map(AnimalDto::new)
+                .collect(Collectors.toList());
+    }
+
 
     public Animal findAnimalById(Long id) {
         return animalRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Animal for ID: " + id + " not found"));
@@ -55,17 +66,19 @@ public class AnimalService {
     }
 
 
-    public void add(AnimalDto animalDto) {
+    public void addNewAnimal(AnimalDto animalDto){
         Animal animal = new Animal();
+        animal.getId();
         animal.setName(animalDto.getName());
         animal.setGender(animalDto.getGender());
         animal.setAge(animalDto.getAge());
         animal.setCondition(animalDto.getCondition());
         animal.setDescription(animalDto.getDescription());
-        TypeOfAnimal type = typeRepository.findByName(
-                animalDto.getTypeOfAnimal())
-                .orElseThrow(() -> new NoSuchElementException("ERROR type name"));
 
-
+        TypeOfAnimal typeOfAnimal = typeService.findTypeAnimalByName(animalDto.getTypeOfAnimal())
+                .orElseThrow(() -> new RuntimeException(String.format("Animal type '%s' not found\n", animalDto.getTypeOfAnimal())));
+        animal.setTypeOfAnimal(typeOfAnimal);
+        save(animal);
     }
+
 }

@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "type_of_animal")
@@ -17,15 +18,14 @@ public class TypeOfAnimal {
     @Column(name = "name")
     private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "type_of_animal_id")
-    private Animal animal;
-
     public TypeOfAnimal (@Value("id") Long id,
-                         @Value("name") String name) {
+                         @Value("name") String name){
         this.id = id;
         this.name = name;
 
     }
 
+    @OneToMany(mappedBy = "typeOfAnimal")
+//    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    private List<Animal> animalList;
 }

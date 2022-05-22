@@ -13,13 +13,14 @@ import java.util.List;
 @NoArgsConstructor
 public class TypeOfAnimalDto {
 
-    private List<String> typeName;
+    private List<String> animalTypes;
 
-    public TypeOfAnimalDto(List<TypeOfAnimal> typeOfAnimal) {
-        this.typeName = new ArrayList<>();
-        for (int i = 0; i < typeOfAnimal.size(); i++) {
-            typeName.add(typeOfAnimal.get(i).getName());
+    public TypeOfAnimalDto(List<TypeOfAnimal> typeOfAnimals) {
+        this.animalTypes = new ArrayList<>();
+        for (int i = 0; i < typeOfAnimals.size(); i++) {
+            animalTypes.add(typeOfAnimals.get(i).getName());
         }
+
     }
 
 }

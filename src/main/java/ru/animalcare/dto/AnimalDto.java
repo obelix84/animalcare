@@ -22,16 +22,15 @@ public class AnimalDto {
     private String typeOfAnimal;
 
     public AnimalDto(Animal animal) {
-        this.id = animal.getId();
+        if(animal.getId() != null){
+            this.id = animal.getId();
+        }
         this.name = animal.getName();
         this.gender = animal.getGender();
         this.age = animal.getAge();
         this.condition = animal.getCondition();
         this.description = animal.getDescription();
-        this.typeOfAnimal = animal.getTypeOfAnimal()
-                .stream()
-                .map(TypeOfAnimal::getName)
-                .toString();
+        this.typeOfAnimal = animal.getTypeOfAnimal().getName();
     }
 
 }

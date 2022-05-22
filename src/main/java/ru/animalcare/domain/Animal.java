@@ -2,6 +2,7 @@ package ru.animalcare.domain;
 
 import lombok.*;
 import org.hibernate.Hibernate;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.util.List;
@@ -33,13 +34,9 @@ public class Animal {
     @Column(name = "description")
     private String description;
 
-    @OneToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User user;
-
-    @OneToMany(mappedBy = "animal")
-    //@Cascade(org.hibernate.annotations.CascadeType.ALL)
-    private List<TypeOfAnimal> typeOfAnimal;
+//    @OneToOne
+//    @JoinColumn(name = "user_id", referencedColumnName = "id")
+//    private User user;
 
 //    @OneToMany
 //    @JoinColumn(
@@ -48,5 +45,9 @@ public class Animal {
 //            foreignKey = @ForeignKey(name = "fk_typeOfAnimal")
 //    )
 //    List<TypeOfAnimal> typeOfAnimals;
+
+    @ManyToOne
+    @JoinColumn(name = "type_of_animal_id")
+    private TypeOfAnimal typeOfAnimal;
 
 }

@@ -8,6 +8,7 @@ import ru.animalcare.repository.TypeRepository;
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.stream.StreamSupport;
 
 @Service
@@ -17,6 +18,9 @@ public class TypeService {
 
     public List<TypeOfAnimal> findAll() {
         return typeRepository.findAll();
+    }
+    public Optional<TypeOfAnimal> findTypeAnimalByName(String name) {
+        return typeRepository.findByName(name);
     }
 
     public TypeOfAnimal findById(long id) {

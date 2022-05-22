@@ -17,43 +17,54 @@
 <!--        <input type="submit" value="Отправить"></p>-->
 <!--</form>-->
 <!--</body>-->
-<form th:action="@{animals/add}" th:object="${animal}" method="post" enctype="multipart/form-data" >
+<form th:action="@{add}" th:object="${animal}" method="post" enctype="multipart/form-data" >
+<div>
+
+</div>
 
     <table>
         <tr>
             <td>Кличка:</td>
-            <td><input required type="text" th:field="*{name}"/></td>
+            <td><input  type="text" th:field="*{name}" required /></input>
+            </td>
         </tr>
         <tr>
             <td>Возраст:</td>
-            <td><input required type="text" input th:field="*{age}"/>
+            <td><input type="text"  th:field="*{age}" required />
 
             </td>
         </tr>
         <tr>
             <td>Категория:</td>
-            <td>
-                <!-- В форме есть какие-то косяки проверить type, передовалось typeS-->
-                <input required type="text"  th:object="${type}" th:field="${type}"/>
-                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                    <option selected>Выберите категорию</option>
-                    <option th:each="t : ${type}" th:value="${t}"
-                            th:text="${animal.typeOfAnimal}"></option>
-                </select>
+            <td><input required type="text"  th:field="*{typeOfAnimal}"/>
 
             </td>
         </tr>
+
+<!--        <tr>-->
+<!--            <td>Категория:</td>-->
+<!--            <td>-->
+<!--                &lt;!&ndash; В форме есть какие-то косяки проверить type, передовалось typeS&ndash;&gt;-->
+<!--&lt;!&ndash;                <input required type="text"  th:object="${types}" th:field="${types}"/>&ndash;&gt;-->
+<!--                <select class="form-select form-select-sm" aria-label=".form-select-sm example">-->
+<!--                    <option selected>Выберите категорию</option>-->
+<!--                    <option th:each="t : ${types}" th:value="${types}"-->
+<!--                            th:text="${t}" th:field="*{typeOfAnimal}" /></option>-->
+<!--                </select>-->
+
+<!--            </td>-->
+<!--        </tr>-->
         <tr>
             <td>Пол:</td>
-            <td><input required type="text" input th:field="*{gender}"/></td>
+            <td><input required type="text" th:field="*{gender}"/></td>
         </tr>
         <tr>
             <td>Состояние:</td>
-            <td><input required type="text" input th:field="*{condition}"/></td>
+            <td><input required type="text" th:field="*{condition}"/></td>
         </tr>
         <tr>
             <td>Текстовое описание:</td>
-            <td><input required type="text" input th:field="*{description}"/></td>
+            <td><input required type="text" th:field="*{description}"/></td>
         </tr>
 
         <tr>
