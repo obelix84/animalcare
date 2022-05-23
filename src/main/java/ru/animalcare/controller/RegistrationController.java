@@ -14,17 +14,18 @@ import ru.animalcare.domain.Authority;
 import ru.animalcare.domain.User;
 import ru.animalcare.service.UserDetailsServiceImpl;
 import ru.animalcare.validator.UserValidator;
+
 import java.util.List;
 
 @Controller
 public class RegistrationController {
 
-//    private static final Logger logger = LoggerFactory.getLogger(RegistrationController.class);
+    //    private static final Logger logger = LoggerFactory.getLogger(RegistrationController.class);
     private final UserDetailsServiceImpl userService;
     private final UserValidator userValidator;
 
     @Autowired
-    public RegistrationController(@Qualifier("UserDetailsServiceImpl") UserDetailsServiceImpl userService,UserValidator userValidator) {
+    public RegistrationController(@Qualifier("UserDetailsServiceImpl") UserDetailsServiceImpl userService, UserValidator userValidator) {
         this.userService = userService;
         this.userValidator = userValidator;
     }
@@ -49,8 +50,10 @@ public class RegistrationController {
         authority.setId(1L);
         userForm.setAuthorities(List.of(authority));
         userForm.setEnabled(true);
-        userService.save(userForm);
-        userService.loadUserByUsername(userForm.getUsername());
-        return "redirect:/authenticated";
+        if (userService.save(userForm)) {
+            userService.loadUserByUsername(userForm.getUsername());
+            return "redirect:/authenticated";
+        } else
+            return "registration";
     }
 }
