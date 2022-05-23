@@ -15,7 +15,6 @@ import ru.animalcare.domain.User;
 import ru.animalcare.service.UserDetailsServiceImpl;
 import ru.animalcare.validator.UserValidator;
 
-import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -26,7 +25,7 @@ public class RegistrationController {
     private final UserValidator userValidator;
 
     @Autowired
-    public RegistrationController(@Qualifier("UserDetailsServiceImpl") UserDetailsServiceImpl userService,UserValidator userValidator) {
+    public RegistrationController(@Qualifier("UserDetailsServiceImpl") UserDetailsServiceImpl userService, UserValidator userValidator) {
         this.userService = userService;
         this.userValidator = userValidator;
     }
