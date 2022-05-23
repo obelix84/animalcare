@@ -9,8 +9,8 @@ server:
             enable: 'true'
           auth: 'true'
     host: smtp.gmail.com
-    username: <login user to smtp server>
-    password: <login password to smtp server>
+    username: "noreply@animalcare.com"
+    password: "<login password to smtp server>"
     port: '587'
 spring:
   h2:

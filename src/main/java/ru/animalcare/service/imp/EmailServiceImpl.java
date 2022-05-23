@@ -16,6 +16,7 @@ import java.util.List;
 @Service
 public class EmailServiceImpl implements EmailService {
 
+    //нужно создать Email 'noreply@animalcare.com' или использовать другую почту
     private final String senderAddress = "noreply@animalcare.com";
     public JavaMailSender javaMailSender;
 
@@ -24,7 +25,7 @@ public class EmailServiceImpl implements EmailService {
         this.javaMailSender = javaMailSender;
     }
 
-    //Sending emails using javaMailSender
+    //Оптравка через javaMailSender
     public void sendEmail(String receiver, String message){
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setFrom(senderAddress);
@@ -33,13 +34,14 @@ public class EmailServiceImpl implements EmailService {
         javaMailSender.send(mailMessage);
     }
 
+
+    //Возможно не будем использовать, пока не знаю.
     @Override
     public void sendEmailWithAttachments(String receiver, String message, List<Object> attachments) throws MessagingException {
         MimeMessage msg = javaMailSender.createMimeMessage();
 
-        // true = multipart message
         MimeMessageHelper helper = new MimeMessageHelper(msg, true);
-        helper.setTo("1@gmail.com");
+        helper.setTo(receiver);
 
         helper.setSubject("Testing from Spring Boot");
 
@@ -49,7 +51,8 @@ public class EmailServiceImpl implements EmailService {
         // true = text/html
         helper.setText("<h1>Check attachment for image!</h1>", true);
 
-        helper.addAttachment("my_photo.png", new ClassPathResource("android.png"));
+        //Optional
+        //helper.addAttachment("my_photo.png", new ClassPathResource("android.png"));
 
         javaMailSender.send(msg);
 

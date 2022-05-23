@@ -7,6 +7,7 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 import java.util.Properties;
 
+//Отдельная конфигурация Email
     @Configuration
     public class EmailConfiguration {
 

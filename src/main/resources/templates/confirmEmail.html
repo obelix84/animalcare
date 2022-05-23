@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>One last step, and you're ready to go...</title>
+</head>
+<body>
+<div class="container">
+    <div class="row" style="margin-top:20px">
+        <form class="form-signin" autocomplete="off" th:action="@{register}" th:object="${OTP}" method="POST">
+            <fieldset>
+                <h1 th:text="Confirm your E-mail address"></h1>
+                <div class="form-group">
+                    <label th:text="Confirmation + code + '*'"></label>
+                    <input type="password" class="form-control input-lg" title="email" required/>
+                <input class="btn btn-outline-dark" type="submit" th:value="Confirm"/>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+</body>
+</html>
