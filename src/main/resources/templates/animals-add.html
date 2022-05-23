@@ -11,12 +11,14 @@
 <body>
 <h1>Edit Animal</h1>
 <!--<body>-->
-<!--<form th:action="upload" enctype="multipart/form-data" method="post" th:object="${photo}">-->
+<!--<form th:action="@{add}" enctype="multipart/form-data" method="post" th:object="${pfoto}">-->
 <!--    <p>Загрузите ваши фотографии на сервер</p>-->
 <!--    <p><input type="file" name="uploadPhoto" multiple accept="image/*,image/jpeg">-->
 <!--        <input type="submit" value="Отправить"></p>-->
 <!--</form>-->
 <!--</body>-->
+
+
 <form th:action="@{add}" th:object="${animal}" method="post" enctype="multipart/form-data" >
 <div>
 
@@ -34,15 +36,23 @@
 
             </td>
         </tr>
-        <tr>
-            <td>Категория:</td>
-            <td><input required type="text"  th:field="*{typeOfAnimal}"/>
-
-            </td>
-        </tr>
-
 <!--        <tr>-->
 <!--            <td>Категория:</td>-->
+<!--            <td><input required type="text"  th:field="*{typeOfAnimal}"/>-->
+
+<!--            </td>-->
+<!--        </tr>-->
+
+        <tr>
+            <td>Категория:</td>
+            <td>
+                <select class="form-select form-select-sm" th:field="*{typeOfAnimal}">
+                    <!--                    <option value=""> &#45;&#45; </option>-->
+                    <option th:each="t : ${types}"
+                            th:value="${t}"
+                            th:utext="${t}"/>
+                </select>
+            </td>
 <!--            <td>-->
 <!--                &lt;!&ndash; В форме есть какие-то косяки проверить type, передовалось typeS&ndash;&gt;-->
 <!--&lt;!&ndash;                <input required type="text"  th:object="${types}" th:field="${types}"/>&ndash;&gt;-->
@@ -53,7 +63,7 @@
 <!--                </select>-->
 
 <!--            </td>-->
-<!--        </tr>-->
+        </tr>
         <tr>
             <td>Пол:</td>
             <td><input required type="text" th:field="*{gender}"/></td>

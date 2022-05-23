@@ -34,13 +34,13 @@ public class Photo {
     @Column(name = "comment")
     private String comment;
 
-    @ManyToOne
-    @JoinColumn(
-            name = "animals_id",
-            nullable = false,
-            foreignKey = @ForeignKey(name = "FK_PHOTO_ANIMALS_ID_RELATION")
-    )
-    private Animal animalsId;
+//    @ManyToOne
+//    @JoinColumn(
+//            name = "animals_id",
+//            nullable = false,
+//            foreignKey = @ForeignKey(name = "FK_PHOTO_ANIMALS_ID_RELATION")
+//    )
+//    private Animal animalsId;
 
 
     public Photo (@Value("id") Long id,
@@ -48,16 +48,15 @@ public class Photo {
                   @Value("size") Long size,
                   @Value("keyPhoto") String keyPhoto,
                   @Value("uploadDate") LocalDate uploadDate,
-                  @Value("comment") String comment,
-                  @Value("animals_id") Animal animalsId) {
+                  @Value("comment") String comment)
+    //                  @Value("animals_id") Animal animalsId)
+                  {
         this.id = id;
         this.name = name;
         this.size=size;
         this.keyPhoto=keyPhoto;
         this.uploadDate=uploadDate;
         this.comment =comment;
-        this.animalsId=animalsId;
+//        this.animalsId=animalsId;
     }
-
-
 }

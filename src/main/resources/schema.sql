@@ -114,6 +114,17 @@ insert into USERS_AUTHORITIES
 values (4, 3);
 
 
+-- CREATE TABLE photos
+-- (
+--     id         bigint auto_increment primary key,
+--     name       varchar(255) not null,
+--     size       bigint       not null,
+--     keyPhoto   varchar(255) not null,
+--     uploadDate datetime,
+--     comment    varchar(255) not null,
+--     animalsId  bigint       not null,
+--     constraint fk_photo_animals foreign key (animalsId) references animals (id)
+-- );
 CREATE TABLE photos
 (
     id         bigint auto_increment primary key,
@@ -121,7 +132,5 @@ CREATE TABLE photos
     size       bigint       not null,
     keyPhoto   varchar(255) not null,
     uploadDate datetime,
-    comment    varchar(255) not null,
-    animalsId  bigint       not null,
-    constraint fk_photo_animals foreign key (animalsId) references animals (id)
+    comment    varchar(255) not null
 );

@@ -42,7 +42,7 @@ public class FileManagerTest {
                 .size(48L)
                 .uploadDate(LocalDate.now())
                 .comment("test")
-                .animalsId(new Animal())
+//                .animalsId(new Animal())
                 .build();
         multipartFile = new MockMultipartFile("test", "test.txt", "txt",
                 new FileInputStream("src/test/resources/test.txt"));

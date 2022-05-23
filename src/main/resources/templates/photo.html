@@ -1,19 +1,62 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
-<h:head>
-    <title>File Upload</title>
-</h:head>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Edit photo animal</title>
+</head>
 <body>
+<form method="post" enctype="multipart/form-data" th:action="@{/upload}" th:object="${photo}">
+    <table class="table">
+        <!--        <thead>-->
+        <!--        <tr>-->
+        <!--            <th scope="col">ID</th>-->
+        <!--            <th scope="col">Name</th>-->
+        <!--            <th scope="col">Gender</th>-->
+        <!--            <th scope="col">Age</th>-->
+        <!--            <th scope="col">Condition</th>-->
+        <!--            <th scope="col">Description</th>-->
+        <!--            <th scope="col">Action</th>-->
+        <!--            <th scope="col">Choose file to upload</th>-->
 
-<form action="${pageContext.request.contextPath}/FileUploadServlet" method="post" enctype="multipart/form-data">
+        <!--        </tr>-->
+        <!--        </thead>-->
+        <!--        <tr th:each="animal : ${animals}">-->
+        <!--            <th scope="row">-->
+        <!--                <p th:utext="${animal.id}">-->
+        <!--            </th>-->
+        <!--            <td>-->
+        <!--                <p th:utext="${animal.name}">-->
+        <!--            </td>-->
+        <!--            <td>-->
+        <!--                <p th:utext="${animal.gender}">-->
+        <!--            </td>-->
+        <!--            <td>-->
+        <!--                <p th:utext="${animal.age}">-->
+        <!--            </td>-->
+        <!--            <td>-->
+        <!--                <p th:utext="${animal.condition}">-->
+        <!--            </td>-->
+        <!--            <td>-->
+        <!--                <p th:utext="${animal.description}">-->
+        <!--            </td>-->
+        <!--            <td>-->
+        <!--                <input type="checkbox" th:field="*{animalsId}" th:value="#{${animal.id}}"/>-->
+        <!--                    <label th:for="${#ids.prev('animal')}"-->
+        <!--                           th:text="#{${'photo.setAnimalsId(animal)' + photo.setAnimalsId(animal)  }}"></label>-->
+        <input type="file" id="profile_pic" name="file" accept=".jpg, .jpeg, .png">
+        <input type="submit" , name="Добавить фото"/>
+        </td>
 
-    Файл 1:<input type="file" name="file1"/><br/>
-    Файл 2:<input type="file" name="file2"/><br/>
-    <input type="submit" value="представить"/>
+        </tr>
+
+
+    </table>
 </form>
-
 </body>
+
+
 </html>

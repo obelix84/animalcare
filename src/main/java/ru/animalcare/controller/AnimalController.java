@@ -29,7 +29,7 @@ public class AnimalController {
     }
 
     @GetMapping("/{id}")
-    public String showAnimalById(Model model, @PathVariable Long id){
+    public String showAnimalById(Model model, @PathVariable Long id) {
         Animal currentAnimal = animalService.findAnimalById(id);
         model.addAttribute("current_animal", currentAnimal);
         return "profile_animal";
@@ -47,7 +47,7 @@ public class AnimalController {
 //        return "redirect:/main";
 //    }
 
-  //  @PreAuthorize("hasAuthority({'ROLE_ADMIN', 'ROLE_MANAGER'})")
+    //  @PreAuthorize("hasAuthority({'ROLE_ADMIN', 'ROLE_MANAGER'})")
 
 //    @GetMapping("/animals-add")
 //    public String displayingTheAnimals(Model model) {
@@ -62,7 +62,7 @@ public class AnimalController {
     public String addNewAnimals(Model model) {
 
         TypeOfAnimalDto typeOfAnimalDto = new TypeOfAnimalDto(typeService.findAll());
-        model.addAttribute("animal",new AnimalDto());
+        model.addAttribute("animal", new AnimalDto());
         model.addAttribute("types", typeOfAnimalDto.getAnimalTypes());
         return "animals-add";
     }
@@ -73,9 +73,7 @@ public class AnimalController {
             return "index";
         }
         animalService.addNewAnimal(animalDto);
-        List<AnimalDto> animals = animalService.findAllAnimalDto();
-        model.addAttribute("animals", animals);
-        return "all_animals";
+        return showAllAnimals(model);
     }
 
 

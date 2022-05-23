@@ -19,7 +19,7 @@ import java.time.LocalDate;
 public class PhotoRepository {
 
     private static final String FIND_FILE_BY_ID = "SELECT * FROM photos WHERE id = ?";
-    private static final String CREATE_FILE = "INSERT INTO photos(name, size, key, comment, animals, date) VALUES (?, ?, ?, ?, ?, ?)";
+    private static final String CREATE_FILE = "INSERT INTO photos( name, size, keyPhoto,uploadDate, comment) VALUES ( ?, ?, ?, ?, ?)";
     private static final String DELETE_FILE_BY_ID = "DELETE FROM photos WHERE id = ?";
 
     private final JdbcTemplate jdbcTemplate;
@@ -32,15 +32,16 @@ public class PhotoRepository {
             preparedStatement.setString(1, file.getName());
             preparedStatement.setLong(2, file.getSize());
             preparedStatement.setString(3, file.getKeyPhoto());
-            preparedStatement.setString(3, file.getComment());
-            preparedStatement.setObject(4, file.getAnimalsId());
             preparedStatement.setDate(4, Date.valueOf(uploadDate));
+            preparedStatement.setString(5, file.getComment());
+//            preparedStatement.setObject(6, file.getAnimalsId());
+
             return preparedStatement;
         }, keyHolder);
 
         return file.toBuilder()
                 .id(keyHolder.getKey().longValue())
-                .animalsId(file.getAnimalsId())
+//                .animalsId(file.getAnimalsId())
                 .uploadDate(uploadDate)
                 .build();
     }
@@ -60,7 +61,7 @@ public class PhotoRepository {
                 .keyPhoto(rs.getString("keyPhotos"))
                 .uploadDate(rs.getObject("upload_date", LocalDate.class))
                 .comment(rs.getString("photo_comment"))
-                .animalsId(rs.getObject("animalsId", Animal.class))
+//                .animalsId(rs.getObject("animalsId", Animal.class))
                 .build();
     }
 

@@ -2,6 +2,7 @@ package ru.animalcare.service;
 
 import org.springframework.core.io.Resource;
 import org.springframework.web.multipart.MultipartFile;
+import ru.animalcare.domain.Animal;
 import ru.animalcare.domain.Photo;
 
 import java.io.IOException;

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import org.springframework.web.multipart.MultipartFile;
+import ru.animalcare.domain.Animal;
 import ru.animalcare.domain.Photo;
 import ru.animalcare.repository.PhotoRepository;
 import ru.animalcare.service.PhotoService;
@@ -38,6 +39,7 @@ public class PhotoServiceImp implements PhotoService {
                 .size(resource.getSize())
                 .keyPhoto(key)
                 .comment(resource.getContentType())
+                //.animalsId(animal)
                 .build();
         // загоняем сущность с инфой в БД.
         createdPhoto = repository.create(createdPhoto);
