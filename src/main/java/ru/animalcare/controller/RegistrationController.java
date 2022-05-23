@@ -55,28 +55,29 @@ public class RegistrationController {
             return "registration";
         }
         //Генерируем OTP(one time password)
-        String opt = String.valueOf(otpService.generateOTP(userForm.getUsername()));
+        //String opt = String.valueOf(otpService.generateOTP(userForm.getUsername()));
         //отправляем email with OTP
-        emailService.sendEmail(userForm.getEmail(),opt);
+       // emailService.sendEmail(userForm.getEmail(),opt);
 
         //нужно отправить все, что снизу в confirmEmail.
         Authority authority = new Authority();
         authority.setAuthority("USER");
         authority.setId(1L);
         userForm.setAuthorities(List.of(authority));
+        userForm.setEnabled(true);
         userService.save(userForm);
         userService.loadUserByUsername(userForm.getUsername());
-        return "redirect:/confirmEmail";
-    }
-
-    @GetMapping("/confirmEmail")
-    public String confirmEmail(Model model){
-        model.addAttribute("OTP", new String());
-        return "confirmEmail";
-    }
-    @PostMapping("/confirmEmail")
-    public String confirmEmail(@ModelAttribute("OPT") String opt, BindingResult bindingResult){
-        //нужно проверить здесь код и после этого только создать аккаунт
         return "redirect:/authenticated";
     }
+//
+//    @GetMapping("/confirmEmail")
+//    public String confirmEmail(Model model){
+//        model.addAttribute("OTP", new String());
+//        return "confirmEmail";
+//    }
+//    @PostMapping("/confirmEmail")
+//    public String confirmEmail(@ModelAttribute("OPT") String opt, BindingResult bindingResult){
+//        //нужно проверить здесь код и после этого только создать аккаунт
+//        return "redirect:/authenticated";
+//    }
 }
