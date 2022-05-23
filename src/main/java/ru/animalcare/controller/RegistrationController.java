@@ -50,6 +50,7 @@ public class RegistrationController {
         authority.setAuthority("USER");
         authority.setId(1L);
         userForm.setAuthorities(List.of(authority));
+        userForm.setEnabled(true);
         userService.save(userForm);
         userService.loadUserByUsername(userForm.getUsername());
         return "redirect:/authenticated";
