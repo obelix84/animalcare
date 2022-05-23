@@ -27,16 +27,9 @@ public class AnimalService {
     }
 
     public Animal findAnimalById(Long id){
-        return animalRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Animal for ID: " + id + " not found"));
+        return animalRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Animal for ID: " + id + " not found"));
     }
-
-//    public void save(Animal animal) {
-//        try {
-//          animalRepository.save(animal);
-//        } catch (NoSuchElementException e) {
-//            throw new EntityNotFoundException("Animal entity no found by id: " + animal.getId());
-//        }
-//    }
 
     public boolean deleteById(Long id) {
         try {
@@ -67,5 +60,7 @@ public class AnimalService {
         TypeOfAnimal typeOfAnimal = typeService.findTypeAnimalByName(animalDto.getTypeOfAnimal())
                 .orElseThrow(() -> new RuntimeException(String.format("Animal type '%s' not found\n", animalDto.getTypeOfAnimal())));
         animal.setTypeOfAnimal(typeOfAnimal);
+
+        animalRepository.save(animal);
     }
 }

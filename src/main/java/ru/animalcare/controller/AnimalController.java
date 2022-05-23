@@ -6,13 +6,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.BindingResult;
 import ru.animalcare.domain.Animal;
-import ru.animalcare.domain.TypeOfAnimal;
 import ru.animalcare.dto.AnimalDto;
 import ru.animalcare.dto.TypeOfAnimalDto;
 import ru.animalcare.service.AnimalService;
 import ru.animalcare.service.TypeService;
 
-import java.util.ArrayList;
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -36,47 +35,23 @@ public class AnimalController {
         return "profile_animal";
     }
 
-
-//    @PostMapping("/animals-add")
-//    public String save(@RequestParam(value = "animals", required = false) Animal animal,
-//                       @RequestParam(value = "type", required = false) TypeOfAnimal type,
-//                       BindingResult result) {
-//        if (result.hasErrors()) {
-//            return "animals-add";
-//        }
-//        animalService.save(animal);
-//        return "redirect:/main";
-//    }
-
     //  @PreAuthorize("hasAuthority({'ROLE_ADMIN', 'ROLE_MANAGER'})")
-
-//    @GetMapping("/animals-add")
-//    public String displayingTheAnimals(Model model) {
-//        List<TypeOfAnimal> type = new ArrayList<>();
-//        typeService.findAll().forEach(type::add);
-//        model.addAttribute("animal",new Animal() );
-//        model.addAttribute("types", type);
-//        return "animals-add";
-//    }
-
     @GetMapping("/add")
-    public String displayingTheAnimals(Model model) {
+    public String showAnimalAddForm(Model model) {
         TypeOfAnimalDto typeOfAnimalDto = new TypeOfAnimalDto(typeService.findAll());
         model.addAttribute("animal", new AnimalDto());
         model.addAttribute("types", typeOfAnimalDto.getAnimalTypes());
-        return "animals-add";
+        return "animals_add";
     }
 
     @PostMapping("/add")
-    public String addNewAnimal(@RequestParam(value = "animal", required = false) AnimalDto animalDto)
-//                       @RequestParam(value = "type", required = false) TypeOfAnimal type,
-//                       BindingResult result)
-    {
-//        if (result.hasErrors()) {
-//            return "animals-add";
-//        }
+    public String addNewAnimal(@Valid AnimalDto animalDto, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            return "main";
+        }
         animalService.addNewAnimal(animalDto);
-        return "all_animals";
+
+        return showAllAnimals(model);
     }
 
 }
