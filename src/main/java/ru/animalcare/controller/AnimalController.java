@@ -6,11 +6,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.BindingResult;
 import ru.animalcare.domain.Animal;
-import ru.animalcare.domain.TypeOfAnimal;
+import ru.animalcare.dto.AnimalDto;
+import ru.animalcare.dto.TypeOfAnimalDto;
 import ru.animalcare.service.AnimalService;
 import ru.animalcare.service.TypeService;
 
-import java.util.ArrayList;
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -22,38 +23,35 @@ public class AnimalController {
 
     @GetMapping
     public String showAllAnimals(Model model) {
-        List<Animal> animals = animalService.findAll();
+        List<AnimalDto> animals = animalService.findAll();
         model.addAttribute("animals", animals);
         return "all_animals";
     }
 
     @GetMapping("/{id}")
-    public String showAnimalById(Model model, @PathVariable Long id){
+    public String showAnimalById(Model model, @PathVariable Long id) {
         Animal currentAnimal = animalService.findAnimalById(id);
         model.addAttribute("current_animal", currentAnimal);
         return "profile_animal";
     }
 
+    //  @PreAuthorize("hasAuthority({'ROLE_ADMIN', 'ROLE_MANAGER'})")
+    @GetMapping("/add")
+    public String showAnimalAddForm(Model model) {
+        TypeOfAnimalDto typeOfAnimalDto = new TypeOfAnimalDto(typeService.findAll());
+        model.addAttribute("animal", new AnimalDto());
+        model.addAttribute("types", typeOfAnimalDto.getAnimalTypes());
+        return "animals_add";
+    }
 
-    @PostMapping("/animals-add")
-    public String save(@RequestParam(value = "animals", required = false) Animal animal,
-                       @RequestParam(value = "type", required = false) TypeOfAnimal type,
-                       BindingResult result) {
+    @PostMapping("/add")
+    public String addNewAnimal(@Valid AnimalDto animalDto, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            return "animals-add";
+            return "main";
         }
-        animalService.save(animal);
-        return "redirect:/main";
+        animalService.addNewAnimal(animalDto);
+
+        return showAllAnimals(model);
     }
 
-  //  @PreAuthorize("hasAuthority({'ROLE_ADMIN', 'ROLE_MANAGER'})")
-
-    @GetMapping("/animals-add")
-    public String displayingTheAnimals(Model model) {
-        List<TypeOfAnimal> type = new ArrayList<>();
-        typeService.findAll().forEach(type::add);
-        model.addAttribute("animal",new Animal() );
-        model.addAttribute("types", type);
-        return "animals-add";
-    }
 }
