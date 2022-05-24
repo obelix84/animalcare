@@ -3,7 +3,8 @@ package ru.animalcare.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.animalcare.domain.Animal;
-import ru.animalcare.domain.TypeOfAnimal;
+import ru.animalcare.domain.AnimalGender;
+import ru.animalcare.domain.AnimalType;
 import ru.animalcare.dto.AnimalDto;
 import ru.animalcare.repository.AnimalRepository;
 
@@ -17,7 +18,8 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class AnimalService {
     private final AnimalRepository animalRepository;
-    private final TypeService typeService;
+    private final AnimalTypeService animalTypeService;
+    private final AnimalGenderService animalGenderService;
 
     public List<AnimalDto> findAll(){
         return animalRepository.findAll()
@@ -52,14 +54,18 @@ public class AnimalService {
     public void addNewAnimal(AnimalDto animalDto){
         Animal animal = new Animal();
         animal.setName(animalDto.getName());
-        animal.setGender(animalDto.getGender());
+
+        AnimalGender animalGender = animalGenderService.findAnimalGenderByName(animalDto.getGender())
+                .orElseThrow(() -> new RuntimeException(String.format("Animal gender '%s' not found\n", animalDto.getGender())));
+        animal.setAnimalGender(animalGender);
+
         animal.setAge(animalDto.getAge());
         animal.setCondition(animalDto.getCondition());
         animal.setDescription(animalDto.getDescription());
 
-        TypeOfAnimal typeOfAnimal = typeService.findTypeAnimalByName(animalDto.getTypeOfAnimal())
-                .orElseThrow(() -> new RuntimeException(String.format("Animal type '%s' not found\n", animalDto.getTypeOfAnimal())));
-        animal.setTypeOfAnimal(typeOfAnimal);
+        AnimalType animalType = animalTypeService.findTypeAnimalByName(animalDto.getType())
+                .orElseThrow(() -> new RuntimeException(String.format("Animal type '%s' not found\n", animalDto.getType())));
+        animal.setAnimalType(animalType);
 
         animalRepository.save(animal);
     }

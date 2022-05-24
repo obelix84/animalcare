@@ -44,15 +44,28 @@ insert into USERS(first_name, last_name, username, password, email, enabled)
 values ('manager', 'manager', 'manager', '$2a$10$BoAjnAXDD9xiR34FPSTP2.BMu..hYqhymJp46K/7j9aRzGowlgpBO',
         'manager@mail.ru', true);
 
-create table TYPE_OF_ANIMAL
+
+create table ANIMAL_GENDER
 (
-    id   bigint       not null primary key,
+    id   bigint primary key auto_increment,
     name VARCHAR(100) NOT NULL
 );
 
-INSERT INTO TYPE_OF_ANIMAL (id, name)
-VALUES (1, 'Cat'),
-       (2, 'Dog');
+INSERT INTO ANIMAL_GENDER (name)
+VALUES
+('Male'),
+('Female');
+
+create table ANIMAL_TYPE
+(
+    id   bigint primary key auto_increment,
+    name VARCHAR(100) NOT NULL
+);
+
+INSERT INTO ANIMAL_TYPE (name)
+VALUES
+('Cat'),
+('Dog');
 
 --CREATE TABLE animals
 --(
@@ -72,25 +85,20 @@ CREATE TABLE animals
 (
     id                  bigserial PRIMARY KEY,
     name                VARCHAR(40)  NOT NULL,
-    gender              VARCHAR(10)  NOT NULL,
+    animal_gender_id    bigint       NOT NULL,
     age                 INT          NOT NULL,
     condition           VARCHAR(255) NOT NULL,
     description         VARCHAR(255) NOT NULL,
-    type_of_animal_id   bigint       not null,
-    foreign key (type_of_animal_id) references TYPE_OF_ANIMAL (id)
+    animal_type_id      bigint       NOT NULL,
+    FOREIGN KEY (animal_gender_id) REFERENCES ANIMAL_GENDER (id),
+    FOREIGN KEY (animal_type_id) REFERENCES ANIMAL_TYPE (id)
 );
 
---INSERT INTO animals (name, gender, age, condition, description, user_id, type_of_animal_id)
---VALUES
---( 'Felix', 'Male', 5, 'Good', 'Looking for a host', 1, 1),
---( 'Kassandra', 'Female', 4, 'Good', 'Looking for a host', 2, 2),
---( 'Rex', 'Male', 7, 'Good', 'Looking for a host', 3, 2);
-
-INSERT INTO animals (name, gender, age, condition, description, type_of_animal_id)
+INSERT INTO animals (name, animal_gender_id, age, condition, description, animal_type_id)
 VALUES
-( 'Felix', 'Male', 5, 'Good', 'Looking for a host', 1),
-( 'Kassandra', 'Female', 4, 'Good', 'Looking for a host', 2),
-( 'Rex', 'Male', 7, 'Good', 'Looking for a host', 2);
+( 'Felix', 1, 5, 'Good', 'Looking for a host', 1),
+( 'Kassandra', 2, 4, 'Good', 'Looking for a host', 2),
+( 'Rex', 1, 7, 'Good', 'Looking for a host', 2);
 
 -- Роли:
 --  USER обычный пользователь, может регистрироваться и создавать объявления

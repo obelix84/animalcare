@@ -7,9 +7,9 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "TYPE_OF_ANIMAL")
+@Table(name = "ANIMAL_TYPE")
 @Data
-public class TypeOfAnimal {
+public class AnimalType {
 
     @Id
     @GeneratedValue
@@ -19,18 +19,18 @@ public class TypeOfAnimal {
     @Column(name = "name")
     private String name;
 
-    public TypeOfAnimal (@Value("id") Long id,
-                         @Value("name") String name) {
+    public AnimalType(@Value("id") Long id,
+                      @Value("name") String name) {
         this.id = id;
         this.name = name;
 
     }
 
-    public TypeOfAnimal() {
+    public AnimalType() {
 
     }
 
-    @OneToMany(mappedBy = "typeOfAnimal")
+    @OneToMany(mappedBy = "animalType")
 //    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private List<Animal> animalList;
 }

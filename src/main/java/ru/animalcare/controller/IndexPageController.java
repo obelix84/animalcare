@@ -6,10 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ru.animalcare.domain.Animal;
 import ru.animalcare.service.AnimalService;
-
-import java.util.List;
 
 import java.security.Principal;
 

@@ -39,17 +39,25 @@
         <tr>
             <td>Категория:</td>
             <td>
-                <select class="form-select form-select-sm" th:field="*{typeOfAnimal}">
+                <select class="form-select form-select-sm" th:field="*{type}">
 <!--                    <option value=""> &#45;&#45; </option>-->
-                    <option th:each="t : ${types}"
-                            th:value="${t}"
-                            th:utext="${t}"/>
+                    <option th:each="t : ${animalTypes}"
+                            th:value="${t.name}"
+                            th:utext="${t.name}"/>
                 </select>
             </td>
         </tr>
         <tr>
             <td>Пол:</td>
-            <td><input required type="text" input th:field="*{gender}"/></td>
+<!--            <td><input required type="text" input th:field="*{gender}"/></td>-->
+            <td>
+                <select class="form-select form-select-sm" th:field="*{gender}">
+                    <!--                    <option value=""> &#45;&#45; </option>-->
+                    <option th:each="g : ${animalGenders}"
+                            th:value="${g.name}"
+                            th:utext="${g.name}"/>
+                </select>
+            </td>
         </tr>
         <tr>
             <td>Состояние:</td>
