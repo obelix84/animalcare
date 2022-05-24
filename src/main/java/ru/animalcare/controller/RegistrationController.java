@@ -15,6 +15,7 @@ import ru.animalcare.domain.User;
 import ru.animalcare.service.UserDetailsServiceImpl;
 import ru.animalcare.validator.UserValidator;
 
+import javax.swing.plaf.synth.SynthUI;
 import java.util.Arrays;
 import java.util.List;
 
