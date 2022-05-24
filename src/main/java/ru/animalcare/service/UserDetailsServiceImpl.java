@@ -43,10 +43,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 .build();
     }
 
-    public void save(User user) {
-        //TODO enabled = true
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepo.save(user);
+    public boolean save(User user) {
+        if(!checkByEmail(user.getEmail())) {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            userRepo.save(user);
+            return true;
+        }
+        return false;
     }
 
     public boolean checkByEmail(String email) {
