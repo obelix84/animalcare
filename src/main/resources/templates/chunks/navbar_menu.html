@@ -60,6 +60,9 @@
             </a>
             <div class="dropdown-menu dropdown-menu-animation ms-n3 dropdown-md p-3 border-radius-xl mt-0 mt-lg-3" aria-labelledby="dropdownMenuPages">
                 <div class="d-none d-lg-block">
+                    <a href="/animals/add" class="dropdown-item border-radius-md">
+                        <span>Подать объявление</span>
+                    </a>
                     <a href="/register" class="dropdown-item border-radius-md">
                         <span>Зарегистрироваться</span>
                     </a>
@@ -70,21 +73,19 @@
 
                 <div class="d-lg-none">
                     <h6 class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-1">
-                        Каталоги животных
+                        Подать объявления
                     </h6>
-
-                    <a href="animals" class="dropdown-item border-radius-md">
-                        <span>Все животные</span>
-                    </a>
-                    <a href="cats" class="dropdown-item border-radius-md">
-                        <span>Кошки</span>
-                    </a>
-                    <a href="dogs" class="dropdown-item border-radius-md">
-                        <span>Собаки</span>
-                    </a>
-                    <a href="search" class="dropdown-item border-radius-md">
-                        <span>Поиск</span>
-                    </a>
+                    <div class="d-none d-lg-block">
+                        <a href="/animals/add" class="dropdown-item border-radius-md">
+                            <span>Подать объявление</span>
+                        </a>
+                        <a href="/register" class="dropdown-item border-radius-md">
+                            <span>Зарегистрироваться</span>
+                        </a>
+                        <a href="/login" class="dropdown-item border-radius-md">
+                            <span>Войти</span>
+                        </a>
+                    </div>
 
                 </div>
 
@@ -92,9 +93,15 @@
         </li>
 
         <li class="nav-item ms-lg-auto">
-            <a class="nav-link nav-link-icon me-2" th:href="@{/login}">
+            <a sec:authorize="isAuthenticated()" class="nav-link nav-link-icon me-2" th:href="@{/account}">
                 <i class="bi bi-person-circle"></i>
-                <p class="d-inline text-sm z-index-1 font-weight-bold" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Войдите чтобы продолжить">Войти</p>
+                <p th:text="${fio}" class="d-inline text-sm z-index-1 font-weight-bold" data-bs-toggle="tooltip"
+                   data-bs-placement="bottom" title="Личный кабинет"></p>
+            </a>
+            <a sec:authorize="!isAuthenticated()" class="nav-link nav-link-icon me-2" th:href="@{/login}">
+                <i class="bi bi-person-circle"></i>
+                <p class="d-inline text-sm z-index-1 font-weight-bold" data-bs-toggle="tooltip"
+                   data-bs-placement="bottom" title="Войдите чтобы продолжить">Войти</p>
             </a>
         </li>
     </ul>
