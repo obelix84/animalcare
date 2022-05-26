@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -16,8 +17,10 @@ import ru.animalcare.domain.Animal;
 import ru.animalcare.domain.Photo;
 
 import ru.animalcare.dto.AnimalDto;
+import ru.animalcare.dto.TypeOfAnimalDto;
 import ru.animalcare.service.AnimalService;
 import ru.animalcare.service.PhotoService;
+import ru.animalcare.service.TypeService;
 
 import javax.imageio.ImageIO;
 import javax.validation.Valid;
@@ -34,6 +37,8 @@ public class PhotoController {
 
     private final PhotoService service;
     private final AnimalService animalService;
+    private final TypeService typeService;
+    private  final AnimalController animalController;
 
     @PostMapping("/upload")
     public ResponseEntity<Photo> upload( @RequestParam("file") MultipartFile attachment) {
@@ -43,13 +48,34 @@ public class PhotoController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
+    @PostMapping("/addAnimal")
+    public String addA(@Valid AnimalDto animalDto,
+                       @RequestParam("file") MultipartFile attachment ) throws IOException {
+     Photo photo =service.upload(attachment);
+
+     String str = "/папка/"+photo.getKeyPhoto()+".jpg";
+        animalService.addAnimal(animalDto);
+
+     animalDto.setPathPhoto(str);
+
+
+//        service.upload(attachment);
+        return "animal_photo_add";
+    }
+
+
 
     @GetMapping("/upload")
     public String addNewPhoto(Model model) {
-//        List<Animal> animals = animalService.findAll();
-//        model.addAttribute("animals", animals);
         model.addAttribute("photo", new Photo());
         return "photo";
+    }
+
+    @GetMapping("/addAnimal")
+    public String addNew(Model model) {
+        model.addAttribute("animal", new AnimalDto());
+        model.addAttribute("photo", new Photo());
+        return "animal_photo_add";
     }
 
 //    @GetMapping("/upload")

@@ -15,4 +15,6 @@ public interface PhotoService {
     Photo findById(Long id);
 
     Resource download(String key) throws IOException;
+
+//    Photo addAnimal(MultipartFile attachment, Animal addAnimal) throws IOException;
 }

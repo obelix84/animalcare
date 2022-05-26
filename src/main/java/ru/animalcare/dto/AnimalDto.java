@@ -13,6 +13,8 @@ import java.util.stream.Collectors;
 @Data
 @NoArgsConstructor
 public class AnimalDto {
+
+
     private Long id;
     private String name;
     private String gender;
@@ -20,6 +22,7 @@ public class AnimalDto {
     private String condition;
     private String description;
     private String typeOfAnimal;
+    private String pathPhoto;
 
     public AnimalDto(Animal animal) {
         if(animal.getId() != null){
@@ -31,6 +34,7 @@ public class AnimalDto {
         this.condition = animal.getCondition();
         this.description = animal.getDescription();
         this.typeOfAnimal = animal.getTypeOfAnimal().getName();
+        this.pathPhoto = animal.getPathPhoto();
     }
 
 }

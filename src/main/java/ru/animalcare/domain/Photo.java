@@ -40,23 +40,25 @@ public class Photo {
 //            nullable = false,
 //            foreignKey = @ForeignKey(name = "FK_PHOTO_ANIMALS_ID_RELATION")
 //    )
-//    private Animal animalsId;
+//    private Animal animal;
 
+//    @ManyToOne
+//    @JoinColumn(name = "animal")
+//    private Animal animal;
 
-    public Photo (@Value("id") Long id,
-                  @Value("name") String name,
-                  @Value("size") Long size,
-                  @Value("keyPhoto") String keyPhoto,
-                  @Value("uploadDate") LocalDate uploadDate,
-                  @Value("comment") String comment)
-    //                  @Value("animals_id") Animal animalsId)
-                  {
+    public Photo(@Value("id") Long id,
+                 @Value("name") String name,
+                 @Value("size") Long size,
+                 @Value("keyPhoto") String keyPhoto,
+                 @Value("uploadDate") LocalDate uploadDate,
+                 @Value("comment") String comment){
+//                 @Value("animal") Animal animal) {
         this.id = id;
         this.name = name;
-        this.size=size;
-        this.keyPhoto=keyPhoto;
-        this.uploadDate=uploadDate;
-        this.comment =comment;
-//        this.animalsId=animalsId;
+        this.size = size;
+        this.keyPhoto = keyPhoto;
+        this.uploadDate = uploadDate;
+        this.comment = comment;
+//        this.animal = animal;
     }
 }

@@ -68,27 +68,46 @@ VALUES (1, 'Cat'),
 --     foreign key (type_of_animal_id) references TYPE_OF_ANIMAL (id)
 -- );
 
-CREATE TABLE animals
-(
-    id                  bigserial PRIMARY KEY,
-    name                VARCHAR(40)  NOT NULL,
-    gender              VARCHAR(10)  NOT NULL,
-    age                 INT          NOT NULL,
-    condition           VARCHAR(255) NOT NULL,
-    description         VARCHAR(255) NOT NULL,
-    type_of_animal_id   bigint       not null,
-    foreign key (type_of_animal_id) references TYPE_OF_ANIMAL (id)
-);
+-- CREATE TABLE animals
+-- (
+--     id                  bigserial PRIMARY KEY,
+--     name                VARCHAR(40)  NOT NULL,
+--     gender              VARCHAR(10)  NOT NULL,
+--     age                 INT          NOT NULL,
+--     condition           VARCHAR(255) NOT NULL,
+--     description         VARCHAR(255) NOT NULL,
+--     path_photo          VARCHAR(255) NOT NULL,
+--     type_of_animal_id   bigint       not null,
+--     foreign key (type_of_animal_id) references TYPE_OF_ANIMAL (id)
+-- );
 -- INSERT INTO animals (name, gender, age, condition, description, user_id, type_of_animal_id)
 -- VALUES ('Felix', 'Male', 5, 'Good', 'Looking for a host', 1, 1),
 --        ('Kassandra', 'Female', 4, 'Good', 'Looking for a host', 2, 2),
 --        ('Rex', 'Male', 7, 'Good', 'Looking for a host', 3, 2);
 
-INSERT INTO animals (name, gender, age, condition, description, type_of_animal_id)
-VALUES
-    ( 'Felix', 'Male', 5, 'Good', 'Looking for a host', 1),
-    ( 'Kassandra', 'Female', 4, 'Good', 'Looking for a host', 2),
-    ( 'Rex', 'Male', 7, 'Good', 'Looking for a host', 2);
+-- INSERT INTO animals (name, gender, age, condition, description,path_photo, type_of_animal_id)
+-- VALUES
+--     ( 'Felix', 'Male', 5, 'Good', 'Looking for a host', 1),
+--     ( 'Kassandra', 'Female', 4, 'Good', 'Looking for a host', 2),
+--     ( 'Rex', 'Male', 7, 'Good', 'Looking for a host', 2);
+CREATE TABLE animals
+(
+    id                bigserial PRIMARY KEY,
+    name              VARCHAR(40)  NOT NULL,
+    gender            VARCHAR(10)  NOT NULL,
+    age               INT          NOT NULL,
+    condition         VARCHAR(255) NOT NULL,
+    description       VARCHAR(255) NOT NULL,
+    path_photo        VARCHAR(255),
+    type_of_animal_id bigint       not null,
+    foreign key (type_of_animal_id) references TYPE_OF_ANIMAL (id)
+);
+
+INSERT INTO animals (name, gender, age, condition, description, path_photo, type_of_animal_id)
+VALUES ('Felix', 'Male', 5, 'Good', 'Looking for a host', 'img/n/no_photo.jpg', 1),
+       ('Kassandra', 'Female', 4, 'Good', 'Looking for a host', 'img/n/no_photo.jpg', 2),
+       ('Rex', 'Male', 7, 'Good', 'Looking for a host', 'img/n/no_photo.jpg', 2);
+
 -- Роли:
 --  USER обычный пользователь, может регистрироваться и создавать объявления
 --  MANAGER пользоватьель, может модерировать объявляения, т.е. разрешать их публикацию
@@ -122,8 +141,8 @@ values (4, 3);
 --     keyPhoto   varchar(255) not null,
 --     uploadDate datetime,
 --     comment    varchar(255) not null,
---     animalsId  bigint       not null,
---     constraint fk_photo_animals foreign key (animalsId) references animals (id)
+--     animal  bigint       not null,
+--     constraint fk_photo_animals foreign key (animal) references animals (id)
 -- );
 CREATE TABLE photos
 (

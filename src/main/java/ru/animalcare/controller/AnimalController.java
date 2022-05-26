@@ -76,6 +76,16 @@ public class AnimalController {
         return showAllAnimals(model);
     }
 
+//    @PostMapping("/add")
+//    public String add(@Valid AnimalDto animalDto, String path, BindingResult bindingResult, Model model) {
+//        if (bindingResult.hasErrors()) {
+//            return "index";
+//        }
+//
+//        animalService.addNewAnimal(animalDt);
+//        return showAllAnimals(model);
+//    }
+
 
 //    @PostMapping("/add")
 //    public String add (@ModelAttribute("animal") AnimalDto animalDto, BindingResult result){

@@ -20,6 +20,7 @@ public class PhotoRepository {
 
     private static final String FIND_FILE_BY_ID = "SELECT * FROM photos WHERE id = ?";
     private static final String CREATE_FILE = "INSERT INTO photos( name, size, keyPhoto,uploadDate, comment) VALUES ( ?, ?, ?, ?, ?)";
+//    private static final String CREATE_FILE = "INSERT INTO photos( name, size, keyPhoto,uploadDate, comment, animal) VALUES ( ?, ?, ?, ?, ?, ?)";
     private static final String DELETE_FILE_BY_ID = "DELETE FROM photos WHERE id = ?";
 
     private final JdbcTemplate jdbcTemplate;
@@ -34,14 +35,14 @@ public class PhotoRepository {
             preparedStatement.setString(3, file.getKeyPhoto());
             preparedStatement.setDate(4, Date.valueOf(uploadDate));
             preparedStatement.setString(5, file.getComment());
-//            preparedStatement.setObject(6, file.getAnimalsId());
+//            preparedStatement.setObject(6, file.getAnimal());
 
             return preparedStatement;
         }, keyHolder);
 
         return file.toBuilder()
                 .id(keyHolder.getKey().longValue())
-//                .animalsId(file.getAnimalsId())
+//                .animal(file.getAnimal())
                 .uploadDate(uploadDate)
                 .build();
     }
@@ -61,7 +62,7 @@ public class PhotoRepository {
                 .keyPhoto(rs.getString("keyPhotos"))
                 .uploadDate(rs.getObject("upload_date", LocalDate.class))
                 .comment(rs.getString("photo_comment"))
-//                .animalsId(rs.getObject("animalsId", Animal.class))
+//                .animal(rs.getObject("animal", Animal.class))
                 .build();
     }
 

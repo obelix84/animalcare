@@ -39,7 +39,7 @@ public class PhotoServiceImp implements PhotoService {
                 .size(resource.getSize())
                 .keyPhoto(key)
                 .comment(resource.getContentType())
-                //.animalsId(animal)
+                //.animalsId(animal.id)
                 .build();
         // загоняем сущность с инфой в БД.
         createdPhoto = repository.create(createdPhoto);
@@ -70,6 +70,31 @@ public class PhotoServiceImp implements PhotoService {
     public Resource download(String key) throws IOException {
         return photoManager.download(key);
     }
+
+//    @Transactional(rollbackFor = {IOException.class})
+//    @Builder(builderMethodName = "builder")
+//    @Override
+//    public Photo  addAnimal(MultipartFile resource, Animal addAnimal)throws IOException {
+//        // генерируем ключ, который будет уникальным для файла, когда он будет сохранен
+//        // (даже если будут сейвиться два файла с одинаковыми именами, путаницы не возникнет).
+//        String key = generateKey(resource.getName());
+//        // строим сущность для сохранения в БД.
+//        Photo createdPhoto = Photo.builder()
+//                .name(resource.getOriginalFilename())
+//                .size(resource.getSize())
+//                .keyPhoto(key)
+//                .comment(resource.getContentType())
+////                .animal(addAnimal)
+//                .build();
+//        // загоняем сущность с инфой в БД.
+//        createdPhoto = repository.create(createdPhoto);
+//        //сохраняем файл с хешированным именем.
+//        photoManager.upload(resource.getBytes(), key);
+//
+//        //возвращаем созданую сущность photo, но со сгенерированным id в БД и датой создания.
+//        return createdPhoto;
+//
+//    }
 
     // транзакция у нас для чтения
     @Transactional(readOnly = true)

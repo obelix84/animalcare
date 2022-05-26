@@ -66,7 +66,23 @@ public class AnimalService {
     }
 
 
-    public void addNewAnimal(AnimalDto animalDto){
+    public void addNewAnimal(AnimalDto animalDto, path){
+        Animal animal = new Animal();
+        animal.getId();
+        animal.setName(animalDto.getName());
+        animal.setGender(animalDto.getGender());
+        animal.setAge(animalDto.getAge());
+        animal.setCondition(animalDto.getCondition());
+        animal.setDescription(animalDto.getDescription());
+        animal.setPathPhoto(path);
+
+        TypeOfAnimal typeOfAnimal = typeService.findTypeAnimalByName(animalDto.getTypeOfAnimal())
+                .orElseThrow(() -> new RuntimeException(String.format("Animal type '%s' not found\n", animalDto.getTypeOfAnimal())));
+        animal.setTypeOfAnimal(typeOfAnimal);
+        save(animal);
+    }
+
+    public Animal addAnimal(AnimalDto animalDto){
         Animal animal = new Animal();
         animal.getId();
         animal.setName(animalDto.getName());
@@ -79,6 +95,7 @@ public class AnimalService {
                 .orElseThrow(() -> new RuntimeException(String.format("Animal type '%s' not found\n", animalDto.getTypeOfAnimal())));
         animal.setTypeOfAnimal(typeOfAnimal);
         save(animal);
+        return animal;
     }
 
 }

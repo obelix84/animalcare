@@ -5,55 +5,64 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>All Animals</title>
 </head>
 
 <body>
-    <h3>All Animals</h3>
+<h3>All Animals</h3>
 
-    <p>
-        <a th:href="@{/}">Return to the homepage</a>
-    </p>
+<p>
+    <a th:href="@{/}">Return to the homepage</a>
+</p>
+<p>
 
-    <p></p>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Gender</th>
-                    <th scope="col">Age</th>
-                    <th scope="col">Condition</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Action</th>
-                </tr>
-            </thead>
-            <tr th:each="animal : ${animals}">
-                <th scope="row">
-                    <p th:utext="${animal.id}">
-                </th>
-                <td>
-                    <p th:utext="${animal.name}">
-                </td>
-                <td>
-                    <p th:utext="${animal.gender}">
-                </td>
-                <td>
-                    <p th:utext="${animal.age}">
-                </td>
-                <td>
-                    <p th:utext="${animal.condition}">
-                </td>
-                <td>
-                    <p th:utext="${animal.description}">
-                </td>
-                <td>
-                    <a th:href="@{/animals/} + ${animal.id}">Show Profile Animal</a>
-                </td>
-            </tr>
-        </table>
-    </div>
+</p>
+<p></p>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Age</th>
+        <th scope="col">Condition</th>
+        <th scope="col">Description</th>
+        <th scope="col">Action</th>
+    </tr>
+    </thead>
+    <tr th:each="animal : ${animals}">
+
+        <th scope="row">
+            <p th:utext="${animal.id}">
+        </th>
+        <td>
+            <!--                    <p><img th:src="${animal.pathPhoto}"  ></p>-->
+<!--            <p><img th:src="@{img/n/no_photo.jpg}"  width="189" height="255"></p>-->
+            <p><img th:src="${animal.pathPhoto}"  width="189" height="255"></p>
+        </td>
+        <td>
+            <p th:utext="${animal.name}">
+        </td>
+        <td>
+            <p th:utext="${animal.gender}">
+        </td>
+        <td>
+            <p th:utext="${animal.age}">
+        </td>
+        <td>
+            <p th:utext="${animal.condition}">
+        </td>
+        <td>
+            <p th:utext="${animal.description}">
+        </td>
+        <td>
+            <a th:href="@{/animals/} + ${animal.id}">Show Profile Animal</a>
+        </td>
+    </tr>
+</table>
+</div>
 
 </body>
 

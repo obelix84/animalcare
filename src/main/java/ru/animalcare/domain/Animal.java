@@ -34,6 +34,9 @@ public class Animal {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "path_photo")
+    private String pathPhoto;
+
 //    @OneToOne
 //    @JoinColumn(name = "user_id", referencedColumnName = "id")
 //    private User user;
@@ -49,5 +52,8 @@ public class Animal {
     @ManyToOne
     @JoinColumn(name = "type_of_animal_id")
     private TypeOfAnimal typeOfAnimal;
+
+
+
 
 }
