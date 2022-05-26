@@ -31,8 +31,8 @@ public class AnimalController {
 
     @GetMapping("/{id}")
     public String showAnimalById(Model model, @PathVariable Long id) {
-        Animal currentAnimal = animalService.findAnimalById(id);
-        model.addAttribute("current_animal", currentAnimal);
+        AnimalDto animalDto = new AnimalDto(animalService.findAnimalById(id));
+        model.addAttribute("current_animal", animalDto);
         return "profile_animal";
     }
 
