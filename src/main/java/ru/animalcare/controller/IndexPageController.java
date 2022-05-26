@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.animalcare.domain.User;
 import ru.animalcare.repository.UserRepository;
-import ru.animalcare.service.AnimalService;
 
 import java.security.Principal;
 import java.util.NoSuchElementException;

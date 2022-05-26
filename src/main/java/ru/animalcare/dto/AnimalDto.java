@@ -13,17 +13,17 @@ public class AnimalDto {
     private int age;
     private String condition;
     private String description;
-    private String typeOfAnimal;
+    private String type;
 
     public AnimalDto(Animal animal) {
         if(animal.getId() != null){
             this.id = animal.getId();
         }
         this.name = animal.getName();
-        this.gender = animal.getGender();
+        this.gender = animal.getAnimalGender().getName();
         this.age = animal.getAge();
         this.condition = animal.getCondition();
         this.description = animal.getDescription();
-        this.typeOfAnimal = animal.getTypeOfAnimal().getName();
+        this.type = animal.getAnimalType().getName();
     }
 }
