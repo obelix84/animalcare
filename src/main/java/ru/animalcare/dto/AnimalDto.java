@@ -13,6 +13,7 @@ public class AnimalDto {
     private int age;
     private String condition;
     private String description;
+//    private String pathPhoto;
     private String type;
 
     public AnimalDto(Animal animal) {
@@ -24,6 +25,7 @@ public class AnimalDto {
         this.age = animal.getAge();
         this.condition = animal.getCondition();
         this.description = animal.getDescription();
+//        this.pathPhoto = animal.getPathPhoto();
         this.type = animal.getAnimalType().getName();
     }
 }

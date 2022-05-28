@@ -56,6 +56,20 @@ VALUES
 ('Male'),
 ('Female');
 
+CREATE TABLE ANIMAL_PHOTOS
+(
+    id              bigint auto_increment primary key,
+    name            varchar(255) not null,
+    size            bigint       not null,
+--    key_photo       varchar(255) not null,
+    upload_date     datetime,
+    comment         varchar(255) not null
+);
+
+INSERT INTO ANIMAL_PHOTOS (name, size, upload_date, comment)
+VALUES
+('no_photo.jpg', 3515, '2022-05-28 12:00:00', 'image/jpeg');
+
 create table ANIMAL_TYPE
 (
     id   bigint primary key auto_increment,
@@ -81,7 +95,7 @@ VALUES
 --    foreign key (type_of_animal_id) references TYPE_OF_ANIMAL (id)
 --);
 
-CREATE TABLE animals
+CREATE TABLE ANIMALS
 (
     id                  bigserial PRIMARY KEY,
     name                VARCHAR(40)  NOT NULL,
@@ -89,16 +103,34 @@ CREATE TABLE animals
     age                 INT          NOT NULL,
     condition           VARCHAR(255) NOT NULL,
     description         VARCHAR(255) NOT NULL,
+--    path_photo          VARCHAR(255),
     animal_type_id      bigint       NOT NULL,
     FOREIGN KEY (animal_gender_id) REFERENCES ANIMAL_GENDER (id),
     FOREIGN KEY (animal_type_id) REFERENCES ANIMAL_TYPE (id)
 );
 
-INSERT INTO animals (name, animal_gender_id, age, condition, description, animal_type_id)
+INSERT INTO ANIMALS (name, animal_gender_id, age, condition, description, animal_type_id)
 VALUES
 ( 'Felix', 1, 5, 'Good', 'Looking for a host', 1),
 ( 'Kassandra', 2, 4, 'Good', 'Looking for a host', 2),
 ( 'Rex', 1, 7, 'Good', 'Looking for a host', 2);
+
+--'img/n/no_photo.jpg'
+
+CREATE TABLE ANIMALS_ANIMAL_PHOTOS
+(
+    animal_id           bigint not null,
+    animal_photo_id     bigint not null,
+    primary key (animal_id, animal_photo_id),
+    foreign key (animal_id) references ANIMALS (id),
+    foreign key (animal_photo_id) references ANIMAL_PHOTOS (id)
+);
+
+INSERT INTO ANIMALS_ANIMAL_PHOTOS (animal_id, animal_photo_id)
+VALUES
+(1, 1),
+(2, 1),
+(3, 1);
 
 -- Роли:
 --  USER обычный пользователь, может регистрироваться и создавать объявления
@@ -124,15 +156,14 @@ values (3, 2);
 insert into USERS_AUTHORITIES
 values (4, 3);
 
-
-CREATE TABLE photos
-(
-    id         bigint auto_increment primary key,
-    name       varchar(255) not null,
-    size       bigint       not null,
-    keyPhoto   varchar(255) not null,
-    uploadDate datetime,
-    comment    varchar(255) not null,
-    animalsId  bigint       not null,
-    constraint fk_photo_animals foreign key (animalsId) references animals (id)
-);
+--CREATE TABLE photos
+--(
+--    id         bigint auto_increment primary key,
+--    name       varchar(255) not null,
+--    size       bigint       not null,
+--    keyPhoto   varchar(255) not null,
+--    uploadDate datetime,
+--    comment    varchar(255) not null
+----    animalsId  bigint       not null,
+----    constraint fk_photo_animals foreign key (animalsId) references animals (id)
+--);

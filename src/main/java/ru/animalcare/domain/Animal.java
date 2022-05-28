@@ -3,10 +3,12 @@ package ru.animalcare.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.List;
 
 
 @Entity
-@Table(name = "animals")
+@Table(name = "ANIMALS")
 @Data
 @NoArgsConstructor
 public class Animal {
@@ -32,11 +34,20 @@ public class Animal {
     private String description;
 
 //    @OneToOne
-//    @JoinColumn(name = "user_id", referencedColumnName = "id")
-//    private User user;
+//    @JoinColumn(name = "animal_photo_id", referencedColumnName = "id")
+//    private AnimalPhoto animalPhoto;
+
+//    @Column(name = "path_photo")
+//    private String pathPhoto;
 
     @ManyToOne
     @JoinColumn(name = "animal_type_id")
     private AnimalType animalType;
+
+    @ManyToMany
+    @JoinTable(name = "ANIMALS_ANIMAL_PHOTOS",
+            joinColumns = @JoinColumn(name = "animal_id"),
+            inverseJoinColumns = @JoinColumn(name = "animal_photo_id"))
+    private List<AnimalPhoto> animalPhotoList;
 
 }

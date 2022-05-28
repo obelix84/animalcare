@@ -32,8 +32,11 @@
             </thead>
             <tr th:each="animal : ${animals}">
                 <th scope="row">
-                    <p th:utext="${animal.id}">
+<!--                    <p><img th:src="${animal.pathPhoto}"  width="189" height="255"></p>-->
                 </th>
+                <td>
+                    <p th:utext="${animal.id}">
+                </td>
                 <td>
                     <p th:utext="${animal.type}">
                 </td>
@@ -54,6 +57,9 @@
                 </td>
                 <td>
                     <a th:href="@{/animals/} + ${animal.id}">Show Profile Animal</a>
+                </td>
+                <td>
+                    <a th:href="@{/animals/photo/} + ${animal.id}">Add Animal Photo</a>
                 </td>
             </tr>
         </table>
