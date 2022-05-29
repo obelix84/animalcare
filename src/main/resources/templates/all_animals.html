@@ -20,6 +20,7 @@
         <table class="table">
             <thead>
                 <tr>
+                    <th scope="col">Photo</th>
                     <th scope="col">ID</th>
                     <th scope="col">Animal type</th>
                     <th scope="col">Name</th>
@@ -32,34 +33,35 @@
             </thead>
             <tr th:each="animal : ${animals}">
                 <th scope="row">
-<!--                    <p><img th:src="${animal.pathPhoto}"  width="189" height="255"></p>-->
+<!--                    <p><img th:src="${animal.pathPhoto}" width="189" height="255"></p>-->
+                    <p><img th:src="@{${animal.pathPhoto}}" width="189" height="255"></p>
+
+<!--                    <p th:utext="${animal.pathPhoto}"></p>-->
+
                 </th>
                 <td>
-                    <p th:utext="${animal.id}">
+                    <p th:utext="${animal.id}"></p>
                 </td>
                 <td>
-                    <p th:utext="${animal.type}">
+                    <p th:utext="${animal.type}"></p>
                 </td>
                 <td>
-                    <p th:utext="${animal.name}">
+                    <p th:utext="${animal.name}"></p>
                 </td>
                 <td>
-                    <p th:utext="${animal.gender}">
+                    <p th:utext="${animal.gender}"></p>
                 </td>
                 <td>
-                    <p th:utext="${animal.age}">
+                    <p th:utext="${animal.age}"></p>
                 </td>
                 <td>
-                    <p th:utext="${animal.condition}">
+                    <p th:utext="${animal.condition}"></p>
                 </td>
                 <td>
-                    <p th:utext="${animal.description}">
+                    <p th:utext="${animal.description}"></p>
                 </td>
                 <td>
                     <a th:href="@{/animals/} + ${animal.id}">Show Profile Animal</a>
-                </td>
-                <td>
-                    <a th:href="@{/animals/photo/} + ${animal.id}">Add Animal Photo</a>
                 </td>
             </tr>
         </table>

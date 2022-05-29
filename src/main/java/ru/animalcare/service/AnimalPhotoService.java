@@ -41,11 +41,11 @@ public class AnimalPhotoService {
 
     public AnimalPhoto findAnimalPhotoByName(String name) {
         return animalPhotoRepository.findByName(name)
-                .orElseThrow(() -> new NoSuchElementException("Animal photo for ID: " + name + " not found"));
+                .orElseThrow(() -> new NoSuchElementException("Animal photo for name: " + name + " not found"));
     }
 
     @Transactional
-    public AnimalPhotoDto uploadAnimalPhotoToServer(MultipartFile multipartFile) {
+    public AnimalPhoto uploadAnimalPhotoToServer(MultipartFile multipartFile) {
         AnimalPhoto animalPhoto = new AnimalPhoto();
         animalPhoto.setName(generateKey(multipartFile.getName()) + "_" + multipartFile.getOriginalFilename());
         animalPhoto.setSize(multipartFile.getSize());
@@ -61,7 +61,7 @@ public class AnimalPhotoService {
             e.printStackTrace();
         }
 
-        return new AnimalPhotoDto(animalPhoto);
+        return animalPhoto;
     }
 
     private String generateKey(String name) {

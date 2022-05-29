@@ -14,7 +14,7 @@ public class AnimalPhoto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "name")
@@ -22,9 +22,6 @@ public class AnimalPhoto {
 
     @Column(name = "size")
     private Long size;
-
-//    @Column(name = "key_photo")
-//    private String keyPhoto;
 
     @Column(name = "upload_date")
     private LocalDate uploadDate;
