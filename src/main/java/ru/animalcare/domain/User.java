@@ -40,4 +40,8 @@ public class User {
     //не надо использовать эти 2, либо только MERGE, либо ничего.
     @ManyToMany(cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
     private Collection<Authority> authorities;
+
+    //Пока так
+    @Column(name = "photo_id")
+    private Long photoId;
 }

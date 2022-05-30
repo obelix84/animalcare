@@ -7,7 +7,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.animalcare.domain.User;
+import ru.animalcare.dto.UserDto;
 import ru.animalcare.repository.UserRepository;
+import ru.animalcare.service.UserService;
 
 import java.security.Principal;
 import java.util.NoSuchElementException;
@@ -17,24 +19,27 @@ import java.util.NoSuchElementException;
 public class IndexPageController {
 
     private final UserRepository userRepository;
+    private final UserService userService;
 
     @GetMapping("/")
     public String indexPage(Model model, Principal principal) {
         if (principal != null) {
-            //TODO переделать на UserService
-            User user = userRepository.findByUsername(principal.getName()).orElseThrow(NoSuchElementException::new);
-            String fio = user.getFirstName() + " " + user.getLastName();
+            UserDto userDto = userService.findUserByName(principal.getName());
+            System.out.println("-------------------");
+            System.out.println(userDto);
+            String fio = userDto.getFirstName() + " " + userDto.getLastName();
+
             model.addAttribute("fio", fio);
         }
         return "main";
     }
 
-    @GetMapping("/account")
+    @GetMapping("/profile")
     public String showAccount(Model model, Principal principal) {
         if (principal != null) {
             model.addAttribute("fio", principal.getName());
         }
-        return "account";
+        return "user_profile";
     }
 
     @GetMapping("/public")

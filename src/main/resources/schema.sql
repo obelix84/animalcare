@@ -1,3 +1,40 @@
+create table ANIMAL_GENDER
+(
+    id   bigint primary key auto_increment,
+    name VARCHAR(100) NOT NULL
+);
+
+create table ANIMAL_TYPE
+(
+    id   bigint primary key auto_increment,
+    name VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE animals
+(
+    id                  bigserial PRIMARY KEY,
+    name                VARCHAR(40)  NOT NULL,
+    animal_gender_id    bigint       NOT NULL,
+    age                 INT          NOT NULL,
+    condition           VARCHAR(255) NOT NULL,
+    description         VARCHAR(255) NOT NULL,
+    animal_type_id      bigint       NOT NULL,
+    FOREIGN KEY (animal_gender_id) REFERENCES ANIMAL_GENDER (id),
+    FOREIGN KEY (animal_type_id) REFERENCES ANIMAL_TYPE (id)
+);
+
+CREATE TABLE photos
+(
+    id         bigint auto_increment primary key,
+    name       varchar(255) not null,
+    size       bigint       not null,
+    keyPhoto   varchar(255) not null,
+    uploadDate datetime,
+    comment    varchar(255) not null,
+    animalsId  bigint       not null,
+    constraint fk_photo_animals foreign key (animalsId) references animals (id)
+);
+
 create table USERS
 (
     id         bigint       not null primary key auto_increment,
@@ -6,7 +43,9 @@ create table USERS
     first_name varchar(80)  not null,
     last_name  varchar(80)  not null,
     email      varchar(100) not null,
-    enabled    boolean      not null
+    enabled    boolean      not null,
+    photo_id   bigint
+    -- foreign key (id) references PHOTOS(id)
 );
 create unique index ix_users_username on users (username);
 
@@ -26,6 +65,16 @@ create table USERS_AUTHORITIES
     foreign key (authorities_id) references AUTHORITIES (id)
 );
 
+INSERT INTO ANIMAL_GENDER (name)
+VALUES
+('Male'),
+('Female');
+
+INSERT INTO ANIMAL_TYPE (name)
+VALUES
+('Cat'),
+('Dog');
+
 -- пароль везде одинаковый
 -- admin password
 -- insert into USERS(username, password, email, enabled)  values('admin', '$2a$10$yMK04o.HsK9N2Xv.ENsrDe3HiXUqZhoeQxYqMum8oHzL.U5uglREm', 'admin@mail.ru', true);
@@ -44,55 +93,6 @@ insert into USERS(first_name, last_name, username, password, email, enabled)
 values ('manager', 'manager', 'manager', '$2a$10$BoAjnAXDD9xiR34FPSTP2.BMu..hYqhymJp46K/7j9aRzGowlgpBO',
         'manager@mail.ru', true);
 
-
-create table ANIMAL_GENDER
-(
-    id   bigint primary key auto_increment,
-    name VARCHAR(100) NOT NULL
-);
-
-INSERT INTO ANIMAL_GENDER (name)
-VALUES
-('Male'),
-('Female');
-
-create table ANIMAL_TYPE
-(
-    id   bigint primary key auto_increment,
-    name VARCHAR(100) NOT NULL
-);
-
-INSERT INTO ANIMAL_TYPE (name)
-VALUES
-('Cat'),
-('Dog');
-
---CREATE TABLE animals
---(
---    id                  bigserial PRIMARY KEY,
---    name                VARCHAR(40)  NOT NULL,
---    gender              VARCHAR(10)  NOT NULL,
---    age                 INT          NOT NULL,
---    condition           VARCHAR(255) NOT NULL,
---    description         VARCHAR(255) NOT NULL,
---    user_id             bigint       not null,
---    type_of_animal_id   bigint       not null,
---    foreign key (user_id) references users (id),
---    foreign key (type_of_animal_id) references TYPE_OF_ANIMAL (id)
---);
-
-CREATE TABLE animals
-(
-    id                  bigserial PRIMARY KEY,
-    name                VARCHAR(40)  NOT NULL,
-    animal_gender_id    bigint       NOT NULL,
-    age                 INT          NOT NULL,
-    condition           VARCHAR(255) NOT NULL,
-    description         VARCHAR(255) NOT NULL,
-    animal_type_id      bigint       NOT NULL,
-    FOREIGN KEY (animal_gender_id) REFERENCES ANIMAL_GENDER (id),
-    FOREIGN KEY (animal_type_id) REFERENCES ANIMAL_TYPE (id)
-);
 
 INSERT INTO animals (name, animal_gender_id, age, condition, description, animal_type_id)
 VALUES
@@ -124,15 +124,3 @@ values (3, 2);
 insert into USERS_AUTHORITIES
 values (4, 3);
 
-
-CREATE TABLE photos
-(
-    id         bigint auto_increment primary key,
-    name       varchar(255) not null,
-    size       bigint       not null,
-    keyPhoto   varchar(255) not null,
-    uploadDate datetime,
-    comment    varchar(255) not null,
-    animalsId  bigint       not null,
-    constraint fk_photo_animals foreign key (animalsId) references animals (id)
-);
