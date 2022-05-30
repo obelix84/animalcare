@@ -1,6 +1,11 @@
 package ru.animalcare.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +18,10 @@ import ru.animalcare.service.AnimalTypeService;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import static ru.animalcare.common.Settings.PATH_TO_ANIMAL_PHOTO_DIRECTORY;
@@ -61,5 +69,37 @@ public class AnimalController {
         File serverFile = new File(PATH_TO_ANIMAL_PHOTO_DIRECTORY + imageName + ".jpg");
         return Files.readAllBytes(serverFile.toPath());
     }
+
+    @GetMapping("/download/{imageName}")
+    public ResponseEntity downloadFileFromLocal(@PathVariable String imageName) {
+        Path path = Paths.get(PATH_TO_ANIMAL_PHOTO_DIRECTORY + imageName + ".jpg");
+        Resource resource = null;
+        try {
+            resource = new UrlResource(path.toUri());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType("application/octet-stream"))
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+                .body(resource);
+    }
+
+    @GetMapping("/get/{imageName}")
+    public ResponseEntity<Resource> getFileFromLocal(@PathVariable String imageName) {
+        Path path = Paths.get(PATH_TO_ANIMAL_PHOTO_DIRECTORY + imageName + ".jpg");
+        Resource resource = null;
+        try {
+            resource = new UrlResource(path.toUri());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return ResponseEntity.ok()
+                .contentLength(path.toFile().length())
+                //вот тут надо чего сделать
+                .contentType(MediaType.IMAGE_JPEG)
+                .body(resource);
+    }
+
 
 }
