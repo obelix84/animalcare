@@ -22,11 +22,18 @@ public class AnimalController {
     private final AnimalTypeService animalTypeService;
     private final AnimalGenderService animalGenderService;
 
+//    @GetMapping
+//    public String showAllAnimals(Model model) {
+//        List<AnimalDto> animals = animalService.findAll();
+//        model.addAttribute("animals", animals);
+//        return "all_animals";
+//    }
+
     @GetMapping
-    public String showAllAnimals(Model model) {
-        List<AnimalDto> animals = animalService.findAll();
-        model.addAttribute("animals", animals);
-        return "all_animals";
+    public String showAllAnimals(@RequestParam(value = "pageNumber", required = false, defaultValue = "1") int pageNumber,
+                                 @RequestParam(value = "size", required = false, defaultValue = "2") int size, Model model) {
+        model.addAttribute("animals", animalService.getPage(pageNumber,size));
+        return "all";
     }
 
     @GetMapping("/{id}")
@@ -52,7 +59,8 @@ public class AnimalController {
         }
         animalService.addNewAnimal(animalDto);
 
-        return showAllAnimals(model);
+//        return showAllAnimals(model);
+        return "all_animals";
     }
 
 }
