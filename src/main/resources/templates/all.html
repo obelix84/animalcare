@@ -2,10 +2,10 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <!--    <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
-    <!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
-    <!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"-->
-    <!--          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>All Animals</title>
     <link th:rel="stylesheet" th:href="@{webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
 
@@ -15,7 +15,7 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
     <div class="container">
-                <a class="navbar-brand" href="/">Thymeleaf - Bootstrap Pagination</a>
+<!--                <a class="navbar-brand" href="/">Thymeleaf - Bootstrap Pagination</a>-->
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
                         aria-controls="navbarResponsive"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -28,15 +28,15 @@
                                 <span class="sr-only">(current)</span>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Services</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Contact</a>
-                        </li>
+<!--                        <li class="nav-item">-->
+<!--                            <a class="nav-link" href="#">About</a>-->
+<!--                        </li>-->
+<!--                        <li class="nav-item">-->
+<!--                            <a class="nav-link" href="#">Services</a>-->
+<!--                        </li>-->
+<!--                        <li class="nav-item">-->
+<!--                            <a class="nav-link" href="#">Contact</a>-->
+<!--                        </li>-->
                     </ul>
                 </div>
     </div>
@@ -45,7 +45,7 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-10 mt-5 mb-5">
-            <table id="posts" class="table">
+            <table id="posts" class="table table-bordered table-responsive-sm">
                 <thead>
                 <tr>
                     <th scope="col">ID</th>
@@ -55,7 +55,7 @@
                     <th scope="col">Age</th>
                     <th scope="col">Condition</th>
                     <th scope="col">Description</th>
-                                            <th scope="col">Action</th>
+                    <th scope="col">Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -81,35 +81,35 @@
                     <td>
                         <p th:utext="${animal.description}">
                     </td>
-                                        <td>
-                                            <a th:href="@{/animals/} + ${animal.id}">Show Profile Animal</a>
-                                        </td>
+                    <td>
+                        <a th:href="@{/animals/} + ${animal.id}">Show Profile Animal</a>
+                    </td>
                 </tr>
             </table>
+
+            <nav aria-label="Page navigation" class="paging">
+                <ul class="pagination" th:if="${animals.page.totalPages > 1}">
+                    <li class="page-item" th:classappend="${!animals.paging.isPrevEnabled()? 'disabled' : 'animals'}">
+                        <a class="page-link" th:href="@{'/?pageNumber=' + ${animals.paging.pageNumber - 1}}"
+                           tabindex="-1">Previous</a>
+                    </li>
+                    <th:block th:each="item : ${animals.paging.getItems()}">
+                        <li class="page-item" th:classappend="${item.index == animals.paging.pageNumber? 'active' : ''}"
+                            th:if="${item.pageItemType.name() == 'PAGE'}">
+                            <a class="page-link" th:href="@{'?pageNumber=' + ${item.index}}"
+                               th:text="${item.index}"></a>
+                        </li>
+                        <li class="page-item disabled" th:if="${item.pageItemType.name() == 'DOTS'}">
+                            <a class="page-link" href="#">...</a>
+                        </li>
+                    </th:block>
+                    <li class="page-item" th:classappend="${!animals.paging.isNextEnabled()? 'disabled' : ''}">
+                        <a class="page-link" th:href="@{'/?pageNumber=' + ${animals.paging.pageNumber + 1}}">Next</a>
+                    </li>
+                </ul>
+            </nav>
+
         </div>
-
-        <nav aria-label="Page navigation" class="paging">
-            <ul class="pagination" th:if="${animals.page.totalPages > 1}">
-                <li class="page-item" th:classappend="${!animals.paging.isPrevEnabled()? 'disabled' : ''}">
-                    <a class="page-link" th:href="@{'/?pageNumber=' + ${animals.paging.pageNumber - 1}}"
-                       tabindex="-1">Previous</a>
-                </li>
-                <th:block th:each="item : ${animals.paging.getItems()}">
-                    <li class="page-item" th:classappend="${item.index == animals.paging.pageNumber? 'active' : ''}"
-                        th:if="${item.pageItemType.name() == 'PAGE'}">
-                        <a class="page-link" th:href="@{'/?pageNumber=' + ${item.index}}"
-                           th:text="${item.index}"></a>
-                    </li>
-                    <li class="page-item disabled" th:if="${item.pageItemType.name() == 'DOTS'}">
-                        <a class="page-link" href="#">...</a>
-                    </li>
-                </th:block>
-                <li class="page-item" th:classappend="${!animals.paging.isNextEnabled()? 'disabled' : ''}">
-                    <a class="page-link" th:href="@{'/?pageNumber=' + ${animals.paging.pageNumber + 1}}">Next</a>
-                </li>
-            </ul>
-        </nav>
-
     </div>
 </div>
 

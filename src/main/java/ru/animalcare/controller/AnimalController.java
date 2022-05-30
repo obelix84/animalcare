@@ -30,8 +30,8 @@ public class AnimalController {
 //    }
 
     @GetMapping
-    public String showAllAnimals(@RequestParam(value = "pageNumber", required = false, defaultValue = "1") int pageNumber,
-                                 @RequestParam(value = "size", required = false, defaultValue = "2") int size, Model model) {
+    public String showAllAnimalsPage(@RequestParam(value = "pageNumber", required = false, defaultValue = "1") int pageNumber,
+                                 @RequestParam(value = "size", required = false, defaultValue = "1") int size, Model model) {
         model.addAttribute("animals", animalService.getPage(pageNumber,size));
         return "all";
     }
@@ -60,7 +60,8 @@ public class AnimalController {
         animalService.addNewAnimal(animalDto);
 
 //        return showAllAnimals(model);
-        return "all_animals";
+        return "all";
+
     }
 
 }
