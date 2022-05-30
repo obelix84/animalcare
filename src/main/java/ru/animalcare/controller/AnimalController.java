@@ -4,19 +4,19 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.multipart.MultipartFile;
-import ru.animalcare.domain.Animal;
 import ru.animalcare.dto.AnimalDto;
-import ru.animalcare.dto.AnimalPhotoDto;
 import ru.animalcare.dto.AnimalRegistrationDto;
 import ru.animalcare.service.AnimalGenderService;
 import ru.animalcare.service.AnimalPhotoService;
 import ru.animalcare.service.AnimalService;
 import ru.animalcare.service.AnimalTypeService;
 
-import javax.validation.Valid;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.List;
+
+import static ru.animalcare.common.Settings.PATH_TO_ANIMAL_PHOTO_DIRECTORY;
 
 @Controller
 @RequiredArgsConstructor
@@ -41,26 +41,6 @@ public class AnimalController {
         return "profile_animal";
     }
 
-    //  @PreAuthorize("hasAuthority({'ROLE_ADMIN', 'ROLE_MANAGER'})")
-//    @GetMapping("/add")
-//    public String showFormAddAnimal(Model model) {
-//        model.addAttribute("animal", new AnimalDto());
-//        model.addAttribute("animalTypes", animalTypeService.findAllAnimalTypes());
-//        model.addAttribute("animalGenders", animalGenderService.findAllAnimalGenders());
-//        return "animals_add";
-//    }
-//
-//    @PostMapping("/add")
-//    public String addNewAnimal(@Valid AnimalDto animalDto, BindingResult result, Model model) {
-//        if (result.hasErrors()) {
-//            return "main";
-//        }
-//        animalService.addNewAnimal(animalDto);
-//
-//        return showAllAnimals(model);
-//    }
-
-
     @GetMapping("/add")
     public String showFormAddAnimalPhoto(Model model) {
         model.addAttribute("animalTypes", animalTypeService.findAllAnimalTypes());
@@ -73,6 +53,13 @@ public class AnimalController {
     public String uploadAnimalPhotoToServer(@ModelAttribute AnimalRegistrationDto animalRegistrationDto) {
         animalService.addNewAnimal(animalRegistrationDto);
         return "redirect:/";
+    }
+
+    @GetMapping("/image/{imageName}")
+    @ResponseBody
+    public byte[] getImage(@PathVariable(value = "imageName") String imageName) throws IOException {
+        File serverFile = new File(PATH_TO_ANIMAL_PHOTO_DIRECTORY + imageName + ".jpg");
+        return Files.readAllBytes(serverFile.toPath());
     }
 
 }

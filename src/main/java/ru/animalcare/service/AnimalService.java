@@ -2,16 +2,15 @@ package ru.animalcare.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.animalcare.domain.Animal;
 import ru.animalcare.domain.AnimalGender;
 import ru.animalcare.domain.AnimalPhoto;
 import ru.animalcare.domain.AnimalType;
 import ru.animalcare.dto.AnimalDto;
-import ru.animalcare.dto.AnimalPhotoDto;
 import ru.animalcare.dto.AnimalRegistrationDto;
 import ru.animalcare.repository.AnimalRepository;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -41,35 +40,8 @@ public class AnimalService {
                 .orElseThrow(() -> new NoSuchElementException("Animal for ID: " + id + " not found"));
     }
 
-//    public boolean deleteById(Long id) {
-//        try {
-//            animalRepository.deleteById(id);
-//            return true;
-//        } catch (NoSuchElementException e) {
-//            throw new EntityNotFoundException("Animal entity no found by id: " + id);
-//        }
-//    }
-
-//    public void addNewAnimal(AnimalDto animalDto){
-//        Animal animal = new Animal();
-//        animal.setName(animalDto.getName());
-//
-//        AnimalGender animalGender = animalGenderService.findAnimalGenderByName(animalDto.getGender())
-//                .orElseThrow(() -> new RuntimeException(String.format("Animal gender '%s' not found\n", animalDto.getGender())));
-//        animal.setAnimalGender(animalGender);
-//
-//        animal.setAge(animalDto.getAge());
-//        animal.setCondition(animalDto.getCondition());
-//        animal.setDescription(animalDto.getDescription());
-//
-//        AnimalType animalType = animalTypeService.findTypeAnimalByName(animalDto.getType())
-//                .orElseThrow(() -> new RuntimeException(String.format("Animal type '%s' not found\n", animalDto.getType())));
-//        animal.setAnimalType(animalType);
-//
-//        animalRepository.save(animal);
-//    }
-
-    public void addNewAnimal(AnimalRegistrationDto animalRegistrationDto) {
+    @Transactional
+    public AnimalDto addNewAnimal(AnimalRegistrationDto animalRegistrationDto) {
         Animal animal = new Animal();
         animal.setName(animalRegistrationDto.getName());
 
@@ -93,7 +65,7 @@ public class AnimalService {
             animal.setAnimalPhotoList(new ArrayList<>(Arrays.asList(animalPhoto)));
         }
 
-        animalRepository.save(animal);
+        return new AnimalDto(animalRepository.save(animal));
     }
 
 }

@@ -3,7 +3,6 @@ package ru.animalcare.domain;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.List;
 
 
@@ -32,13 +31,6 @@ public class Animal {
 
     @Column(name = "description")
     private String description;
-
-//    @OneToOne
-//    @JoinColumn(name = "animal_photo_id", referencedColumnName = "id")
-//    private AnimalPhoto animalPhoto;
-
-//    @Column(name = "path_photo")
-//    private String pathPhoto;
 
     @ManyToOne
     @JoinColumn(name = "animal_type_id")

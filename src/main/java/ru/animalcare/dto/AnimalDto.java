@@ -27,7 +27,10 @@ public class AnimalDto {
         this.age = animal.getAge();
         this.condition = animal.getCondition();
         this.description = animal.getDescription();
-        this.pathPhoto = PATH_TO_ANIMAL_PHOTO_DIRECTORY_THYMELEAF + animal.getAnimalPhotoList().get(0).getName();
+        this.pathPhoto = animal.getAnimalPhotoList()
+                .get(0)
+                .getName()
+                .replace(".jpg", "");
         this.type = animal.getAnimalType().getName();
     }
 }

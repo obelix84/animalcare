@@ -10,7 +10,6 @@ import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.web.multipart.MultipartFile;
 import ru.animalcare.domain.Animal;
-import ru.animalcare.domain.Photo;
 
 
 import java.io.FileInputStream;

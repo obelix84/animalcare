@@ -33,11 +33,9 @@
             </thead>
             <tr th:each="animal : ${animals}">
                 <th scope="row">
-<!--                    <p><img th:src="${animal.pathPhoto}" width="189" height="255"></p>-->
-                    <p><img th:src="@{${animal.pathPhoto}}" width="189" height="255"></p>
-
-<!--                    <p th:utext="${animal.pathPhoto}"></p>-->
-
+                    <p>
+                        <img th:src="@{animals/image/} + ${animal.pathPhoto}" width="250" height="250"/>
+                    </p>
                 </th>
                 <td>
                     <p th:utext="${animal.id}"></p>
