@@ -5,14 +5,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.BindingResult;
-import ru.animalcare.domain.Animal;
 import ru.animalcare.dto.AnimalDto;
 import ru.animalcare.service.AnimalGenderService;
 import ru.animalcare.service.AnimalService;
 import ru.animalcare.service.AnimalTypeService;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -31,9 +29,9 @@ public class AnimalController {
 
     @GetMapping
     public String showAllAnimalsPage(@RequestParam(value = "pageNumber", required = false, defaultValue = "1") int pageNumber,
-                                 @RequestParam(value = "size", required = false, defaultValue = "1") int size, Model model) {
+                                 @RequestParam(value = "size", required = false, defaultValue = "2") int size, Model model) {
         model.addAttribute("animals", animalService.getPage(pageNumber,size));
-        return "all";
+        return "all_animal";
     }
 
     @GetMapping("/{id}")
@@ -60,7 +58,7 @@ public class AnimalController {
         animalService.addNewAnimal(animalDto);
 
 //        return showAllAnimals(model);
-        return "all";
+        return "allAA";
 
     }
 

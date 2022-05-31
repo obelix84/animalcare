@@ -98,7 +98,10 @@ INSERT INTO animals (name, animal_gender_id, age, condition, description, animal
 VALUES
 ( 'Felix', 1, 5, 'Good', 'Looking for a host', 1),
 ( 'Kassandra', 2, 4, 'Good', 'Looking for a host', 2),
-( 'Rex', 1, 7, 'Good', 'Looking for a host', 2);
+( 'Rex', 1, 7, 'Good', 'Looking for a host', 2),
+( 'Felix 2', 1, 5, 'Good', 'Looking for a host', 1),
+( 'Kassandra 2', 2, 4, 'Good', 'Looking for a host', 2),
+( 'Rex 2', 1, 7, 'Good', 'Looking for a host', 2);
 
 -- Роли:
 --  USER обычный пользователь, может регистрироваться и создавать объявления

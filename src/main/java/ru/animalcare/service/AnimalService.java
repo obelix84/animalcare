@@ -82,7 +82,12 @@ public class AnimalService {
 
         PageRequest request = PageRequest.of(pageNumber - 1, size, Sort.by(Sort.Direction.ASC, "id"));
 
-        Page<AnimalDto> animalPage = new PageImpl<>(findAll(), request, findAll().size());
+        Page<AnimalDto> animalPage = new PageImpl<>(animalRepository.findAll(request)
+                .stream()
+                .map(AnimalDto::new)
+                .collect(Collectors.toList())
+                , request
+                , findAll().size());
         return new Paged<>(animalPage, Paging.of(animalPage.getTotalPages(), pageNumber, size));
     }
 }
