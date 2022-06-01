@@ -65,15 +65,85 @@
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body">
-                                    <h5 class="card-title" th:text="Пользователь + ' ' + ${fio}"></h5>
-                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                    <h5 class="card-title" th:text="'Пользователь ID:'  + ' ' + ${userDto.id}"></h5>
+                                    <p class="card-text">
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item" th:inline="text"><strong>Логин: </strong>  [[${userDto.username}]]
+                                            <li class="list-group-item" th:inline="text"><strong>Фамилия: </strong> [[${userDto.firstName}]]
+                                            <li class="list-group-item" th:inline="text"><strong>Имя: </strong>  [[${userDto.lastName}]]
+                                        </ul>
+
+                                    <ul class="list-group">
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            <a href="#Active">Активные объявления</a>
+                                            <span class="badge bg-primary rounded-pill" th:text="${countActive}"></span>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            <a href="#InActive">Снятые с публикации</a>
+                                            <span class="badge bg-primary rounded-pill" th:text="${countInActive}"></span>
+                                        </li>
+                                    </ul>
+                                    </p>
+                                    <form name="f" th:action="@{/logout}" method="post">
+                                        <fieldset>
+                                            <button type="submit" class="btn btn-primary">Выйти</button>
+                                        </fieldset>
+                                    </form>
+                                    <p class="card-text"><small class="text-muted">Last login 3 mins ago</small></p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            <h2 class="mt-5" id="Active">Активные объявления</h2>
+            <div class="row row-cols-1 row-cols-md-4 g-4 mt-3">
+                <div class="col" th:each="animal : ${animals}" th:if="${animal.active} == true">
+                    <div class="card">
+                        <img src="img/empty.png" class="card-img-top max-height-200 max-width-200">
+                        <div class="card-body h-100">
+                            <h5 class="card-title" th:text="${animal.name}"></h5>
+                            <p class="card-text" th:text="${animal}"></p>
+
+                            <div class="dropdown">
+                                <button class="btn btn-primary dropdown-toggle" type="button"
+                                        th:id="'dmB' + ${animal.id}"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                    . . .
+                                </button>
+                                <ul class="dropdown-menu" th:aria-labelledby="'dmB' + ${animal.id}">
+                                    <li><a class="dropdown-item" href="#">Снять с публикации</a></li>
+                                    <li><a class="dropdown-item" href="#">Редактировать</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <h2 class="mt-5" id="InActive">Снятые с публикации</h2>
+            <div class="row row-cols-1 row-cols-md-4 g-4 mt-3">
+                <div class="col" th:each="animal : ${animals}" th:if="${animal.active} == false">
+                    <div class="card">
+                        <img src="img/empty.png" class="card-img-top max-height-200 max-width-200">
+                        <div class="card-body h-100">
+                            <h5 class="card-title" th:text="${animal.name}"></h5>
+                            <p class="card-text" th:text="${animal}"></p>
+                            <div class="dropdown">
+                                <button class="btn btn-success dropdown-toggle" type="button" th:id="'dmB' + ${animal.id}"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                    . . .
+                                </button>
+                                <ul class="dropdown-menu" th:aria-labelledby="'dmB' + ${animal.id}">
+                                    <li><a class="dropdown-item" href="#">Опубликовать</a></li>
+                                    <li><a class="dropdown-item" href="#">Удалить</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
     </section>
 
 </div>

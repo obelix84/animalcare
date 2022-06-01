@@ -10,7 +10,7 @@ create table ANIMAL_TYPE
     name VARCHAR(100) NOT NULL
 );
 
-CREATE TABLE animals
+CREATE TABLE ANIMALS
 (
     id                  bigserial PRIMARY KEY,
     name                VARCHAR(40)  NOT NULL,
@@ -19,6 +19,9 @@ CREATE TABLE animals
     condition           VARCHAR(255) NOT NULL,
     description         VARCHAR(255) NOT NULL,
     animal_type_id      bigint       NOT NULL,
+    active              boolean       NOT NULL DEFAULT FALSE,
+    -- исправить на FOREIGN KEY, когда будет понятно с изменением формы
+    user_id             bigint      NULL,
     FOREIGN KEY (animal_gender_id) REFERENCES ANIMAL_GENDER (id),
     FOREIGN KEY (animal_type_id) REFERENCES ANIMAL_TYPE (id)
 );
@@ -83,7 +86,7 @@ values ('admin', 'admin', 'admin', '$2a$10$BoAjnAXDD9xiR34FPSTP2.BMu..hYqhymJp46
         true);
 -- user password
 insert into USERS(first_name, last_name, username, password, email, enabled)
-values ('user', 'user', 'user', '$2a$10$BoAjnAXDD9xiR34FPSTP2.BMu..hYqhymJp46K/7j9aRzGowlgpBO', 'user@mail.ru', true);
+values ('Иванов', 'Иван', 'user', '$2a$10$BoAjnAXDD9xiR34FPSTP2.BMu..hYqhymJp46K/7j9aRzGowlgpBO', 'user@mail.ru', true);
 -- user1 password
 insert into USERS(first_name, last_name, username, password, email, enabled)
 values ('user1', 'user1', 'user1', '$2a$10$BoAjnAXDD9xiR34FPSTP2.BMu..hYqhymJp46K/7j9aRzGowlgpBO', 'user1@mail.ru',
@@ -94,11 +97,13 @@ values ('manager', 'manager', 'manager', '$2a$10$BoAjnAXDD9xiR34FPSTP2.BMu..hYqh
         'manager@mail.ru', true);
 
 
-INSERT INTO animals (name, animal_gender_id, age, condition, description, animal_type_id)
+INSERT INTO ANIMALS (name, animal_gender_id, age, condition, description, animal_type_id, active , user_id)
 VALUES
-( 'Felix', 1, 5, 'Good', 'Looking for a host', 1),
-( 'Kassandra', 2, 4, 'Good', 'Looking for a host', 2),
-( 'Rex', 1, 7, 'Good', 'Looking for a host', 2);
+( 'Felix', 1, 5, 'Good', 'Looking for a host', 1, true, 2),
+( 'Kassandra', 2, 4, 'Good', 'Looking for a host', true, 2, 2),
+( 'Rex', 1, 7, 'Good', 'Looking for a host', 2, true, 2),
+( 'TRex', 1, 7000, 'Excellent', 'Looking for a host', 2, false , 2),
+( 'Ramon', 1, 17000, 'Excellent', 'Looking for a host', 2, false , 2);
 
 -- Роли:
 --  USER обычный пользователь, может регистрироваться и создавать объявления

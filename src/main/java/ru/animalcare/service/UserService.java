@@ -10,21 +10,15 @@ import ru.animalcare.repository.UserRepository;
 import java.util.NoSuchElementException;
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
 
     private final ModelMapper modelMapper;
     private final UserRepository userRepository;
 
-    public UserService(UserRepository userRepository) {
-        this.modelMapper = new ModelMapper();
-        this.userRepository = userRepository;
-    }
-
     public UserDto findUserByName(String name){
         User user = userRepository.findByUsername(name)
                 .orElseThrow( ()-> new NoSuchElementException("User with name " + name + " isn\'t exist"));
-        System.out.println(user);
-        System.out.println("user");
         return this.modelMapper.map(user, UserDto.class);
     }
 }

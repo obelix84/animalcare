@@ -14,6 +14,8 @@ public class AnimalDto {
     private String condition;
     private String description;
     private String type;
+    private Long userId;
+    private Boolean active;
 
     public AnimalDto(Animal animal) {
         if(animal.getId() != null){
@@ -25,5 +27,7 @@ public class AnimalDto {
         this.condition = animal.getCondition();
         this.description = animal.getDescription();
         this.type = animal.getAnimalType().getName();
+        this.userId = animal.getUser().getId();
+        this.active = animal.getActive();
     }
 }

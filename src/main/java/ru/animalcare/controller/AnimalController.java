@@ -5,7 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.BindingResult;
-import ru.animalcare.domain.Animal;
 import ru.animalcare.dto.AnimalDto;
 import ru.animalcare.service.AnimalGenderService;
 import ru.animalcare.service.AnimalService;
@@ -51,8 +50,9 @@ public class AnimalController {
             return "main";
         }
         animalService.addNewAnimal(animalDto);
-
         return showAllAnimals(model);
     }
+
+
 
 }

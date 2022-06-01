@@ -31,12 +31,15 @@ public class Animal {
     @Column(name = "description")
     private String description;
 
-//    @OneToOne
-//    @JoinColumn(name = "user_id", referencedColumnName = "id")
-//    private User user;
+    @Column(name = "active")
+    Boolean active;
 
     @ManyToOne
     @JoinColumn(name = "animal_type_id")
     private AnimalType animalType;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
 }

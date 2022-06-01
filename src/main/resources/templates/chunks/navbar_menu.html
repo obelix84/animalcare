@@ -93,9 +93,9 @@
         </li>
 
         <li class="nav-item ms-lg-auto">
-            <a sec:authorize="isAuthenticated()" class="nav-link nav-link-icon me-2" th:href="@{/account}">
+            <a sec:authorize="isAuthenticated()" class="nav-link nav-link-icon me-2" th:href="@{/profile}" th:object="${userdto}">
                 <i class="bi bi-person-circle"></i>
-                <p th:text="${fio}" class="d-inline text-sm z-index-1 font-weight-bold" data-bs-toggle="tooltip"
+                <p th:text="${userDto.firstName} + ' ' + ${userDto.lastName}" class="d-inline text-sm z-index-1 font-weight-bold" data-bs-toggle="tooltip"
                    data-bs-placement="bottom" title="Личный кабинет"></p>
             </a>
             <a sec:authorize="!isAuthenticated()" class="nav-link nav-link-icon me-2" th:href="@{/login}">
