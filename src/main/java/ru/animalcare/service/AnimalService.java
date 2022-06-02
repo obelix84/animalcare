@@ -1,8 +1,6 @@
 package ru.animalcare.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import ru.animalcare.domain.Animal;
@@ -14,8 +12,6 @@ import ru.animalcare.dto.AnimalDto;
 import ru.animalcare.repository.AnimalRepository;
 
 import javax.persistence.EntityNotFoundException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;

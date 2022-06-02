@@ -29,7 +29,7 @@ public class AnimalController {
 
     @GetMapping
     public String showAllAnimalsPage(@RequestParam(value = "pageNumber", required = false, defaultValue = "1") int pageNumber,
-                                 @RequestParam(value = "size", required = false, defaultValue = "2") int size, Model model) {
+                                 @RequestParam(value = "size", required = false, defaultValue = "3") int size, Model model) {
         model.addAttribute("animals", animalService.getPage(pageNumber,size));
         return "all_animal";
     }
@@ -47,7 +47,8 @@ public class AnimalController {
         model.addAttribute("animal", new AnimalDto());
         model.addAttribute("animalTypes", animalTypeService.findAllAnimalTypes());
         model.addAttribute("animalGenders", animalGenderService.findAllAnimalGenders());
-        return "animals_add";
+//        return "animals_add";
+        return "add_animals";
     }
 
     @PostMapping("/add")
@@ -58,8 +59,9 @@ public class AnimalController {
         animalService.addNewAnimal(animalDto);
 
 //        return showAllAnimals(model);
-        return "allAA";
+        return showAllAnimalsPage(1,3, model);
 
     }
+
 
 }

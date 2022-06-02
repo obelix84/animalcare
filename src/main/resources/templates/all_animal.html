@@ -67,7 +67,7 @@
         <div class="container">
                 <div class="row">
                     <div class="col-lg-10 mt-5 mb-5">
-                        <table id="posts" class="table table-bordered table-responsive-sm">
+                        <table id="posts"   class="table table-hover">
                             <thead>
                             <tr>
                                 <th scope="col">ID</th>
@@ -81,18 +81,19 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="animal : ${animals.page}">
-                                <td th:text="${animal.id}">id</td>
-                                <td th:text="${animal.type}">type</td>
-                                <td th:text="${animal.name}">name</td>
-                                <td th:text="${animal.gender}">gender</td>
-                                <td th:text="${animal.age}">age</td>
-                                <td th:text="${animal.condition}">condition</td>
-                                <td th:text="${animal.description}">description</td>
+                            <tr  th:each="animal : ${animals.page}">
+                                <td class=" text-center" th:text="${animal.id}">id</td>
+                                <td class=" text-center" th:text="${animal.type}">type</td>
+                                <td class="text-center" th:text="${animal.name}">name</td>
+                                <td class=" text-center" th:text="${animal.gender}">gender</td>
+                                <td class=" text-center"  th:text="${animal.age}">age</td>
+                                <td class=" text-center" th:text="${animal.condition}">condition</td>
+                                <td class=" text-center" th:text="${animal.description}">description</td>
                                 <td>
                                     <a th:href="@{/animals/} + ${animal.id}">Show Profile Animal</a>
                                 </td>
                             </tr>
+                            </tbody>
                         </table>
 
                         <nav aria-label="Page navigation" class="paging">
