@@ -105,21 +105,22 @@ CREATE TABLE ANIMALS
     age                 INT          NOT NULL,
     condition           VARCHAR(255) NOT NULL,
     description         VARCHAR(255) NOT NULL,
---    path_photo          VARCHAR(255),
     animal_type_id      bigint       NOT NULL,
+    active              boolean      NOT NULL DEFAULT FALSE,
+    user_id             bigint       NULL,
+--    исправить на FOREIGN KEY
     FOREIGN KEY (animal_gender_id) REFERENCES ANIMAL_GENDER (id),
     FOREIGN KEY (animal_type_id) REFERENCES ANIMAL_TYPE (id)
+--    FOREIGN KEY (user_id) REFERENCES USERS (id)
 );
 
-INSERT INTO ANIMALS (name, animal_gender_id, age, condition, description, animal_type_id)
-INSERT INTO ANIMALS (name, animal_gender_id, age, condition, description, animal_type_id, active , user_id)
+INSERT INTO ANIMALS (name, animal_gender_id, age, condition, description, animal_type_id, active, user_id)
 VALUES
 ( 'Felix', 1, 5, 'Good', 'Looking for a host', 1, true, 2),
 ( 'Kassandra', 2, 4, 'Good', 'Looking for a host', true, 2, 2),
 ( 'Rex', 1, 7, 'Good', 'Looking for a host', 2, true, 2),
 ( 'TRex', 1, 7000, 'Excellent', 'Looking for a host', 2, false , 2),
 ( 'Ramon', 1, 17000, 'Excellent', 'Looking for a host', 2, false , 2);
-( 'Rex', 1, 7, 'Good', 'Looking for a host', 2);
 
 CREATE TABLE ANIMALS_ANIMAL_PHOTOS
 (
@@ -134,7 +135,9 @@ INSERT INTO ANIMALS_ANIMAL_PHOTOS (animal_id, animal_photo_id)
 VALUES
 (1, 1),
 (2, 1),
-(3, 1);
+(3, 1),
+(4, 1),
+(5, 1);
 
 -- Роли:
 --  USER обычный пользователь, может регистрироваться и создавать объявления
@@ -161,14 +164,14 @@ insert into USERS_AUTHORITIES
 values (4, 3);
 
 
---CREATE TABLE photos
---(
---    id         bigint auto_increment primary key,
---    name       varchar(255) not null,
---    size       bigint       not null,
---    keyPhoto   varchar(255) not null,
---    uploadDate datetime,
---    comment    varchar(255) not null
-----    animalsId  bigint       not null,
-----    constraint fk_photo_animals foreign key (animalsId) references animals (id)
---);
+CREATE TABLE photos
+(
+    id         bigint auto_increment primary key,
+    name       varchar(255) not null,
+    size       bigint       not null,
+    keyPhoto   varchar(255) not null,
+    uploadDate datetime,
+    comment    varchar(255) not null
+--    animalsId  bigint       not null,
+--    constraint fk_photo_animals foreign key (animalsId) references animals (id)
+);

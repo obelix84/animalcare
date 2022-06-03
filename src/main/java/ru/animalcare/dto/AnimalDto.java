@@ -29,12 +29,14 @@ public class AnimalDto {
         this.age = animal.getAge();
         this.condition = animal.getCondition();
         this.description = animal.getDescription();
-        this.pathPhoto = animal.getAnimalPhotoList()
-                .get(0)
-                .getName()
-                .replace(".jpg", "");
+        if(animal.getAnimalPhotoList().size() > 0){
+            this.pathPhoto = animal.getAnimalPhotoList()
+                    .get(0)
+                    .getName()
+                    .replace(".jpg", "");
+        }
         this.type = animal.getAnimalType().getName();
-        this.userId = animal.getUser().getId();
+//        this.userId = animal.getUser().getId();
         this.active = animal.getActive();
     }
 }

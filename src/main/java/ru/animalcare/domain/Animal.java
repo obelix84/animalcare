@@ -33,7 +33,7 @@ public class Animal {
     private String description;
 
     @Column(name = "active")
-    Boolean active;
+    private Boolean active;
 
     @ManyToOne
     @JoinColumn(name = "animal_type_id")
@@ -44,6 +44,7 @@ public class Animal {
             joinColumns = @JoinColumn(name = "animal_id"),
             inverseJoinColumns = @JoinColumn(name = "animal_photo_id"))
     private List<AnimalPhoto> animalPhotoList;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;

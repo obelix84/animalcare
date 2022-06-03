@@ -74,6 +74,9 @@ public class AnimalService {
         animal.setAge(animalRegistrationDto.getAge());
         animal.setCondition(animalRegistrationDto.getCondition());
         animal.setDescription(animalRegistrationDto.getDescription());
+        animal.setActive(true);
+//        todo переделать на поиск юзера по id
+        animal.setUser(null);
 
         AnimalType animalType = animalTypeService.findTypeAnimalByName(animalRegistrationDto.getType())
                 .orElseThrow(() -> new RuntimeException(String.format("Animal type '%s' not found\n", animalRegistrationDto.getType())));
