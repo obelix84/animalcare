@@ -6,7 +6,9 @@ create table USERS
     first_name varchar(80)  not null,
     last_name  varchar(80)  not null,
     email      varchar(100) not null,
-    enabled    boolean      not null
+    enabled    boolean      not null,
+    photo_id   bigint
+    -- foreign key (id) references PHOTOS(id)
 );
 create unique index ix_users_username on users (username);
 
@@ -34,7 +36,7 @@ values ('admin', 'admin', 'admin', '$2a$10$BoAjnAXDD9xiR34FPSTP2.BMu..hYqhymJp46
         true);
 -- user password
 insert into USERS(first_name, last_name, username, password, email, enabled)
-values ('user', 'user', 'user', '$2a$10$BoAjnAXDD9xiR34FPSTP2.BMu..hYqhymJp46K/7j9aRzGowlgpBO', 'user@mail.ru', true);
+values ('Иванов', 'Иван', 'user', '$2a$10$BoAjnAXDD9xiR34FPSTP2.BMu..hYqhymJp46K/7j9aRzGowlgpBO', 'user@mail.ru', true);
 -- user1 password
 insert into USERS(first_name, last_name, username, password, email, enabled)
 values ('user1', 'user1', 'user1', '$2a$10$BoAjnAXDD9xiR34FPSTP2.BMu..hYqhymJp46K/7j9aRzGowlgpBO', 'user1@mail.ru',
@@ -110,12 +112,14 @@ CREATE TABLE ANIMALS
 );
 
 INSERT INTO ANIMALS (name, animal_gender_id, age, condition, description, animal_type_id)
+INSERT INTO ANIMALS (name, animal_gender_id, age, condition, description, animal_type_id, active , user_id)
 VALUES
-( 'Felix', 1, 5, 'Good', 'Looking for a host', 1),
-( 'Kassandra', 2, 4, 'Good', 'Looking for a host', 2),
+( 'Felix', 1, 5, 'Good', 'Looking for a host', 1, true, 2),
+( 'Kassandra', 2, 4, 'Good', 'Looking for a host', true, 2, 2),
+( 'Rex', 1, 7, 'Good', 'Looking for a host', 2, true, 2),
+( 'TRex', 1, 7000, 'Excellent', 'Looking for a host', 2, false , 2),
+( 'Ramon', 1, 17000, 'Excellent', 'Looking for a host', 2, false , 2);
 ( 'Rex', 1, 7, 'Good', 'Looking for a host', 2);
-
---'img/n/no_photo.jpg'
 
 CREATE TABLE ANIMALS_ANIMAL_PHOTOS
 (
@@ -155,6 +159,7 @@ insert into USERS_AUTHORITIES
 values (3, 2);
 insert into USERS_AUTHORITIES
 values (4, 3);
+
 
 --CREATE TABLE photos
 --(

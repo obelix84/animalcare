@@ -17,6 +17,8 @@ public class AnimalDto {
     private String description;
     private String pathPhoto;
     private String type;
+    private Long userId;
+    private Boolean active;
 
     public AnimalDto(Animal animal) {
         if(animal.getId() != null){
@@ -32,5 +34,7 @@ public class AnimalDto {
                 .getName()
                 .replace(".jpg", "");
         this.type = animal.getAnimalType().getName();
+        this.userId = animal.getUser().getId();
+        this.active = animal.getActive();
     }
 }

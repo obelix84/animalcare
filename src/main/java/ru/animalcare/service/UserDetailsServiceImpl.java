@@ -34,6 +34,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             throw new UsernameNotFoundException(username);
         }
         User appUser = optUser.get();
+        System.out.println(optUser);
+        System.out.println("--------------------------");
         return org.springframework.security.core.userdetails.User.builder()
                 .username(appUser.getUsername())
                 .password(appUser.getPassword())

@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.BindingResult;
 import ru.animalcare.dto.AnimalDto;
 import ru.animalcare.dto.AnimalRegistrationDto;
 import ru.animalcare.service.AnimalGenderService;
@@ -100,6 +101,5 @@ public class AnimalController {
                 .contentType(MediaType.IMAGE_JPEG)
                 .body(resource);
     }
-
 
 }

@@ -28,7 +28,29 @@ public class AnimalService {
     private final AnimalGenderService animalGenderService;
     private final AnimalPhotoService animalPhotoService;
 
-    public List<AnimalDto> findAll() {
+    public Long countActiveAnimalsByUserId(Long id){
+        return animalRepository.countAnimalsByUserIdAndActiveTrue(id);
+    }
+
+    public Long countInActiveAnimalsByUserId(Long id){
+        return animalRepository.countAnimalsByUserIdAndActiveFalse(id);
+    }
+
+    public List<AnimalDto> findAllAnimals(){
+        return animalRepository.findAll()
+                .stream()
+                .map(AnimalDto::new)
+                .collect(Collectors.toList());
+    }
+
+    public List<AnimalDto> findAnimalsById(Long id){
+        return animalRepository.findAnimalsByUserId(id)
+                .stream()
+                .map(AnimalDto::new)
+                .collect(Collectors.toList());
+    }
+
+    public List<AnimalDto> findAll(){
         return animalRepository.findAll()
                 .stream()
                 .map(AnimalDto::new)
