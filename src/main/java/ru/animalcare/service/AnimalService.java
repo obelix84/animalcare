@@ -75,6 +75,8 @@ public class AnimalService {
         animal.setCondition(animalRegistrationDto.getCondition());
         animal.setDescription(animalRegistrationDto.getDescription());
         animal.setActive(true);
+
+
 //        todo переделать на поиск юзера по id
         animal.setUser(null);
 
@@ -87,6 +89,31 @@ public class AnimalService {
             animal.setAnimalPhotoList(new ArrayList<>(Arrays.asList(animalPhoto)));
         } else {
             AnimalPhoto animalPhoto = animalPhotoService.findAnimalPhotoByName(ANIMAL_PHOTO_DEFAULT);
+            animal.setAnimalPhotoList(new ArrayList<>(Arrays.asList(animalPhoto)));
+        }
+
+        return new AnimalDto(animalRepository.save(animal));
+    }
+
+    @Transactional
+    public AnimalDto updateAnimal(Long id, AnimalRegistrationDto animalRegistrationDto) {
+        Animal animal = findAnimalById(id);
+        animal.setName(animalRegistrationDto.getName());
+
+        AnimalGender animalGender = animalGenderService.findAnimalGenderByName(animalRegistrationDto.getGender())
+                .orElseThrow(() -> new RuntimeException(String.format("Animal gender '%s' not found\n", animalRegistrationDto.getGender())));
+        animal.setAnimalGender(animalGender);
+
+        animal.setAge(animalRegistrationDto.getAge());
+        animal.setCondition(animalRegistrationDto.getCondition());
+        animal.setDescription(animalRegistrationDto.getDescription());
+
+        AnimalType animalType = animalTypeService.findTypeAnimalByName(animalRegistrationDto.getType())
+                .orElseThrow(() -> new RuntimeException(String.format("Animal type '%s' not found\n", animalRegistrationDto.getType())));
+        animal.setAnimalType(animalType);
+
+        if (animalRegistrationDto.getMultipartFile().getSize() != 0) {
+            AnimalPhoto animalPhoto = animalPhotoService.uploadAnimalPhotoToServer(animalRegistrationDto.getMultipartFile());
             animal.setAnimalPhotoList(new ArrayList<>(Arrays.asList(animalPhoto)));
         }
 

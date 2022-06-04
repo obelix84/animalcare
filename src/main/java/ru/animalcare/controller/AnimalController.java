@@ -34,7 +34,6 @@ public class AnimalController {
     private final AnimalService animalService;
     private final AnimalTypeService animalTypeService;
     private final AnimalGenderService animalGenderService;
-    private final AnimalPhotoService animalPhotoService;
 
     @GetMapping
     public String showAllAnimals(Model model) {
@@ -59,8 +58,22 @@ public class AnimalController {
     }
 
     @PostMapping("/add")
-    public String uploadAnimalPhotoToServer(@ModelAttribute AnimalRegistrationDto animalRegistrationDto) {
+    public String addNewAnimal(@ModelAttribute AnimalRegistrationDto animalRegistrationDto) {
         animalService.addNewAnimal(animalRegistrationDto);
+        return "redirect:/";
+    }
+
+    @GetMapping("/{id}/update")
+    public String showUpdateFormAnimal(Model model, @PathVariable Long id) {
+        model.addAttribute("animalTypes", animalTypeService.findAllAnimalTypes());
+        model.addAttribute("animalGenders", animalGenderService.findAllAnimalGenders());
+        model.addAttribute("animalRegistration", new AnimalRegistrationDto());
+        return "animal_update";
+    }
+
+    @PostMapping("/{id}/update")
+    public String updateAnimal(@PathVariable Long id, @ModelAttribute AnimalRegistrationDto animalRegistrationDto) {
+        animalService.updateAnimal(id, animalRegistrationDto);
         return "redirect:/";
     }
 
