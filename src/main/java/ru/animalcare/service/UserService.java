@@ -16,9 +16,9 @@ public class UserService {
     private final ModelMapper modelMapper;
     private final UserRepository userRepository;
 
-    public UserDto findUserByName(String name){
-        User user = userRepository.findByUsername(name)
-                .orElseThrow( ()-> new NoSuchElementException("User with name " + name + " isn\'t exist"));
+    public UserDto findUserByEmail(String email){
+        User user = userRepository.findByEmail(email)
+                .orElseThrow( ()-> new NoSuchElementException("Account with email " + email + " does not exist"));
         return this.modelMapper.map(user, UserDto.class);
     }
 }

@@ -1,8 +1,10 @@
 package ru.animalcare.domain;
 
 import lombok.Data;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -18,18 +20,24 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @Column(name = "username", unique = true)
-    String username;
+    @NotNull
+    @Column(name = "email", unique = true)
+    String email;
 
+    @NotNull
     @Column(name = "password", nullable = false)
     String password;
 
-    @Column(name = "email", nullable = false)
-    String email;
+    @NotNull
+    @Column(name = "contact_number", nullable = false)
+    @Length(max = 12,min = 12, message = "phone number should be in this format: +71234567890")
+    String contact_number;
 
+    @NotNull
     @Column(name = "first_name")
     private String firstName;
 
+    @NotNull
     @Column(name = "last_name")
     private String lastName;
 

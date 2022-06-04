@@ -20,7 +20,7 @@ import java.util.List;
 @Controller
 public class RegistrationController {
 
-    //    private static final Logger logger = LoggerFactory.getLogger(RegistrationController.class);
+    private static final Logger logger = LoggerFactory.getLogger(RegistrationController.class);
     private final UserDetailsServiceImpl userService;
     private final UserValidator userValidator;
 
@@ -39,12 +39,12 @@ public class RegistrationController {
 
     @PostMapping("/register")
     public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult) {
-//        userValidator.validate(userForm, bindingResult);
-//
-//        if (bindingResult.hasErrors()) {
-//            logger.error(String.valueOf(bindingResult.getFieldError()));
-//            return "registration";
-//        }
+        userValidator.validate(userForm, bindingResult);
+
+        if (bindingResult.hasErrors()) {
+            logger.error(String.valueOf(bindingResult.getFieldError()));
+            return "registration";
+        }
         Authority authority = new Authority();
         authority.setAuthority("USER");
         authority.setId(1L);
@@ -52,7 +52,7 @@ public class RegistrationController {
         userForm.setEnabled(true);
 
         if (userService.save(userForm)) {
-            userService.loadUserByUsername(userForm.getUsername());
+            userService.loadUserByUsername(userForm.getEmail());
             return "redirect:/authenticated";
         } else
             return "registration";

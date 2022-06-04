@@ -26,7 +26,7 @@ public class UserProfileController {
     @ModelAttribute(name = "userDto")
     public UserDto insertUserInMenu(Principal principal) {
         if (principal != null) {
-            return userService.findUserByName(principal.getName());
+            return userService.findUserByEmail(principal.getName());
         }
         return null;
     }
