@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <title>Edit animal</title>
+    <title>Animal editing form</title>
 </head>
 <body>
 
-<h1 class="text-center">Edit animal</h1>
+<h1 class="text-center">Animal editing form</h1>
 
 <div class="container my-auto">
     <form th:action="@{update}" th:object="${animalRegistration}" method="post" enctype="multipart/form-data">
@@ -48,7 +48,7 @@
         </div>
         <div class="mb-3">
             <label for="inputFile" class="form-label">Photo:</label>
-            <input input type="file" th:field="*{multipartFile}" multiple="multiple" id="inputFile">
+            <input type="file" th:field="*{multipartFile}" multiple="multiple" id="inputFile">
         </div>
         <div>
             <button type="submit" class="btn btn-primary">Edit animal</button>

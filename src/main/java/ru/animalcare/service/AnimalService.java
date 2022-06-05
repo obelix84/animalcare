@@ -3,12 +3,10 @@ package ru.animalcare.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.animalcare.domain.Animal;
-import ru.animalcare.domain.AnimalGender;
-import ru.animalcare.domain.AnimalPhoto;
-import ru.animalcare.domain.AnimalType;
+import ru.animalcare.domain.*;
 import ru.animalcare.dto.AnimalDto;
 import ru.animalcare.dto.AnimalRegistrationDto;
+import ru.animalcare.dto.UserDto;
 import ru.animalcare.repository.AnimalRepository;
 
 import java.util.ArrayList;
@@ -27,6 +25,7 @@ public class AnimalService {
     private final AnimalTypeService animalTypeService;
     private final AnimalGenderService animalGenderService;
     private final AnimalPhotoService animalPhotoService;
+    private final UserService userService;
 
     public Long countActiveAnimalsByUserId(Long id){
         return animalRepository.countAnimalsByUserIdAndActiveTrue(id);
@@ -63,7 +62,7 @@ public class AnimalService {
     }
 
     @Transactional
-    public AnimalDto addNewAnimal(AnimalRegistrationDto animalRegistrationDto) {
+    public AnimalDto addNewAnimal(AnimalRegistrationDto animalRegistrationDto, String username) {
         Animal animal = new Animal();
         animal.setName(animalRegistrationDto.getName());
 
@@ -76,9 +75,12 @@ public class AnimalService {
         animal.setDescription(animalRegistrationDto.getDescription());
         animal.setActive(true);
 
-
-//        todo переделать на поиск юзера по id
-        animal.setUser(null);
+//  todo подумать, нужно ли возвращать UserDto из метода findUserByName, чтобы несколько раз поиск не проводить, если нужна сущность User
+        UserDto userDto = userService.findUserByName(username);
+        User user = userService.findUserById(userDto.getId());
+        if(user != null){
+            animal.setUser(user);
+        }
 
         AnimalType animalType = animalTypeService.findTypeAnimalByName(animalRegistrationDto.getType())
                 .orElseThrow(() -> new RuntimeException(String.format("Animal type '%s' not found\n", animalRegistrationDto.getType())));

@@ -23,6 +23,7 @@ import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.Principal;
 import java.util.List;
 
 import static ru.animalcare.common.Settings.PATH_TO_ANIMAL_PHOTO_DIRECTORY;
@@ -58,8 +59,8 @@ public class AnimalController {
     }
 
     @PostMapping("/add")
-    public String addNewAnimal(@ModelAttribute AnimalRegistrationDto animalRegistrationDto) {
-        animalService.addNewAnimal(animalRegistrationDto);
+    public String addNewAnimal(@ModelAttribute AnimalRegistrationDto animalRegistrationDto, Principal principal) {
+        animalService.addNewAnimal(animalRegistrationDto, principal.getName());
         return "redirect:/";
     }
 

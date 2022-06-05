@@ -21,4 +21,11 @@ public class UserService {
                 .orElseThrow( ()-> new NoSuchElementException("User with name " + name + " isn\'t exist"));
         return this.modelMapper.map(user, UserDto.class);
     }
+
+    public User findUserById(Long id){
+        User user = userRepository.findById(id)
+                .orElseThrow( ()-> new NoSuchElementException("User with id " + id + " isn\'t exist"));
+        return user;
+    }
+
 }
