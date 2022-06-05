@@ -30,8 +30,8 @@ public class User {
 
     @NotNull
     @Column(name = "contact_number", nullable = false)
-    @Length(max = 12,min = 12, message = "phone number should be in this format: +71234567890")
-    String contact_number;
+//    @Length(max = 12,min = 12, message = "phone number should be in this format: +71234567890")
+    String contactNumber;
 
     @NotNull
     @Column(name = "first_name")
@@ -52,4 +52,10 @@ public class User {
     //Пока так
     @Column(name = "photo_id")
     private Long photoId;
+
+
+//   Bean couldn't find the getter of contact number
+//    public String getContactNumber() {
+//        return contactNumber;
+//    }
 }

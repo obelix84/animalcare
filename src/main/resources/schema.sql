@@ -1,13 +1,14 @@
 create table USERS
 (
-    id         bigint       not null primary key auto_increment,
-    username   varchar(50)  not null,
-    password   varchar(80)  not null,
-    first_name varchar(80)  not null,
-    last_name  varchar(80)  not null,
-    email      varchar(100) not null,
-    enabled    boolean      not null,
-    photo_id   bigint
+    id             bigint       not null primary key auto_increment,
+    username       varchar(50)  not null,
+    password       varchar(80)  not null,
+    first_name     varchar(80)  not null,
+    last_name      varchar(80)  not null,
+    email          varchar(100) not null,
+    enabled        boolean      not null,
+    photo_id       bigint,
+    contact_number varchar(13)  not null
     -- foreign key (id) references PHOTOS(id)
 );
 create unique index ix_users_username on users (username);
@@ -31,20 +32,20 @@ create table USERS_AUTHORITIES
 -- пароль везде одинаковый
 -- admin password
 -- insert into USERS(username, password, email, enabled)  values('admin', '$2a$10$yMK04o.HsK9N2Xv.ENsrDe3HiXUqZhoeQxYqMum8oHzL.U5uglREm', 'admin@mail.ru', true);
-insert into USERS(first_name, last_name, username, password, email, enabled)
+insert into USERS(first_name, last_name, username, password, email, enabled,contact_number)
 values ('admin', 'admin', 'admin', '$2a$10$BoAjnAXDD9xiR34FPSTP2.BMu..hYqhymJp46K/7j9aRzGowlgpBO', 'admin@mail.ru',
-        true);
+        true,'+79001234570');
 -- user password
-insert into USERS(first_name, last_name, username, password, email, enabled)
-values ('Иванов', 'Иван', 'user', '$2a$10$BoAjnAXDD9xiR34FPSTP2.BMu..hYqhymJp46K/7j9aRzGowlgpBO', 'user@mail.ru', true);
+insert into USERS(first_name, last_name, username, password, email, enabled,contact_number)
+values ('Иванов', 'Иван', 'user', '$2a$10$BoAjnAXDD9xiR34FPSTP2.BMu..hYqhymJp46K/7j9aRzGowlgpBO', 'user@mail.ru', true,'+79001234569');
 -- user1 password
-insert into USERS(first_name, last_name, username, password, email, enabled)
+insert into USERS(first_name, last_name, username, password, email, enabled,contact_number)
 values ('user1', 'user1', 'user1', '$2a$10$BoAjnAXDD9xiR34FPSTP2.BMu..hYqhymJp46K/7j9aRzGowlgpBO', 'user1@mail.ru',
-        true);
+        true,'+79001234568');
 -- manager password
-insert into USERS(first_name, last_name, username, password, email, enabled)
+insert into USERS(first_name, last_name, username, password, email, enabled,contact_number)
 values ('manager', 'manager', 'manager', '$2a$10$BoAjnAXDD9xiR34FPSTP2.BMu..hYqhymJp46K/7j9aRzGowlgpBO',
-        'manager@mail.ru', true);
+        'manager@mail.ru', true,'+79001234567');
 
 
 create table ANIMAL_GENDER
@@ -54,23 +55,21 @@ create table ANIMAL_GENDER
 );
 
 INSERT INTO ANIMAL_GENDER (name)
-VALUES
-('Male'),
-('Female');
+VALUES ('Male'),
+       ('Female');
 
 CREATE TABLE ANIMAL_PHOTOS
 (
-    id              bigint auto_increment primary key,
-    name            varchar(255) not null,
-    size            bigint       not null,
+    id          bigint auto_increment primary key,
+    name        varchar(255) not null,
+    size        bigint       not null,
 --    key_photo       varchar(255) not null,
-    upload_date     datetime,
-    comment         varchar(255) not null
+    upload_date datetime,
+    comment     varchar(255) not null
 );
 
 INSERT INTO ANIMAL_PHOTOS (name, size, upload_date, comment)
-VALUES
-('no_photo.jpg', 3515, '2022-05-28 12:00:00', 'image/jpeg');
+VALUES ('no_photo.jpg', 3515, '2022-05-28 12:00:00', 'image/jpeg');
 
 create table ANIMAL_TYPE
 (
@@ -79,9 +78,8 @@ create table ANIMAL_TYPE
 );
 
 INSERT INTO ANIMAL_TYPE (name)
-VALUES
-('Cat'),
-('Dog');
+VALUES ('Cat'),
+       ('Dog');
 
 --CREATE TABLE animals
 --(
@@ -99,15 +97,15 @@ VALUES
 
 CREATE TABLE ANIMALS
 (
-    id                  bigserial PRIMARY KEY,
-    name                VARCHAR(40)  NOT NULL,
-    animal_gender_id    bigint       NOT NULL,
-    age                 INT          NOT NULL,
-    condition           VARCHAR(255) NOT NULL,
-    description         VARCHAR(255) NOT NULL,
-    animal_type_id      bigint       NOT NULL,
-    active              boolean      NOT NULL DEFAULT FALSE,
-    user_id             bigint       NULL,
+    id               bigserial PRIMARY KEY,
+    name             VARCHAR(40)  NOT NULL,
+    animal_gender_id bigint       NOT NULL,
+    age              INT          NOT NULL,
+    condition        VARCHAR(255) NOT NULL,
+    description      VARCHAR(255) NOT NULL,
+    animal_type_id   bigint       NOT NULL,
+    active           boolean      NOT NULL DEFAULT FALSE,
+    user_id          bigint       NULL,
 --    исправить на FOREIGN KEY
     FOREIGN KEY (animal_gender_id) REFERENCES ANIMAL_GENDER (id),
     FOREIGN KEY (animal_type_id) REFERENCES ANIMAL_TYPE (id)
@@ -115,29 +113,27 @@ CREATE TABLE ANIMALS
 );
 
 INSERT INTO ANIMALS (name, animal_gender_id, age, condition, description, animal_type_id, active, user_id)
-VALUES
-( 'Felix', 1, 5, 'Good', 'Looking for a host', 1, true, 2),
-( 'Kassandra', 2, 4, 'Good', 'Looking for a host', true, 2, 2),
-( 'Rex', 1, 7, 'Good', 'Looking for a host', 2, true, 2),
-( 'TRex', 1, 7000, 'Excellent', 'Looking for a host', 2, false , 2),
-( 'Ramon', 1, 17000, 'Excellent', 'Looking for a host', 2, false , 2);
+VALUES ('Felix', 1, 5, 'Good', 'Looking for a host', 1, true, 2),
+       ('Kassandra', 2, 4, 'Good', 'Looking for a host', true, 2, 2),
+       ('Rex', 1, 7, 'Good', 'Looking for a host', 2, true, 2),
+       ('TRex', 1, 7000, 'Excellent', 'Looking for a host', 2, false, 2),
+       ('Ramon', 1, 17000, 'Excellent', 'Looking for a host', 2, false, 2);
 
 CREATE TABLE ANIMALS_ANIMAL_PHOTOS
 (
-    animal_id           bigint not null,
-    animal_photo_id     bigint not null,
+    animal_id       bigint not null,
+    animal_photo_id bigint not null,
     primary key (animal_id, animal_photo_id),
     foreign key (animal_id) references ANIMALS (id),
     foreign key (animal_photo_id) references ANIMAL_PHOTOS (id)
 );
 
 INSERT INTO ANIMALS_ANIMAL_PHOTOS (animal_id, animal_photo_id)
-VALUES
-(1, 1),
-(2, 1),
-(3, 1),
-(4, 1),
-(5, 1);
+VALUES (1, 1),
+       (2, 1),
+       (3, 1),
+       (4, 1),
+       (5, 1);
 
 -- Роли:
 --  USER обычный пользователь, может регистрироваться и создавать объявления

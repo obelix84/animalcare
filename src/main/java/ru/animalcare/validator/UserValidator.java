@@ -138,8 +138,8 @@ public class UserValidator implements Validator {
         if(user.getPassword().matches(LOWERCASE_PATTERN)){
             errors.rejectValue("password", "password should contain at least one lowercase");
         }
-        if(user.getContact_number().matches(NUMBER_PATTERN)){
-            errors.rejectValue("number","number is in incorrect format");
+        if(user.getContactNumber().matches(NUMBER_PATTERN)){
+            errors.rejectValue("contact_number","number is in incorrect format");
         }
     }
 }
