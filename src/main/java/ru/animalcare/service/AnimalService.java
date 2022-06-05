@@ -1,6 +1,10 @@
 package ru.animalcare.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.animalcare.domain.*;
@@ -8,6 +12,8 @@ import ru.animalcare.dto.AnimalDto;
 import ru.animalcare.dto.AnimalRegistrationDto;
 import ru.animalcare.dto.UserDto;
 import ru.animalcare.repository.AnimalRepository;
+import ru.animalcare.utils.paging.Paged;
+import ru.animalcare.utils.paging.Paging;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -49,11 +55,18 @@ public class AnimalService {
                 .collect(Collectors.toList());
     }
 
-    public List<AnimalDto> findAll(){
-        return animalRepository.findAll()
+    @Transactional
+    public Paged<AnimalDto> getPage(int pageNumber, int size) {
+
+        PageRequest request = PageRequest.of(pageNumber - 1, size, Sort.by(Sort.Direction.ASC, "id"));
+
+        Page<AnimalDto> animalPage = new PageImpl<>(animalRepository.findAll(request)
                 .stream()
                 .map(AnimalDto::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList())
+                , request
+                , findAllAnimals().size());
+        return new Paged<>(animalPage, Paging.of(animalPage.getTotalPages(), pageNumber, size));
     }
 
     public Animal findAnimalById(Long id) {

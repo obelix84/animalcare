@@ -36,10 +36,17 @@ public class AnimalController {
     private final AnimalTypeService animalTypeService;
     private final AnimalGenderService animalGenderService;
 
+//    @GetMapping
+//    public String showAllAnimals(Model model) {
+//        List<AnimalDto> animals = animalService.findAll();
+//        model.addAttribute("animals", animals);
+//        return "all_animals";
+//    }
+
     @GetMapping
-    public String showAllAnimals(Model model) {
-        List<AnimalDto> animals = animalService.findAll();
-        model.addAttribute("animals", animals);
+    public String showAllAnimalsPage(@RequestParam(value = "pageNumber", required = false, defaultValue = "1") int pageNumber,
+                                     @RequestParam(value = "size", required = false, defaultValue = "3") int size, Model model) {
+        model.addAttribute("animals", animalService.getPage(pageNumber,size));
         return "all_animals";
     }
 
