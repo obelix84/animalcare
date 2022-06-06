@@ -107,7 +107,7 @@
                                 </script>
                                 <ul class="dropdown-menu" th:aria-labelledby="'dmB' + ${animal.id}" th:if="${active} == true">
                                     <li><a class="dropdown-item" th:href="@{/profile/ads/arc/} + ${animal.id}" onClick="archive(event);">Снять с публикации</a></li>
-                                    <li><a class="dropdown-item" href="#">Редактировать</a></li>
+                                    <li><a class="dropdown-item" th:href="@{/animals/}+${animal.id}+'/update'">Редактировать</a></li>
                                 </ul>
                                 <ul class="dropdown-menu" th:aria-labelledby="'dmB' + ${animal.id}" th:if="${active} == false">
                                     <li><a class="dropdown-item" href="#" onClick="pub(event);">Опубликовать</a></li>

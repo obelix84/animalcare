@@ -85,7 +85,7 @@ public class UserProfileController {
     @GetMapping("/ads/arc/{id}")
     public String archiveAd(Model model, @PathVariable long id, @ModelAttribute("userDto") UserDto user) {
         this.animalService.archiveAd(id);
-        return this.showAds(model, user, null, null, null);
+        return "redirect:/profile/ads";
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')")

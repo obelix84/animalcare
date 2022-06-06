@@ -1,6 +1,7 @@
 package ru.animalcare.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
@@ -34,6 +35,9 @@ public class AnimalController {
     private final AnimalTypeService animalTypeService;
     private final AnimalGenderService animalGenderService;
     private final UserService userService;
+    private final ModelMapper modelMapper;
+
+
 
     @ModelAttribute(name = "userDto")
     public UserDto getUserDto(Principal principal) {
@@ -88,6 +92,7 @@ public class AnimalController {
 
     @GetMapping("/{id}/update")
     public String showUpdateFormAnimal(Model model, @PathVariable Long id) {
+        //model.addAttribute("animal", animalService.findAnimalsById(id)) ;
         model.addAttribute("animalTypes", animalTypeService.findAllAnimalTypes());
         model.addAttribute("animalGenders", animalGenderService.findAllAnimalGenders());
         model.addAttribute("animalRegistration", new AnimalRegistrationDto());
