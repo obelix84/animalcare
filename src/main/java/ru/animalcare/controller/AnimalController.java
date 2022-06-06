@@ -6,16 +6,15 @@ import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.BindingResult;
 import ru.animalcare.dto.AnimalDto;
 import ru.animalcare.dto.AnimalRegistrationDto;
-import ru.animalcare.service.AnimalGenderService;
-import ru.animalcare.service.AnimalPhotoService;
-import ru.animalcare.service.AnimalService;
-import ru.animalcare.service.AnimalTypeService;
+import ru.animalcare.dto.UserDto;
+import ru.animalcare.service.*;
 
 
 import javax.validation.Valid;
@@ -26,6 +25,7 @@ import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.Principal;
 import java.util.List;
 
 
@@ -38,14 +38,15 @@ public class AnimalController {
     private final AnimalService animalService;
     private final AnimalTypeService animalTypeService;
     private final AnimalGenderService animalGenderService;
-    private final AnimalPhotoService animalPhotoService;
+    private final UserService userService;
 
-//    @GetMapping
-//    public String showAllAnimals(Model model) {
-//        List<AnimalDto> animals = animalService.findAll();
-//        model.addAttribute("animals", animals);
-//        return "all_animals";
-//    }
+    @ModelAttribute(name = "userDto")
+    public UserDto getUserDto(Principal principal) {
+        if (principal != null) {
+            return userService.findUserByName(principal.getName());
+        }
+        return null;
+    }
 
     @GetMapping
     public String showAllAnimalsPage(@RequestParam(value = "pageNumber", required = false, defaultValue = "1") int pageNumber,
@@ -61,6 +62,7 @@ public class AnimalController {
         return "profile_animal";
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN', 'ROLE_MANAGER')")
     @GetMapping("/add")
     public String showFormAddAnimalPhoto(Model model) {
         model.addAttribute("animalTypes", animalTypeService.findAllAnimalTypes());
@@ -74,13 +76,15 @@ public class AnimalController {
 
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN', 'ROLE_MANAGER')")
     @PostMapping("/add")
-    public String uploadAnimalPhotoToServer(@ModelAttribute AnimalRegistrationDto animalRegistrationDto) {
-        animalService.addNewAnimal(animalRegistrationDto);
+    public String uploadAnimalPhotoToServer(@ModelAttribute AnimalRegistrationDto animalRegistrationDto,
+                                            @ModelAttribute UserDto userDto) {
+        animalService.addNewAnimal(animalRegistrationDto, userDto);
         return "redirect:/";
     }
 
-    @GetMapping("/image/{imageName}")
+    @GetMapping("/get/{imageName}")
     @ResponseBody
     public byte[] getImage(@PathVariable(value = "imageName") String imageName) throws IOException {
         File serverFile = new File(PATH_TO_ANIMAL_PHOTO_DIRECTORY + imageName + ".jpg");
@@ -106,7 +110,7 @@ public class AnimalController {
     //    return showAllAnimalsPage(1,3, model);
 
 
-    @GetMapping("/get/{imageName}")
+    @GetMapping("/image/{imageName}")
     public ResponseEntity<Resource> getFileFromLocal(@PathVariable String imageName) {
         Path path = Paths.get(PATH_TO_ANIMAL_PHOTO_DIRECTORY + imageName + ".jpg");
         Resource resource = null;

@@ -63,14 +63,29 @@ CREATE TABLE ANIMAL_PHOTOS
     id              bigint auto_increment primary key,
     name            varchar(255) not null,
     size            bigint       not null,
---    key_photo       varchar(255) not null,
     upload_date     datetime,
     comment         varchar(255) not null
 );
 
 INSERT INTO ANIMAL_PHOTOS (name, size, upload_date, comment)
 VALUES
-('no_photo.jpg', 3515, '2022-05-28 12:00:00', 'image/jpeg');
+('no_photo.jpg', 3515, '2022-05-28 12:00:00', 'image/jpeg'),
+('001.jpg', 3515, '2022-05-28 12:00:00', 'image/jpeg'),
+('002.jpg', 3515, '2022-05-28 12:00:00', 'image/jpeg'),
+('003.jpg', 3515, '2022-05-28 12:00:00', 'image/jpeg'),
+('004.jpg', 3515, '2022-05-28 12:00:00', 'image/jpeg'),
+('005.jpg', 3515, '2022-05-28 12:00:00', 'image/jpeg'),
+('006.jpg', 3515, '2022-05-28 12:00:00', 'image/jpeg'),
+('007.jpg', 3515, '2022-05-28 12:00:00', 'image/jpeg'),
+('008.jpg', 3515, '2022-05-28 12:00:00', 'image/jpeg'),
+('009.jpg', 3515, '2022-05-28 12:00:00', 'image/jpeg'),
+('010.jpg', 3515, '2022-05-28 12:00:00', 'image/jpeg'),
+('011.jpg', 3515, '2022-05-28 12:00:00', 'image/jpeg'),
+('012.jpg', 3515, '2022-05-28 12:00:00', 'image/jpeg'),
+('013.jpg', 3515, '2022-05-28 12:00:00', 'image/jpeg'),
+('014.jpg', 3515, '2022-05-28 12:00:00', 'image/jpeg'),
+('015.jpg', 3515, '2022-05-28 12:00:00', 'image/jpeg');
+
 
 create table ANIMAL_TYPE
 (
@@ -83,20 +98,6 @@ VALUES
 ('Cat'),
 ('Dog');
 
--- CREATE TABLE animals
--- (
---    id                  bigserial PRIMARY KEY,
---    name                VARCHAR(40)  NOT NULL,
---    gender              VARCHAR(10)  NOT NULL,
---    age                 INT          NOT NULL,
---    condition           VARCHAR(255) NOT NULL,
---    description         VARCHAR(255) NOT NULL,
---    user_id             bigint       not null,
---    type_of_animal_id   bigint       not null,
---    foreign key (user_id) references users (id),
---    foreign key (type_of_animal_id) references TYPE_OF_ANIMAL (id)
--- );
-
 CREATE TABLE ANIMALS
 (
     id                  bigserial PRIMARY KEY,
@@ -108,7 +109,6 @@ CREATE TABLE ANIMALS
     animal_type_id      bigint       NOT NULL,
     active              boolean      NOT NULL DEFAULT FALSE,
     user_id             bigint       NULL,
---    исправить на FOREIGN KEY
     FOREIGN KEY (animal_gender_id) REFERENCES ANIMAL_GENDER (id),
     FOREIGN KEY (animal_type_id) REFERENCES ANIMAL_TYPE (id)
 --    FOREIGN KEY (user_id) REFERENCES USERS (id)
@@ -144,11 +144,10 @@ CREATE TABLE ANIMALS_ANIMAL_PHOTOS
 
 INSERT INTO ANIMALS_ANIMAL_PHOTOS (animal_id, animal_photo_id)
 VALUES
-(1, 1),
-(2, 1),
-(3, 1),
-(4, 1),
-(5, 1);
+(1, 2), (2, 3), (3, 1), (4, 4),
+(5, 5), (6, 6), (7, 7), (8, 8),
+(9, 9), (10, 1), (11, 10), (12, 11),
+(13, 12), (14, 13), (15, 14);
 
 -- Роли:
 --  USER обычный пользователь, может регистрироваться и создавать объявления

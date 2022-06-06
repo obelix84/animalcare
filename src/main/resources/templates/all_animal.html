@@ -33,6 +33,8 @@
     <!-- CSS Files -->
     <link id="pagestyle" href="/css/material-kit.css?v=3.0.2" rel="stylesheet"/>
 
+<!--    <base th:href="@{/}">-->
+
 </head>
 
 <body class="index-page bg-gray-200">
@@ -67,9 +69,10 @@
         <div class="container">
                 <div class="row">
                     <div class="col-lg-10 mt-5 mb-5">
-                        <table id="posts"   class="table table-hover">
+                        <table id="posts"  class="table table-hover">
                             <thead>
                             <tr>
+                                <th scope="col">Photo</th>
                                 <th scope="col">ID</th>
                                 <th scope="col">Animal type</th>
                                 <th scope="col">Name</th>
@@ -82,6 +85,9 @@
                             </thead>
                             <tbody>
                             <tr  th:each="animal : ${animals.page}">
+                                <td class=" text-center">
+                                    <img th:src="@{/animals/image/} + ${animal.pathPhoto}" class="card-img-top max-width-200">
+                                </td>
                                 <td class=" text-center" th:text="${animal.id}">id</td>
                                 <td class=" text-center" th:text="${animal.type}">type</td>
                                 <td class="text-center" th:text="${animal.name}">name</td>

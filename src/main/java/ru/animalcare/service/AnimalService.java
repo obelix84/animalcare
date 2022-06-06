@@ -13,7 +13,10 @@ import ru.animalcare.domain.paging.Paged;
 import ru.animalcare.domain.paging.Paging;
 import ru.animalcare.dto.AnimalDto;
 import ru.animalcare.dto.AnimalRegistrationDto;
+import ru.animalcare.dto.UserDto;
 import ru.animalcare.repository.AnimalRepository;
+import ru.animalcare.repository.UserRepository;
+
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,6 +36,7 @@ public class AnimalService {
     private final AnimalTypeService animalTypeService;
     private final AnimalGenderService animalGenderService;
     private final AnimalPhotoService animalPhotoService;
+    private final UserRepository userRepository;
 
     public Long countActiveAnimalsByUserId(Long id){
         return animalRepository.countAnimalsByUserIdAndActiveTrue(id);
@@ -78,7 +82,7 @@ public class AnimalService {
 
 
     @Transactional
-    public AnimalDto addNewAnimal(AnimalRegistrationDto animalRegistrationDto) {
+    public AnimalDto addNewAnimal(AnimalRegistrationDto animalRegistrationDto, UserDto userDto) {
         Animal animal = new Animal();
         animal.setName(animalRegistrationDto.getName());
 
@@ -90,8 +94,9 @@ public class AnimalService {
         animal.setCondition(animalRegistrationDto.getCondition());
         animal.setDescription(animalRegistrationDto.getDescription());
         animal.setActive(true);
-//        todo переделать на поиск юзера по id
-        animal.setUser(null);
+        animal.setUser(userRepository.findById(userDto.getId()).orElseThrow(
+                () -> new RuntimeException(String.format("User with id '%d' is not exist\n", userDto.getId()))
+        ));
 
         AnimalType animalType = animalTypeService.findTypeAnimalByName(animalRegistrationDto.getType())
                 .orElseThrow(() -> new RuntimeException(String.format("Animal type '%s' not found\n", animalRegistrationDto.getType())));

@@ -31,6 +31,7 @@
 
     <!-- CSS Files -->
     <link id="pagestyle" href="/css/material-kit.css?v=3.0.2" rel="stylesheet" />
+    <base th:href="@{/}">
 
 </head>
 
@@ -59,7 +60,7 @@
             <div class="row row-cols-1 row-cols-md-4 g-4 mt-3">
                 <div class="col" th:each="animal : ${animals}" th:if="${animal.active} == ${active}">
                     <div class="card">
-                        <img src="/img/empty.png" class="card-img-top max-height-200 max-width-200">
+                        <img th:src="@{http://localhost:8080/animals/image/} + ${animal.pathPhoto}" class="card-img-top max-width-300">
                         <div class="card-body h-100">
                             <h5 class="card-title" th:text="${animal.name}"></h5>
                             <p class="card-text">
