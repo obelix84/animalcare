@@ -46,9 +46,8 @@
     </div>
 </div>
 
-
 <header class="header-2">
-    <div class="page-header min-vh-45 relative">
+    <div class="page-header min-vh-75 relative" style="background-image: url('/img/dog_dark.jpg')">
         <span class="mask bg-gradient-primary opacity-4"></span>
         <div class="container">
             <div class="row">
@@ -61,8 +60,6 @@
     </div>
 </header>
 
-
-<!--<body class="index-page bg-gray-200">-->
 
 <div class="container">
     <section class="my-5 py-5">
@@ -86,7 +83,7 @@
                         <tbody>
                         <tr th:each="animal : ${animals}">
                             <td>
-                                <img th:src="@{animals/image/} + ${animal.pathPhoto}" width="250" height="250"/>
+                                <img th:src="@{/animals/image/} + ${animal.pathPhoto}" width="250" height="250"/>
                             </td>
                             <td class="text-center" th:text="${animal.id}"></td>
                             <td class="text-center" th:text="${animal.type}"></td>

@@ -181,6 +181,7 @@ public class AnimalService {
 
         return animalRepository.findAll()
                 .stream()
+                .filter(Animal::getActive)
                 .filter(Animal -> Animal.getAnimalType().getName().equals(type))
                 .map(AnimalDto::new)
                 .collect(Collectors.toList());
