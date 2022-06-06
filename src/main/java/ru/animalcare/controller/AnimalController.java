@@ -6,16 +6,15 @@ import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.BindingResult;
 import ru.animalcare.dto.AnimalDto;
 import ru.animalcare.dto.AnimalRegistrationDto;
-import ru.animalcare.service.AnimalGenderService;
-import ru.animalcare.service.AnimalPhotoService;
-import ru.animalcare.service.AnimalService;
-import ru.animalcare.service.AnimalTypeService;
+import ru.animalcare.dto.UserDto;
+import ru.animalcare.service.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -82,6 +81,19 @@ public class AnimalController {
     @PostMapping("/{id}/update")
     public String updateAnimal(@PathVariable Long id, @ModelAttribute AnimalRegistrationDto animalRegistrationDto) {
         animalService.updateAnimal(id, animalRegistrationDto);
+        return "redirect:/";
+    }
+
+    @GetMapping("/change_active/{id}")
+    public String changeActiveAnimal(@PathVariable Long id) {
+        animalService.changeActiveAnimal(id);
+        return "redirect:/";
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')")
+    @GetMapping("/delete/{id}")
+    public String deleteAnimal(@PathVariable Long id) {
+        animalService.deleteAnimalById(id);
         return "redirect:/";
     }
 

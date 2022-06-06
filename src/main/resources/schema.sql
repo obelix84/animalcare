@@ -116,11 +116,12 @@ CREATE TABLE ANIMALS
 
 INSERT INTO ANIMALS (name, animal_gender_id, age, condition, description, animal_type_id, active, user_id)
 VALUES
-( 'Felix', 1, 5, 'Good', 'Looking for a host', 1, true, 2),
-( 'Kassandra', 2, 4, 'Good', 'Looking for a host', true, 2, 2),
-( 'Rex', 1, 7, 'Good', 'Looking for a host', 2, true, 2),
-( 'TRex', 1, 7000, 'Excellent', 'Looking for a host', 2, false , 2),
-( 'Ramon', 1, 17000, 'Excellent', 'Looking for a host', 2, false , 2);
+('Felix', 1, 5, 'Good', 'Looking for a host', 1, true, 2),
+('Kassandra', 2, 4, 'Good', 'Looking for a host', 1, true, 2),
+('Rex', 1, 7, 'Good', 'Looking for a host', 2, true, 2),
+('Leopold', 1, 10, 'Good', 'Looking for a host', 1, true, 2),
+('TRex', 1, 7000, 'Excellent', 'Looking for a host', 2, false , 2),
+('Ramon', 1, 17000, 'Excellent', 'Looking for a host', 2, false , 2);
 
 CREATE TABLE ANIMALS_ANIMAL_PHOTOS
 (
@@ -137,7 +138,8 @@ VALUES
 (2, 1),
 (3, 1),
 (4, 1),
-(5, 1);
+(5, 1),
+(6, 1);
 
 -- Роли:
 --  USER обычный пользователь, может регистрироваться и создавать объявления

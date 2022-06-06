@@ -98,6 +98,11 @@
                 <p th:text="${userDto.firstName} + ' ' + ${userDto.lastName}" class="d-inline text-sm z-index-1 font-weight-bold" data-bs-toggle="tooltip"
                    data-bs-placement="bottom" title="Личный кабинет"></p>
             </a>
+            <a sec:authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')" class="nav-link nav-link-icon me-2" th:href="@{/profile/manager}" th:object="${userdto}">
+                <i class="bi bi-person-circle"></i>
+                <p th:text="${userDto.firstName} + ' ' + ${userDto.lastName}" class="d-inline text-sm z-index-1 font-weight-bold" data-bs-toggle="tooltip"
+                   data-bs-placement="bottom" title="Личный кабинет"></p>
+            </a>
             <a sec:authorize="!isAuthenticated()" class="nav-link nav-link-icon me-2" th:href="@{/login}">
                 <i class="bi bi-person-circle"></i>
                 <p class="d-inline text-sm z-index-1 font-weight-bold" data-bs-toggle="tooltip"

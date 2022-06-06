@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import static ru.animalcare.common.Settings.ANIMAL_PHOTO_DEFAULT;
@@ -33,24 +34,52 @@ public class AnimalService {
     private final AnimalPhotoService animalPhotoService;
     private final UserService userService;
 
-    public Long countActiveAnimalsByUserId(Long id){
+    public Long countActiveAnimalsByUserId(Long id) {
         return animalRepository.countAnimalsByUserIdAndActiveTrue(id);
     }
 
-    public Long countInActiveAnimalsByUserId(Long id){
+    public Long countInActiveAnimalsByUserId(Long id) {
         return animalRepository.countAnimalsByUserIdAndActiveFalse(id);
     }
 
-    public List<AnimalDto> findAllAnimals(){
+    public Long countModeration() {
+        Long count = 0L;
+        List<Animal> animalList = animalRepository.findAll();
+        for (int i = 0; i < animalList.size(); i++) {
+            if (!animalList.get(i).getActive()) {
+                count++;
+            }
+
+        }
+        return count;
+    }
+
+    public List<AnimalDto> findAllAnimals() {
         return animalRepository.findAll()
                 .stream()
                 .map(AnimalDto::new)
                 .collect(Collectors.toList());
     }
 
-    public List<AnimalDto> findAnimalsById(Long id){
+    public List<AnimalDto> findAnimalsById(Long id) {
         return animalRepository.findAnimalsByUserId(id)
                 .stream()
+                .map(AnimalDto::new)
+                .collect(Collectors.toList());
+    }
+
+    public List<AnimalDto> findAllInactiveAnimals() {
+        return animalRepository.findAll()
+                .stream()
+                .filter(animal -> !animal.getActive())
+                .map(AnimalDto::new)
+                .collect(Collectors.toList());
+    }
+
+    public List<AnimalDto> findAllActiveAnimals() {
+        return animalRepository.findAll()
+                .stream()
+                .filter(Animal::getActive)
                 .map(AnimalDto::new)
                 .collect(Collectors.toList());
     }
@@ -60,18 +89,27 @@ public class AnimalService {
 
         PageRequest request = PageRequest.of(pageNumber - 1, size, Sort.by(Sort.Direction.ASC, "id"));
 
+
         Page<AnimalDto> animalPage = new PageImpl<>(animalRepository.findAll(request)
                 .stream()
+                .filter(Animal::getActive)
                 .map(AnimalDto::new)
                 .collect(Collectors.toList())
                 , request
-                , findAllAnimals().size());
+                , findAllActiveAnimals().size());
         return new Paged<>(animalPage, Paging.of(animalPage.getTotalPages(), pageNumber, size));
     }
 
     public Animal findAnimalById(Long id) {
         return animalRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Animal for ID: " + id + " not found"));
+    }
+
+    @Transactional
+    public void changeActiveAnimal(Long id) {
+        Animal animal = findAnimalById(id);
+        animal.setActive(true);
+        animalRepository.save(animal);
     }
 
     @Transactional
@@ -91,7 +129,7 @@ public class AnimalService {
 //  todo подумать, нужно ли возвращать UserDto из метода findUserByName, чтобы несколько раз поиск не проводить, если нужна сущность User
         UserDto userDto = userService.findUserByName(username);
         User user = userService.findUserById(userDto.getId());
-        if(user != null){
+        if (user != null) {
             animal.setUser(user);
         }
 
@@ -133,6 +171,10 @@ public class AnimalService {
         }
 
         return new AnimalDto(animalRepository.save(animal));
+    }
+
+    public void deleteAnimalById(Long id) {
+        animalRepository.deleteById(id);
     }
 
 }

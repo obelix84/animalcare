@@ -49,4 +49,18 @@ public class UserProfileController {
         return "user_profile";
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')")
+    @GetMapping("/manager")
+    public String showProfileManager(Model model, @ModelAttribute("userDto") UserDto user) {
+        if (user != null) {
+            model.addAttribute("countModeration", animalService.countModeration());
+        }
+        return "manager_profile";
+    }
+
+    @ModelAttribute(name = "animalsModeration")
+    public List<AnimalDto> animalsModeration() {
+        return animalService.findAllInactiveAnimals();
+    }
+
 }
