@@ -6,14 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <title>Animal add form</title>
+    <title>Animal editing form</title>
 </head>
 <body>
 
-<h1 class="text-center">Animal add form</h1>
+<h1 class="text-center">Animal editing form</h1>
 
 <div class="container my-auto">
-    <form th:action="@{add}" th:object="${animalRegistration}" method="post" enctype="multipart/form-data">
+    <form th:action="@{update}" th:object="${animalRegistration}" method="post" enctype="multipart/form-data">
         <div class="mb-3">
             <label for="inputName" class="form-label">Name:</label>
             <input type="text" th:field="*{name}" class="form-control" id="inputName">
@@ -51,7 +51,7 @@
             <input type="file" th:field="*{multipartFile}" multiple="multiple" id="inputFile">
         </div>
         <div>
-            <button type="submit" class="btn btn-primary">Add animal</button>
+            <button type="submit" class="btn btn-primary">Edit animal</button>
             <button type="reset" class="btn btn-danger">Reset</button>
         </div>
     </form>
@@ -60,9 +60,8 @@
 </body>
 </html>
 
-<!--<h1>Add animal</h1>&ndash;&gt;-->
 
-<!--<form th:action="@{add}" th:object="${animalRegistration}" method="post" enctype="multipart/form-data">-->
+<!--<form th:action="@{update}" th:object="${animalRegistration}" method="post" enctype="multipart/form-data">-->
 <!--    <table>-->
 <!--        <tr>-->
 <!--            <td>Name:</td>-->
@@ -111,11 +110,12 @@
 
 <!--        <tr>-->
 <!--            <td>-->
-<!--                <input type="submit" value="Add animal"/>-->
+<!--                <input type="submit" value="Edit animal"/>-->
 <!--            </td>-->
 <!--            <td>-->
 <!--                <input type="reset" value="Reset"/>-->
 <!--            </td>-->
 <!--        </tr>-->
 <!--    </table>-->
+
 <!--</form>-->

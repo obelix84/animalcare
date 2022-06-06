@@ -116,6 +116,7 @@ CREATE TABLE ANIMALS
 
 INSERT INTO ANIMALS (name, animal_gender_id, age, condition, description, animal_type_id, active, user_id)
 VALUES
+
 ( 'Felix', 1, 5, 'Good', 'Looking for a host', 1, true, 2),
 ( 'Kassandra', 2, 4, 'Good', 'Looking for a host', true, 2, 2),
 ( 'Rex', 1, 7, 'Good', 'Looking for a host', 2, true, 2),
@@ -148,6 +149,7 @@ VALUES
 (5, 5), (6, 6), (7, 7), (8, 8),
 (9, 9), (10, 1), (11, 10), (12, 11),
 (13, 12), (14, 13), (15, 14);
+
 
 -- Роли:
 --  USER обычный пользователь, может регистрироваться и создавать объявления

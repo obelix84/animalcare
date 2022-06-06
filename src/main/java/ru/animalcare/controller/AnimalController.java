@@ -10,15 +10,10 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.validation.BindingResult;
 import ru.animalcare.dto.AnimalDto;
 import ru.animalcare.dto.AnimalRegistrationDto;
 import ru.animalcare.dto.UserDto;
 import ru.animalcare.service.*;
-
-
-import javax.validation.Valid;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -26,7 +21,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.Principal;
-import java.util.List;
+
 
 
 import static ru.animalcare.common.Settings.PATH_TO_ANIMAL_PHOTO_DIRECTORY;
@@ -55,6 +50,12 @@ public class AnimalController {
         return "all_animal";
     }
 
+    @GetMapping(value ="type/{type}")
+    public String showAnimalsTypesPage( Model model, @PathVariable String type) {
+        model.addAttribute("animals", animalService.findAllAnimalsTypes(type) );
+        return "animals_type";
+    }
+
     @GetMapping("/{id}")
     public String showAnimalById(Model model, @PathVariable Long id) {
         AnimalDto animalDto = new AnimalDto(animalService.findAnimalById(id));
@@ -67,10 +68,6 @@ public class AnimalController {
     public String showFormAddAnimalPhoto(Model model) {
         model.addAttribute("animalTypes", animalTypeService.findAllAnimalTypes());
         model.addAttribute("animalGenders", animalGenderService.findAllAnimalGenders());
-
-//        return "animals_add";
-//        return "add_animals";
-
         model.addAttribute("animalRegistration", new AnimalRegistrationDto());
         return "animal_add";
 
@@ -81,6 +78,38 @@ public class AnimalController {
     public String uploadAnimalPhotoToServer(@ModelAttribute AnimalRegistrationDto animalRegistrationDto,
                                             @ModelAttribute UserDto userDto) {
         animalService.addNewAnimal(animalRegistrationDto, userDto);
+        return "redirect:/";
+    }
+
+    public String addNewAnimal(@ModelAttribute AnimalRegistrationDto animalRegistrationDto, @ModelAttribute UserDto userDto) {
+        animalService.addNewAnimal(animalRegistrationDto, userDto);
+        return "redirect:/";
+    }
+
+    @GetMapping("/{id}/update")
+    public String showUpdateFormAnimal(Model model, @PathVariable Long id) {
+        model.addAttribute("animalTypes", animalTypeService.findAllAnimalTypes());
+        model.addAttribute("animalGenders", animalGenderService.findAllAnimalGenders());
+        model.addAttribute("animalRegistration", new AnimalRegistrationDto());
+        return "animal_update";
+    }
+
+    @PostMapping("/{id}/update")
+    public String updateAnimal(@PathVariable Long id, @ModelAttribute AnimalRegistrationDto animalRegistrationDto) {
+        animalService.updateAnimal(id, animalRegistrationDto);
+        return "redirect:/";
+    }
+
+    @GetMapping("/change_active/{id}")
+    public String changeActiveAnimal(@PathVariable Long id) {
+        animalService.changeActiveAnimal(id);
+        return "redirect:/";
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')")
+    @GetMapping("/delete/{id}")
+    public String deleteAnimal(@PathVariable Long id) {
+        animalService.deleteAnimalById(id);
         return "redirect:/";
     }
 
@@ -105,9 +134,6 @@ public class AnimalController {
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
                 .body(resource);
     }
-
-   //  return showAllAnimals(model);
-    //    return showAllAnimalsPage(1,3, model);
 
 
     @GetMapping("/image/{imageName}")
