@@ -1,7 +1,12 @@
 server:
   servlet:
     context-path: /
-
+logging:
+  level:
+    sql: debug
+    logging:
+      level:
+        root: info
 spring:
   h2:
     console:

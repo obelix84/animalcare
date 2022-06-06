@@ -2,18 +2,13 @@ package ru.animalcare.validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.security.web.server.MatcherSecurityWebFilterChain;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 import ru.animalcare.domain.User;
 import ru.animalcare.service.UserDetailsServiceImpl;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import org.apache.commons.validator.routines.EmailValidator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,65 +20,10 @@ public class UserValidator implements Validator {
     public UserValidator(@Qualifier("UserDetailsServiceImpl") UserDetailsServiceImpl userService) {
         this.userService = userService;
     }
-//
-//    public boolean isEmailValid(String email,Errors errors) {
-//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "error.not_empty");
-//        String error_message;
-//        if (email.endsWith(".")) {
-//            errors.rejectValue(email,"register.error.email.ENDS_WITH_DOT");
-//            return false;
-//        }
-//        // Code to find out last index of '@' sign
-//
-//
-//        //Code to check occurrence of @ in the email address
-//       if(!checkSymbol(email,'@')){
-//           errors.rejectValue(email,"register.error.email.MORE_THAN_ONE_AT");
-//           return false;
-//       }
-//        // Code to check occurrence of [period sign i..e, "."] after @
-//        String buffering = email.substring(email.indexOf('@') + 1, email.length());
-//        int len = buffering.length();
-//
-//        int countOfDotAfterAt = 0;
-//        for (int i = 0; i < len; i++) {
-//            if (buffering.charAt(i) == '.')
-//                countOfDotAfterAt++;
-//        }
-//
-//
-//        // Code to print userName & domainName
-//        String userName = email.substring(0, email.indexOf('@'));
-//        String domainName = email.substring(email.indexOf('@') + 1, email.length());
-//
-//        if ((countOfAt == 1) && (userName.endsWith(".") == false) && (countOfDotAfterAt == 1) &&
-//                ((indexOfAt + 3) <= (lastIndexOfAt) && !checkEndDot)) {
-//
-//            System.out.println("\"Valid email address\"");
-//        } else {
-//            System.out.println("\n\"Invalid email address\"");
-//        }
-//
-//
-//        System.out.println("\n");
-//        System.out.println("User name: " + userName + "\n" + "Domain name: " + domainName);
-//
-//
-//    }
-//    private boolean checkSymbol(String email,Character symbol){
-//        int count= 0;
-//        for (int i = 0; i < email.length(); i++) {
-//            if (email.charAt(i) == symbol){
-//                count++;
-//            }
-//        }
-//        return count == 1;
-//    }
+//    private static final String EMAIL_PATTERN =
+//            "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\\\.[A-Za-z0-9-]+)*(\\\\.[A-Za-z]{2,})$\n" + "\n";
 
-    private static final String EMAIL_PATTERN =
-            "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\\\.[A-Za-z0-9-]+)*(\\\\.[A-Za-z]{2,})$\n" + "\n";
-
-    //phone number pattern
+    //phone number pattern: +7xxxyyyzzjj or 8xxxyyyzzjj
     private static final String NUMBER_PATTERN = "^(^8|7|\\+7)((\\d{10})|(\\s\\(\\d{3}\\)\\s\\d{3}\\s\\d{2}\\s\\d{2}))\n^";
 
     // password must have at least one digit
@@ -95,11 +35,12 @@ public class UserValidator implements Validator {
     // password must have at least one symbol
     private static final String SYMBOLS_PATTERN = "^(?=.*[!@#&()–[{}]:;',?/*~$^+=<>])^";
 
-    private static final Pattern email_pattern = Pattern.compile(EMAIL_PATTERN);
+//    private static final Pattern email_pattern = Pattern.compile(EMAIL_PATTERN);
 
     public static boolean isEmailValid(String email) {
-        Matcher matcher = email_pattern.matcher(email);
-        return matcher.matches();
+//        Matcher matcher = email_pattern.matcher(email);
+//        return matcher.matches();
+        return EmailValidator.getInstance().isValid(email);
     }
 
     @Override

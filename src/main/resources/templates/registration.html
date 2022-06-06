@@ -69,13 +69,21 @@
                                         </div>
                                     </div>
                                 <div class="col-md-12">
+<!--                                    <div class="input-group input-group-static mb-3">-->
+<!--                                        <label th:text="Email"><span class="text-danger">*</span></label>-->
+<!--                                        <input type="email" th:field="*{email}"/>-->
+<!--                                        <p th:each="error : ${#fields.errors('email')}"-->
+<!--                                           th:text="error">Validation error</p>-->
+<!--                                    </div>-->
                                     <div class="input-group input-group-static mb-3">
                                         <label>Электронная почта <span class="text-danger">*</span></label>
                                         <input type="email" th:field="*{email}" class="form-control input-lg"
                                                title="email" required/>
                                         <div class="alert alert-danger error-alert"
-                                             th:if="${#fields.hasErrors('email')}"
-                                             th:errors="*{email}"></div>
+                                             th:each="error : ${#fields.errors('email')}"
+                                             th:text="error">Validation error
+<!--                                             th:if="${#fields.hasErrors('email')}"-->
+<!--                                             th:errors="*{email}"></div>-->
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -101,7 +109,7 @@
                                                  th:errors="*{contactNumber}"></div>
                                         </div>
                                     </div>
-                                <input class="btn btn-outline-dark" type="submit" th:value="Confirm"/>
+                                <input class="btn btn-outline-dark" type="submit" th:value="Зарегистрироваться"/>
 <!--                                <button type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2">Зарегистрироваться</button>-->
                             </fieldset>
                         </form>

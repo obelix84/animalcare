@@ -1,17 +1,16 @@
 create table USERS
 (
     id             bigint       not null primary key auto_increment,
-    username       varchar(50)  not null,
+    email          varchar(100) not null,
     password       varchar(80)  not null,
     first_name     varchar(80)  not null,
     last_name      varchar(80)  not null,
-    email          varchar(100) not null,
     enabled        boolean      not null,
     photo_id       bigint,
     contact_number varchar(13)  not null
     -- foreign key (id) references PHOTOS(id)
 );
-create unique index ix_users_username on users (username);
+create unique index ix_users_username on users (email);
 
 create table AUTHORITIES
 (
@@ -32,19 +31,19 @@ create table USERS_AUTHORITIES
 -- пароль везде одинаковый
 -- admin password
 -- insert into USERS(username, password, email, enabled)  values('admin', '$2a$10$yMK04o.HsK9N2Xv.ENsrDe3HiXUqZhoeQxYqMum8oHzL.U5uglREm', 'admin@mail.ru', true);
-insert into USERS(first_name, last_name, username, password, email, enabled,contact_number)
-values ('admin', 'admin', 'admin', '$2a$10$BoAjnAXDD9xiR34FPSTP2.BMu..hYqhymJp46K/7j9aRzGowlgpBO', 'admin@mail.ru',
+insert into USERS(first_name, last_name, password, email, enabled,contact_number)
+values ('admin', 'admin','$2a$10$BoAjnAXDD9xiR34FPSTP2.BMu..hYqhymJp46K/7j9aRzGowlgpBO', 'admin@mail.ru',
         true,'+79001234570');
 -- user password
-insert into USERS(first_name, last_name, username, password, email, enabled,contact_number)
-values ('Иванов', 'Иван', 'user', '$2a$10$BoAjnAXDD9xiR34FPSTP2.BMu..hYqhymJp46K/7j9aRzGowlgpBO', 'user@mail.ru', true,'+79001234569');
+insert into USERS(first_name, last_name, password, email, enabled,contact_number)
+values ('Иванов', 'Иван', '$2a$10$BoAjnAXDD9xiR34FPSTP2.BMu..hYqhymJp46K/7j9aRzGowlgpBO', 'user@mail.ru', true,'+79001234569');
 -- user1 password
-insert into USERS(first_name, last_name, username, password, email, enabled,contact_number)
-values ('user1', 'user1', 'user1', '$2a$10$BoAjnAXDD9xiR34FPSTP2.BMu..hYqhymJp46K/7j9aRzGowlgpBO', 'user1@mail.ru',
+insert into USERS(first_name, last_name, password, email, enabled,contact_number)
+values ('user1', 'user1','$2a$10$BoAjnAXDD9xiR34FPSTP2.BMu..hYqhymJp46K/7j9aRzGowlgpBO', 'user1@mail.ru',
         true,'+79001234568');
 -- manager password
-insert into USERS(first_name, last_name, username, password, email, enabled,contact_number)
-values ('manager', 'manager', 'manager', '$2a$10$BoAjnAXDD9xiR34FPSTP2.BMu..hYqhymJp46K/7j9aRzGowlgpBO',
+insert into USERS(first_name, last_name, password, email, enabled,contact_number)
+values ('manager', 'manager', '$2a$10$BoAjnAXDD9xiR34FPSTP2.BMu..hYqhymJp46K/7j9aRzGowlgpBO',
         'manager@mail.ru', true,'+79001234567');
 
 
