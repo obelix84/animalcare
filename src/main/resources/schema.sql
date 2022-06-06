@@ -6,7 +6,9 @@ create table USERS
     first_name varchar(80)  not null,
     last_name  varchar(80)  not null,
     email      varchar(100) not null,
-    enabled    boolean      not null
+    enabled    boolean      not null,
+    photo_id   bigint
+    -- foreign key (id) references PHOTOS(id)
 );
 create unique index ix_users_username on users (username);
 
@@ -34,7 +36,7 @@ values ('admin', 'admin', 'admin', '$2a$10$BoAjnAXDD9xiR34FPSTP2.BMu..hYqhymJp46
         true);
 -- user password
 insert into USERS(first_name, last_name, username, password, email, enabled)
-values ('user', 'user', 'user', '$2a$10$BoAjnAXDD9xiR34FPSTP2.BMu..hYqhymJp46K/7j9aRzGowlgpBO', 'user@mail.ru', true);
+values ('Иванов', 'Иван', 'user', '$2a$10$BoAjnAXDD9xiR34FPSTP2.BMu..hYqhymJp46K/7j9aRzGowlgpBO', 'user@mail.ru', true);
 -- user1 password
 insert into USERS(first_name, last_name, username, password, email, enabled)
 values ('user1', 'user1', 'user1', '$2a$10$BoAjnAXDD9xiR34FPSTP2.BMu..hYqhymJp46K/7j9aRzGowlgpBO', 'user1@mail.ru',
@@ -56,6 +58,20 @@ VALUES
 ('Male'),
 ('Female');
 
+CREATE TABLE ANIMAL_PHOTOS
+(
+    id              bigint auto_increment primary key,
+    name            varchar(255) not null,
+    size            bigint       not null,
+--    key_photo       varchar(255) not null,
+    upload_date     datetime,
+    comment         varchar(255) not null
+);
+
+INSERT INTO ANIMAL_PHOTOS (name, size, upload_date, comment)
+VALUES
+('no_photo.jpg', 3515, '2022-05-28 12:00:00', 'image/jpeg');
+
 create table ANIMAL_TYPE
 (
     id   bigint primary key auto_increment,
@@ -67,8 +83,8 @@ VALUES
 ('Cat'),
 ('Dog');
 
---CREATE TABLE animals
---(
+-- CREATE TABLE animals
+-- (
 --    id                  bigserial PRIMARY KEY,
 --    name                VARCHAR(40)  NOT NULL,
 --    gender              VARCHAR(10)  NOT NULL,
@@ -79,9 +95,9 @@ VALUES
 --    type_of_animal_id   bigint       not null,
 --    foreign key (user_id) references users (id),
 --    foreign key (type_of_animal_id) references TYPE_OF_ANIMAL (id)
---);
+-- );
 
-CREATE TABLE animals
+CREATE TABLE ANIMALS
 (
     id                  bigserial PRIMARY KEY,
     name                VARCHAR(40)  NOT NULL,
@@ -90,18 +106,49 @@ CREATE TABLE animals
     condition           VARCHAR(255) NOT NULL,
     description         VARCHAR(255) NOT NULL,
     animal_type_id      bigint       NOT NULL,
+    active              boolean      NOT NULL DEFAULT FALSE,
+    user_id             bigint       NULL,
+--    исправить на FOREIGN KEY
     FOREIGN KEY (animal_gender_id) REFERENCES ANIMAL_GENDER (id),
     FOREIGN KEY (animal_type_id) REFERENCES ANIMAL_TYPE (id)
+--    FOREIGN KEY (user_id) REFERENCES USERS (id)
 );
 
-INSERT INTO animals (name, animal_gender_id, age, condition, description, animal_type_id)
+INSERT INTO ANIMALS (name, animal_gender_id, age, condition, description, animal_type_id, active, user_id)
 VALUES
-( 'Felix', 1, 5, 'Good', 'Looking for a host', 1),
-( 'Kassandra', 2, 4, 'Good', 'Looking for a host', 2),
-( 'Rex', 1, 7, 'Good', 'Looking for a host', 2),
-( 'Felix 2', 1, 5, 'Good', 'Looking for a host', 1),
-( 'Kassandra 2', 2, 4, 'Good', 'Looking for a host', 2),
-( 'Rex 2', 1, 7, 'Good', 'Looking for a host', 2);
+( 'Felix', 1, 5, 'Good', 'Looking for a host', 1, true, 2),
+( 'Kassandra', 2, 4, 'Good', 'Looking for a host', true, 2, 2),
+( 'Rex', 1, 7, 'Good', 'Looking for a host', 2, true, 2),
+( '1Felix', 1, 5, 'Good', 'Looking for a host', 1, true, 2),
+( '1Kassandra', 2, 4, 'Good', 'Looking for a host', true, 2, 2),
+( '1Rex', 1, 7, 'Good', 'Looking for a host', 2, true, 2),
+( '2Felix', 1, 5, 'Good', 'Looking for a host', 1, true, 2),
+( '2Kassandra', 2, 4, 'Good', 'Looking for a host', true, 2, 2),
+( '2Rex', 1, 7, 'Good', 'Looking for a host', 2, true, 2),
+( 'inTRex', 1, 7000, 'Excellent', 'Looking for a host', 2, false , 2),
+( 'inRamon', 1, 17000, 'Excellent', 'Looking for a host', 2, false , 2),
+( 'in1TRex', 1, 7000, 'Excellent', 'Looking for a host', 2, false , 2),
+( 'in2Ramon', 1, 17000, 'Excellent', 'Looking for a host', 2, false , 2),
+( 'in3TRex', 1, 7000, 'Excellent', 'Looking for a host', 2, false , 2),
+( 'in3Ramon', 1, 17000, 'Excellent', 'Looking for a host', 2, false , 2);
+
+
+CREATE TABLE ANIMALS_ANIMAL_PHOTOS
+(
+    animal_id           bigint not null,
+    animal_photo_id     bigint not null,
+    primary key (animal_id, animal_photo_id),
+    foreign key (animal_id) references ANIMALS (id),
+    foreign key (animal_photo_id) references ANIMAL_PHOTOS (id)
+);
+
+INSERT INTO ANIMALS_ANIMAL_PHOTOS (animal_id, animal_photo_id)
+VALUES
+(1, 1),
+(2, 1),
+(3, 1),
+(4, 1),
+(5, 1);
 
 -- Роли:
 --  USER обычный пользователь, может регистрироваться и создавать объявления
@@ -135,7 +182,7 @@ CREATE TABLE photos
     size       bigint       not null,
     keyPhoto   varchar(255) not null,
     uploadDate datetime,
-    comment    varchar(255) not null,
-    animalsId  bigint       not null,
-    constraint fk_photo_animals foreign key (animalsId) references animals (id)
+    comment    varchar(255) not null
+--    animalsId  bigint       not null,
+--    constraint fk_photo_animals foreign key (animalsId) references animals (id)
 );

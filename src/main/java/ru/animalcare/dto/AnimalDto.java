@@ -4,6 +4,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.animalcare.domain.Animal;
 
+import static ru.animalcare.common.Settings.PATH_TO_ANIMAL_PHOTO_DIRECTORY_THYMELEAF;
+
 @Data
 @NoArgsConstructor
 public class AnimalDto {
@@ -13,7 +15,10 @@ public class AnimalDto {
     private int age;
     private String condition;
     private String description;
+    private String pathPhoto;
     private String type;
+    private Long userId;
+    private Boolean active;
 
     public AnimalDto(Animal animal) {
         if(animal.getId() != null){
@@ -24,6 +29,14 @@ public class AnimalDto {
         this.age = animal.getAge();
         this.condition = animal.getCondition();
         this.description = animal.getDescription();
+        if(animal.getAnimalPhotoList().size() > 0){
+            this.pathPhoto = animal.getAnimalPhotoList()
+                    .get(0)
+                    .getName()
+                    .replace(".jpg", "");
+        }
         this.type = animal.getAnimalType().getName();
+//        this.userId = animal.getUser().getId();
+        this.active = animal.getActive();
     }
 }
