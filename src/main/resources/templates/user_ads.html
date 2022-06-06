@@ -82,13 +82,36 @@
                                         data-bs-toggle="dropdown" aria-expanded="false">
                                     . . .
                                 </button>
+                                <script>
+                                    function archive(e) {
+                                        let arc = confirm("Вы уверены, что хотите снять объявление с публикации?");
+                                        if (arc) {
+                                            return true;
+                                        }
+                                        e.preventDefault();
+                                    }
+                                    function pub(e) {
+                                        let arc = confirm("Вы уверены, что хотите заново опубликовать объявление?");
+                                        if (arc) {
+                                            return true;
+                                        }
+                                        e.preventDefault();
+                                    }
+                                    function del(e) {
+                                        let del = confirm("Вы уверены, что хотите удалить объявление?");
+                                        if (del) {
+                                            return true;
+                                        }
+                                        e.preventDefault();
+                                    }
+                                </script>
                                 <ul class="dropdown-menu" th:aria-labelledby="'dmB' + ${animal.id}" th:if="${active} == true">
-                                    <li><a class="dropdown-item" href="#">Снять с публикации</a></li>
+                                    <li><a class="dropdown-item" th:href="@{/profile/ads/arc/} + ${animal.id}" onClick="archive(event);">Снять с публикации</a></li>
                                     <li><a class="dropdown-item" href="#">Редактировать</a></li>
                                 </ul>
                                 <ul class="dropdown-menu" th:aria-labelledby="'dmB' + ${animal.id}" th:if="${active} == false">
-                                    <li><a class="dropdown-item" href="#">Опубликовать</a></li>
-                                    <li><a class="dropdown-item" href="#">Удалить</a></li>
+                                    <li><a class="dropdown-item" href="#" onClick="pub(event);">Опубликовать</a></li>
+                                    <li><a class="dropdown-item" href="#" onClick="del(event);">Удалить</a></li>
                                 </ul>
                             </div>
                         </div>

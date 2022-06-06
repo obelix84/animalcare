@@ -125,4 +125,11 @@ public class AnimalService {
                 , findAllAnimals().size());
         return new Paged<>(animalPage, Paging.of(animalPage.getTotalPages(), pageNumber, size));
     }
+
+    public void archiveAd(long id) {
+        Animal animal = animalRepository.findById(id).orElseThrow(
+                ()-> new NoSuchElementException("Animal with id " + id + " isnt exist!"));
+        animal.setActive(false);
+        animalRepository.save(animal);
+    }
 }

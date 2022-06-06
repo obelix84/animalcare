@@ -4,10 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import ru.animalcare.domain.Animal;
 import ru.animalcare.dto.AnimalDto;
 import ru.animalcare.dto.UserDto;
@@ -83,4 +80,12 @@ public class UserProfileController {
         }
         return "user_ads";
     }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN', 'ROLE_MANAGER')")
+    @GetMapping("/ads/arc/{id}")
+    public String archiveAd(Model model, @PathVariable long id, @ModelAttribute("userDto") UserDto user) {
+        this.animalService.archiveAd(id);
+        return this.showAds(model, user, null, null, null);
+    }
+
 }
