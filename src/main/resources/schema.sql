@@ -119,8 +119,19 @@ VALUES
 ( 'Felix', 1, 5, 'Good', 'Looking for a host', 1, true, 2),
 ( 'Kassandra', 2, 4, 'Good', 'Looking for a host', true, 2, 2),
 ( 'Rex', 1, 7, 'Good', 'Looking for a host', 2, true, 2),
-( 'TRex', 1, 7000, 'Excellent', 'Looking for a host', 2, false , 2),
-( 'Ramon', 1, 17000, 'Excellent', 'Looking for a host', 2, false , 2);
+( '1Felix', 1, 5, 'Good', 'Looking for a host', 1, true, 2),
+( '1Kassandra', 2, 4, 'Good', 'Looking for a host', true, 2, 2),
+( '1Rex', 1, 7, 'Good', 'Looking for a host', 2, true, 2),
+( '2Felix', 1, 5, 'Good', 'Looking for a host', 1, true, 2),
+( '2Kassandra', 2, 4, 'Good', 'Looking for a host', true, 2, 2),
+( '2Rex', 1, 7, 'Good', 'Looking for a host', 2, true, 2),
+( 'inTRex', 1, 7000, 'Excellent', 'Looking for a host', 2, false , 2),
+( 'inRamon', 1, 17000, 'Excellent', 'Looking for a host', 2, false , 2),
+( 'in1TRex', 1, 7000, 'Excellent', 'Looking for a host', 2, false , 2),
+( 'in2Ramon', 1, 17000, 'Excellent', 'Looking for a host', 2, false , 2),
+( 'in3TRex', 1, 7000, 'Excellent', 'Looking for a host', 2, false , 2),
+( 'in3Ramon', 1, 17000, 'Excellent', 'Looking for a host', 2, false , 2);
+
 
 CREATE TABLE ANIMALS_ANIMAL_PHOTOS
 (

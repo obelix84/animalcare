@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.validation.BindingResult;
 import ru.animalcare.dto.AnimalDto;
 import ru.animalcare.dto.AnimalRegistrationDto;
 import ru.animalcare.service.AnimalGenderService;
@@ -38,7 +37,7 @@ public class AnimalController {
 
     @GetMapping
     public String showAllAnimals(Model model) {
-        List<AnimalDto> animals = animalService.findAll();
+        List<AnimalDto> animals = animalService.findAllAnimals();
         model.addAttribute("animals", animals);
         return "all_animals";
     }
