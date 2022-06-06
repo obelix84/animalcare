@@ -10,10 +10,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.validation.BindingResult;
 import ru.animalcare.dto.AnimalDto;
 import ru.animalcare.dto.AnimalRegistrationDto;
-import ru.animalcare.dto.UserDto;
 import ru.animalcare.service.*;
 
 import java.io.File;
@@ -23,7 +21,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.Principal;
-import java.util.List;
 
 import static ru.animalcare.common.Settings.PATH_TO_ANIMAL_PHOTO_DIRECTORY;
 
@@ -45,8 +42,14 @@ public class AnimalController {
     @GetMapping
     public String showAllAnimalsPage(@RequestParam(value = "pageNumber", required = false, defaultValue = "1") int pageNumber,
                                      @RequestParam(value = "size", required = false, defaultValue = "3") int size, Model model) {
-        model.addAttribute("animals", animalService.getPage(pageNumber,size));
+        model.addAttribute("animals", animalService.getPage(pageNumber, size));
         return "all_animals";
+    }
+
+    @GetMapping(value ="type/{type}")
+    public String showAnimalsTypesPage( Model model, @PathVariable String type) {
+        model.addAttribute("animals", animalService.findAllAnimalsTypes(type) );
+        return "animals_type";
     }
 
     @GetMapping("/{id}")

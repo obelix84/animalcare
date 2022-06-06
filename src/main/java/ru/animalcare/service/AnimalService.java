@@ -177,4 +177,13 @@ public class AnimalService {
         animalRepository.deleteById(id);
     }
 
+    public List<AnimalDto> findAllAnimalsTypes(String type) {
+
+        return animalRepository.findAll()
+                .stream()
+                .filter(Animal -> Animal.getAnimalType().getName().equals(type))
+                .map(AnimalDto::new)
+                .collect(Collectors.toList());
+    }
+
 }
