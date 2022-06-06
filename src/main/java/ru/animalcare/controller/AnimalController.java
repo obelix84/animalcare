@@ -23,7 +23,7 @@ public class AnimalController {
 
     @GetMapping
     public String showAllAnimals(Model model) {
-        List<AnimalDto> animals = animalService.findAll();
+        List<AnimalDto> animals = animalService.findAllAnimals();
         model.addAttribute("animals", animals);
         return "all_animals";
     }

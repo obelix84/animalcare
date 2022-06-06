@@ -38,30 +38,25 @@
 
 
 <!-- Navbar -->
-<div class="container position-sticky z-index-sticky top-0">
-    <div class="row">
-        <div class="col-12" th:insert="chunks/navbar_main :: navbar">
-        </div>
-    </div>
+<div class="container-fluid" th:insert="chunks/navbar_black :: navbar">
 </div>
-
-
-<header class="header-2">
-    <div class="page-header min-vh-25 relative" style="background-color: purple;">
-        <span class="mask bg-gradient-primary opacity-4"></span>
-    </div>
-</header>
 
 <div class="card card-body blur shadow-blur mx-3 mx-md-4 mt-n6">
 
+
     <section class="my-5 py-5">
         <div class="container">
-                <h1>Личный кабинет</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a th:href="@{/profile}">Личный кабинет</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Пользователь</li>
+                </ol>
+            </nav>
                 <div class="col mt-5">
                     <div class="card mb-5">
                         <div class="row g-0">
                             <div class="col-md-4">
-                                <img src="img/person.png" class="img-fluid rounded-start" alt="person" style="max-width: 300px;">
+                                <img src="/img/person.png" class="img-fluid rounded-start" alt="person" style="max-width: 300px;">
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body">
@@ -75,11 +70,11 @@
 
                                     <ul class="list-group">
                                         <li class="list-group-item d-flex justify-content-between align-items-center">
-                                            <a href="#Active">Активные объявления</a>
+                                            <a th:href="@{/profile/ads(active=true)}">Активные объявления</a>
                                             <span class="badge bg-primary rounded-pill" th:text="${countActive}"></span>
                                         </li>
                                         <li class="list-group-item d-flex justify-content-between align-items-center">
-                                            <a href="#InActive">Снятые с публикации</a>
+                                            <a th:href="@{/profile/ads(active=false)}">Снятые с публикации</a>
                                             <span class="badge bg-primary rounded-pill" th:text="${countInActive}"></span>
                                         </li>
                                     </ul>
@@ -89,59 +84,11 @@
                                             <button type="submit" class="btn btn-primary">Выйти</button>
                                         </fieldset>
                                     </form>
-                                    <p class="card-text"><small class="text-muted">Last login 3 mins ago</small></p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            <h2 class="mt-5" id="Active">Активные объявления</h2>
-            <div class="row row-cols-1 row-cols-md-4 g-4 mt-3">
-                <div class="col" th:each="animal : ${animals}" th:if="${animal.active} == true">
-                    <div class="card">
-                        <img src="img/empty.png" class="card-img-top max-height-200 max-width-200">
-                        <div class="card-body h-100">
-                            <h5 class="card-title" th:text="${animal.name}"></h5>
-                            <p class="card-text" th:text="${animal}"></p>
-
-                            <div class="dropdown">
-                                <button class="btn btn-primary dropdown-toggle" type="button"
-                                        th:id="'dmB' + ${animal.id}"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                    . . .
-                                </button>
-                                <ul class="dropdown-menu" th:aria-labelledby="'dmB' + ${animal.id}">
-                                    <li><a class="dropdown-item" href="#">Снять с публикации</a></li>
-                                    <li><a class="dropdown-item" href="#">Редактировать</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <h2 class="mt-5" id="InActive">Снятые с публикации</h2>
-            <div class="row row-cols-1 row-cols-md-4 g-4 mt-3">
-                <div class="col" th:each="animal : ${animals}" th:if="${animal.active} == false">
-                    <div class="card">
-                        <img src="img/empty.png" class="card-img-top max-height-200 max-width-200">
-                        <div class="card-body h-100">
-                            <h5 class="card-title" th:text="${animal.name}"></h5>
-                            <p class="card-text" th:text="${animal}"></p>
-                            <div class="dropdown">
-                                <button class="btn btn-success dropdown-toggle" type="button" th:id="'dmB' + ${animal.id}"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                    . . .
-                                </button>
-                                <ul class="dropdown-menu" th:aria-labelledby="'dmB' + ${animal.id}">
-                                    <li><a class="dropdown-item" href="#">Опубликовать</a></li>
-                                    <li><a class="dropdown-item" href="#">Удалить</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
 
         </div>
     </section>
@@ -172,7 +119,7 @@
 
 <!--  Plugin for TypedJS, full documentation here: https://github.com/inorganik/CountUp.js -->
 <script src="/js/plugins/countup.min.js"></script>
-<script src="./assets/js/plugins/choices.min.js"></script>
+<script src="/js/plugins/choices.min.js"></script>
 <script src="/js/plugins/prism.min.js"></script>
 <script src="/js/plugins/highlight.min.js"></script>
 
