@@ -20,13 +20,12 @@ public class UserValidator implements Validator {
     @Autowired
     public UserValidator(@Qualifier("UserDetailsServiceImpl") UserDetailsServiceImpl userService) {
         this.userService = userService;
-
     }
 
     //phone number pattern: +7xxxyyyzzjj or 8xxxyyyzzjj
-    private static final String NUMBER_PATTERN = "^((8|\\+7)-?)?\\(?\\d{3}\\)?-?\\d{1}-?\\d{1}-?\\d{1}-?\\d{1}-?\\d{1}-?\\d{1}-?\\d{1}\n^";
+    private static final String NUMBER_PATTERN = "^(\\+?7{1}|8{1})[ -]?\\(?[0-9]{0,3}\\)?[ -]?[0-9]{3}[ -]?[0-9]{2}[ -]?[0-9]{2}$";
+    private static final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,32}$";
 
-    private static final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,32}$\n^";
 
     private static final Pattern password_pattern = Pattern.compile(PASSWORD_PATTERN);
     private static final Pattern number_pattern = Pattern.compile(NUMBER_PATTERN);
@@ -38,7 +37,7 @@ public class UserValidator implements Validator {
 
     public boolean isNumberValid(String number){
         Matcher matcher = number_pattern.matcher(number);
-        return matcher.find();
+        return matcher.matches();
     }
 
     @Override
@@ -54,17 +53,19 @@ public class UserValidator implements Validator {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "error.not_empty");
 
         if (userService.checkByEmail(user.getEmail())) {
-            errors.rejectValue("email", "register.error.duplicated.email","email is invalid");
+            errors.rejectValue("email", "register.error.duplicated.email","email is invalid"
+            );
         }
         if (!CustomEmailValidator.getInstance().isValid(user.getEmail())) {
             errors.rejectValue("email", "register.error.email","Email is invalid");
         }
-        if(!isPasswordValid(user.getPassword())){
+        //Works
+        //TODO displaying in html
+        if(!isPasswordValid(user.getPassword().toString())){
             errors.rejectValue("password","register.error.password","password is invalid");
         }
-//        if(isNumberValid(user.getContactNumber())){
-//            errors.rejectValue("contact_number","register.error.number","contact number is invalid");
-//        }
-
+        if(!isNumberValid(user.getContactNumber())){
+            errors.rejectValue("contactNumber","register.error.number","contact number is invalid");
+        }
     }
 }
