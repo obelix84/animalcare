@@ -70,21 +70,21 @@ CREATE TABLE ANIMAL_PHOTOS
 INSERT INTO ANIMAL_PHOTOS (name, size, upload_date, comment)
 VALUES
 ('no_photo.jpg', 3515, '2022-05-28 12:00:00', 'image/jpeg'),
-('001.jpg', 3515, '2022-05-28 12:00:00', 'image/jpeg'),
-('002.jpg', 3515, '2022-05-28 12:00:00', 'image/jpeg'),
-('003.jpg', 3515, '2022-05-28 12:00:00', 'image/jpeg'),
-('004.jpg', 3515, '2022-05-28 12:00:00', 'image/jpeg'),
-('005.jpg', 3515, '2022-05-28 12:00:00', 'image/jpeg'),
-('006.jpg', 3515, '2022-05-28 12:00:00', 'image/jpeg'),
-('007.jpg', 3515, '2022-05-28 12:00:00', 'image/jpeg'),
-('008.jpg', 3515, '2022-05-28 12:00:00', 'image/jpeg'),
-('009.jpg', 3515, '2022-05-28 12:00:00', 'image/jpeg'),
-('010.jpg', 3515, '2022-05-28 12:00:00', 'image/jpeg'),
-('011.jpg', 3515, '2022-05-28 12:00:00', 'image/jpeg'),
-('012.jpg', 3515, '2022-05-28 12:00:00', 'image/jpeg'),
-('013.jpg', 3515, '2022-05-28 12:00:00', 'image/jpeg'),
-('014.jpg', 3515, '2022-05-28 12:00:00', 'image/jpeg'),
-('015.jpg', 3515, '2022-05-28 12:00:00', 'image/jpeg');
+('001.jpg', 224970, '2022-05-28 12:00:00', 'image/jpeg'),
+('002.jpg', 279068, '2022-05-28 12:00:00', 'image/jpeg'),
+('003.jpg', 299182, '2022-05-28 12:00:00', 'image/jpeg'),
+('004.jpg', 297733, '2022-05-28 12:00:00', 'image/jpeg'),
+('005.jpg', 6935, '2022-05-28 12:00:00', 'image/jpeg'),
+('006.jpg', 195101, '2022-05-28 12:00:00', 'image/jpeg'),
+('007.jpg', 242378, '2022-05-28 12:00:00', 'image/jpeg'),
+('008.jpg', 5573, '2022-05-28 12:00:00', 'image/jpeg'),
+('009.jpg', 13518, '2022-05-28 12:00:00', 'image/jpeg'),
+('010.jpg', 7582, '2022-05-28 12:00:00', 'image/jpeg'),
+('011.jpg', 23712, '2022-05-28 12:00:00', 'image/jpeg'),
+('012.jpg', 14490, '2022-05-28 12:00:00', 'image/jpeg'),
+('013.jpg', 22294, '2022-05-28 12:00:00', 'image/jpeg'),
+('014.jpg', 52612, '2022-05-28 12:00:00', 'image/jpeg'),
+('015.jpg', 223452, '2022-05-28 12:00:00', 'image/jpeg');
 
 
 create table ANIMAL_TYPE
@@ -121,16 +121,16 @@ VALUES
 ( 'Kassandra', 2, 4, 'Good', 'Looking for a host', true, 2, 2),
 ( 'Rex', 1, 7, 'Good', 'Looking for a host', 2, true, 2),
 ( '1Felix', 1, 5, 'Good', 'Looking for a host', 1, true, 2),
-( '1Kassandra', 2, 4, 'Good', 'Looking for a host', true, 2, 2),
+( '1Kassandra', 2, 4, 'Good', 'Looking for a host', 1, true, 2),
 ( '1Rex', 1, 7, 'Good', 'Looking for a host', 2, true, 2),
 ( '2Felix', 1, 5, 'Good', 'Looking for a host', 1, true, 2),
-( '2Kassandra', 2, 4, 'Good', 'Looking for a host', true, 2, 2),
+( '2Kassandra', 2, 4, 'Good', 'Looking for a host', 1, true, 2),
 ( '2Rex', 1, 7, 'Good', 'Looking for a host', 2, true, 2),
-( 'inTRex', 1, 7000, 'Excellent', 'Looking for a host', 2, false , 2),
-( 'inRamon', 1, 17000, 'Excellent', 'Looking for a host', 2, false , 2),
-( 'in1TRex', 1, 7000, 'Excellent', 'Looking for a host', 2, false , 2),
-( 'in2Ramon', 1, 17000, 'Excellent', 'Looking for a host', 2, false , 2),
-( 'in3TRex', 1, 7000, 'Excellent', 'Looking for a host', 2, false , 2),
+( 'inTRex', 1, 7000, 'Excellent', 'Looking for a host', 2, false, 2),
+( 'inRamon', 1, 17000, 'Excellent', 'Looking for a host', 2, false, 2),
+( 'in1TRex', 1, 7000, 'Excellent', 'Looking for a host', 2, false, 2),
+( 'in2Ramon', 1, 17000, 'Excellent', 'Looking for a host', 2, false, 2),
+( 'in3TRex', 1, 7000, 'Excellent', 'Looking for a host', 2, false, 2),
 ( 'in3Ramon', 1, 17000, 'Excellent', 'Looking for a host', 2, false , 2);
 
 

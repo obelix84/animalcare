@@ -65,7 +65,7 @@ public class AnimalController {
     @GetMapping("/{id}")
     public String showAnimalById(Model model, @PathVariable Long id) {
         AnimalDto animalDto = new AnimalDto(animalService.findAnimalById(id));
-        model.addAttribute("current_animal", animalDto);
+        model.addAttribute("currentAnimal", animalDto);
         return "profile_animal";
     }
 
@@ -97,6 +97,8 @@ public class AnimalController {
     @GetMapping("/{id}/update")
     public String showUpdateFormAnimal(Model model, @PathVariable Long id) {
         //model.addAttribute("animal", animalService.findAnimalsById(id)) ;
+        AnimalDto animalDto = new AnimalDto(animalService.findAnimalById(id));
+        model.addAttribute("currentAnimal", animalDto);
         model.addAttribute("animalTypes", animalTypeService.findAllAnimalTypes());
         model.addAttribute("animalGenders", animalGenderService.findAllAnimalGenders());
         model.addAttribute("animalRegistration", new AnimalRegistrationDto());

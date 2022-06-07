@@ -60,14 +60,14 @@
             <div class="col-md-3"></div>
             <div class="col-md-3">
                 <div class="mb-3 input-group input-group-static">
-                    <label for="inputName">Name:</label>
-                    <input type="text" th:field="*{name}" class="form-control input-lg" id="inputName">
+                    <label for="inputName">*Name:</label>
+                    <input type="text" th:field="*{name}" th:placeholder="${currentAnimal.name}" class="form-control input-lg" id="inputName">
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="mb-3 input-group input-group-static">
-                    <label for="inputGender">Gender:</label>
-                    <select class="form-control input-lg" th:field="*{gender}" id="inputGender">
+                    <label for="inputGender">*Gender:</label>
+                    <select class="form-control input-lg" th:field="*{gender}" th:placeholder="${currentAnimal.gender}" id="inputGender">
                         <option th:each="g : ${animalGenders}"
                                 th:value="${g.name}"
                                 th:utext="${g.name}"/>
@@ -80,14 +80,14 @@
             <div class="col-md-3"></div>
             <div class="col-md-3">
                 <div class="mb-3 input-group input-group-static">
-                    <label for="inputAge">Age:</label>
-                    <input type="number" th:field="*{age}" class="form-control input-lg" id="inputAge">
+                    <label for="inputAge">*Age:</label>
+                    <input type="number" th:field="*{age}" th:placeholder="${currentAnimal.age}" class="form-control input-lg" id="inputAge">
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="mb-3 input-group input-group-static">
-                    <label for="inputCondition">Condition:</label>
-                    <input type="text" th:field="*{condition}" class="form-control input-lg" id="inputCondition">
+                    <label for="inputCondition">*Condition:</label>
+                    <input type="text" th:field="*{condition}" th:placeholder="${currentAnimal.condition}" class="form-control input-lg" id="inputCondition">
                 </div>
             </div>
             <div class="col-md-3"></div>
@@ -96,14 +96,14 @@
             <div class="col-md-3"></div>
             <div class="col-md-3">
                 <div class="mb-3 input-group input-group-static">
-                <label for="inputDescription">Description:</label>
-                <input type="text" th:field="*{description}" class="form-control input-lg" id="inputDescription">
+                <label for="inputDescription">*Description:</label>
+                <input type="text" th:field="*{description}" th:placeholder="${currentAnimal.description}" class="form-control input-lg" id="inputDescription">
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="mb-3 input-group input-group-static">
-                    <label for="inputType">Type:</label>
-                    <select class="form-control input-lg" th:field=" *{type}" id="inputType">
+                    <label for="inputType">*Type:</label>
+                    <select class="form-control input-lg" th:field="*{type}" id="inputType">
                         <option th:each="t : ${animalTypes}"
                                 th:value="${t.name}"
                                 th:utext="${t.name}"/>
@@ -131,6 +131,8 @@
             </div>
             <div class="col-md-3"></div>
         </div>
+        <p>* - поля, обязательные для заполнения.</p>
+
     </form>
 </div>
 
