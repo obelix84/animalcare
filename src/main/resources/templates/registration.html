@@ -80,10 +80,11 @@
                                         <input type="email" th:field="*{email}" class="form-control input-lg"
                                                title="email" required/>
                                         <div class="alert alert-danger error-alert"
-                                             th:each="error : ${#fields.errors('email')}"
-                                             th:text="error">Validation error
-<!--                                             th:if="${#fields.hasErrors('email')}"-->
-<!--                                             th:errors="*{email}"></div>-->
+                                             th:if="${#fields.hasErrors('email')}"
+                                             th:errors="*{email}">error</div>
+<!--                                             th:each="error : ${#fields.errors('email')}">-->
+<!--                                             <h4>th:text="invalid email">Validation error</h4>-->
+
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -94,7 +95,7 @@
                                                required/>
                                         <div class="alert alert-danger error-alert"
                                              th:if="${#fields.hasErrors('password')}" th:errors="*{password}">
-                                            ошибка
+
                                         </div>
                                     </div>
                                 </div>
@@ -105,7 +106,7 @@
                                                    title="contact_number"
                                                    required/>
                                             <div class="alert alert-danger error-alert"
-                                                 th:if="${#fields.hasErrors('contactNumber')}"
+                                                 th:if="${#fields.hasErrors('ContactNumber')}"
                                                  th:errors="*{contactNumber}"></div>
                                         </div>
                                     </div>

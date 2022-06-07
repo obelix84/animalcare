@@ -2,8 +2,11 @@ package ru.animalcare.domain;
 
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
+import ru.animalcare.validator.ValidPassword;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -18,20 +21,30 @@ public class User {
     @Id
     @Column(name = "id", unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
     @NotNull
     @Column(name = "email", unique = true)
+    @Email
     String email;
 
     @NotNull
     @Column(name = "password", nullable = false)
-    String password;
+    @ValidPassword
+    private String password;
+
+    public String getContactNumber() {
+        return contactNumber;
+    }
+
+    public void setContactNumber(String contactNumber) {
+        this.contactNumber = contactNumber;
+    }
 
     @NotNull
     @Column(name = "contact_number", nullable = false)
 //    @Length(max = 12,min = 12, message = "phone number should be in this format: +71234567890")
-    String contactNumber;
+    private String contactNumber;
 
     @NotNull
     @Column(name = "first_name")
@@ -54,8 +67,11 @@ public class User {
     private Long photoId;
 
 
-//   Bean couldn't find the getter of contact number
+//    //  couldn't find the getter of contact number
 //    public String getContactNumber() {
 //        return contactNumber;
+//    }
+//    public void setContactNumber(String contactNumber){
+//        this.contactNumber = contactNumber;
 //    }
 }

@@ -15,6 +15,8 @@ import ru.animalcare.domain.User;
 import ru.animalcare.service.UserDetailsServiceImpl;
 import ru.animalcare.validator.UserValidator;
 
+import javax.validation.Valid;
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -40,17 +42,17 @@ public class RegistrationController {
     @PostMapping("/register")
     public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult) {
         userValidator.validate(userForm, bindingResult);
-
         if (bindingResult.hasErrors()) {
             logger.error(String.valueOf(bindingResult.getFieldError()));
-            return "registration";
+            return "/registration";
         }
         Authority authority = new Authority();
         authority.setAuthority("USER");
         authority.setId(1L);
         userForm.setAuthorities(List.of(authority));
         userForm.setEnabled(true);
-
+//        userService.loadUserByUsername(userForm.getEmail());
+//        return "redirect:/authenticated";
         if (userService.save(userForm)) {
             userService.loadUserByUsername(userForm.getEmail());
             return "redirect:/authenticated";
