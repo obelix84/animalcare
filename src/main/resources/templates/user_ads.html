@@ -110,8 +110,8 @@
                                     <li><a class="dropdown-item" th:href="@{/animals/}+${animal.id}+'/update'">Редактировать</a></li>
                                 </ul>
                                 <ul class="dropdown-menu" th:aria-labelledby="'dmB' + ${animal.id}" th:if="${active} == false">
-                                    <li><a class="dropdown-item" href="#" onClick="pub(event);">Опубликовать</a></li>
-                                    <li><a class="dropdown-item" href="#" onClick="del(event);">Удалить</a></li>
+                                    <li><a class="dropdown-item" th:href="@{/animals/}+${animal.id}+'/update'" onClick="pub(event);">Опубликовать</a></li>
+                                    <li><a class="dropdown-item" th:href="@{/animals/}+${animal.id}+'/delete'" onClick="del(event);">Удалить</a></li>
                                 </ul>
                             </div>
                         </div>

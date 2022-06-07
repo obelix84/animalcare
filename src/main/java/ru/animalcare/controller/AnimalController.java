@@ -11,6 +11,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.animalcare.domain.Animal;
 import ru.animalcare.dto.AnimalDto;
 import ru.animalcare.dto.AnimalRegistrationDto;
 import ru.animalcare.dto.UserDto;
@@ -42,6 +43,7 @@ public class AnimalController {
     @ModelAttribute(name = "userDto")
     public UserDto getUserDto(Principal principal) {
         if (principal != null) {
+            UserDto userDto = userService.findUserByName(principal.getName());
             return userService.findUserByName(principal.getName());
         }
         return null;
@@ -90,6 +92,8 @@ public class AnimalController {
         return "redirect:/";
     }
 
+
+    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN', 'ROLE_MANAGER')")
     @GetMapping("/{id}/update")
     public String showUpdateFormAnimal(Model model, @PathVariable Long id) {
         //model.addAttribute("animal", animalService.findAnimalsById(id)) ;
@@ -99,23 +103,27 @@ public class AnimalController {
         return "animal_update";
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN', 'ROLE_MANAGER')")
     @PostMapping("/{id}/update")
     public String updateAnimal(@PathVariable Long id, @ModelAttribute AnimalRegistrationDto animalRegistrationDto) {
         animalService.updateAnimal(id, animalRegistrationDto);
         return "redirect:/";
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN', 'ROLE_MANAGER')")
     @GetMapping("/change_active/{id}")
     public String changeActiveAnimal(@PathVariable Long id) {
         animalService.changeActiveAnimal(id);
         return "redirect:/";
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')")
-    @GetMapping("/delete/{id}")
-    public String deleteAnimal(@PathVariable Long id) {
+    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN', 'ROLE_MANAGER')")
+    @GetMapping("/{id}/delete")
+    public String deleteAnimal(@PathVariable Long id, @ModelAttribute UserDto userDto) {
+        //нельзя удалять чужие объявления
+        //нужна проверка
         animalService.deleteAnimalById(id);
-        return "redirect:/";
+        return "redirect:/profile/ads?active=false";
     }
 
     @GetMapping("/get/{imageName}")

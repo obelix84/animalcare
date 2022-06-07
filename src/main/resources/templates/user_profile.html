@@ -81,7 +81,9 @@
                                     </p>
                                     <form name="f" th:action="@{/logout}" method="post">
                                         <fieldset>
-                                            <button type="submit" class="btn btn-primary">Выйти</button>
+                                                <button type="submit" class="btn btn-primary">Выйти</button>
+                                                <a th:href="@{/animals/add}" class="btn btn-success">Подать
+                                                    объявление</a>
                                         </fieldset>
                                     </form>
                                 </div>
