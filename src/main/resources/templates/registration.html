@@ -21,7 +21,7 @@
     <!-- Material Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
     <!-- CSS Files -->
-    <link id="pagestyle" href="css/material-kit.css?v=3.0.2" rel="stylesheet"/>
+    <link id="pagestyle" href="/css/material-kit.css?v=3.0.2" rel="stylesheet"/>
 </head>
 <body>
 <!-- Navbar Blur -->
@@ -73,9 +73,12 @@
                                         <label>Электронная почта <span class="text-danger">*</span></label>
                                         <input type="email" th:field="*{email}" class="form-control input-lg"
                                                title="email" required/>
-                                        <div class="alert alert-danger error-alert"
-                                             th:if="${#fields.hasErrors('email')}"
-                                             th:errors="*{email}"> <h4>Ошибка</h4> </div>
+                                        <p th:if="${#fields.hasErrors('email')}"
+                                           th:class="${#fields.hasErrors('email')}? error">Попробуйте так: 'sample@example.com'</p>
+
+                                        <!--                                        <div class="alert alert-danger error-alert"-->
+<!--                                             th:if="${#fields.hasErrors('email')}"-->
+<!--                                             th:errors="*{email}"> <h4>Ошибка</h4> </div>-->
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -84,10 +87,11 @@
                                         <input type="password" th:field="*{password}" class="form-control input-lg"
                                                title="password"
                                                required/>
-                                        <div class="alert alert-danger error-alert"
-                                             th:if="${#fields.hasErrors('password')}" th:errors="*{password}">
-
-                                        </div>
+<!--                                        class="alert alert-danger error-alert"-->
+                                        <p th:if="${#fields.hasErrors('password')}"
+                                           th:class="${#fields.hasErrors('password')}? error">Пароль не подойдёт</p>
+<!--                                             th:if="${#fields.hasErrors('password')}" th:errors="*{password}">-->
+                                        </p>
                                     </div>
                                 </div>
                                     <div class="col-md-6">
@@ -96,8 +100,10 @@
                                             <input type="text" th:field="*{contactNumber}" class="form-control input-lg"
                                                    title="contact_number"
                                                    required/>
-                                            <div class="alert alert-danger error-alert"
-                                                 th:if="${#fields.hasErrors('ContactNumber')}" th:errors="*{contactNumber}"></div>
+                                            <p th:if="${#fields.hasErrors('contactNumber')}"
+                                               th:class="${#fields.hasErrors('contactNumber')}? error">подск.+7xxxyyykkll или 8хxxyyykkll </p>
+<!--                                            <div class="alert alert-danger error-alert"-->
+<!--                                                 th:if="${#fields.hasErrors('ContactNumber')}" th:errors="*{contactNumber}"></div>div-->
                                         </div>
                                     </div>
                                 <input class="btn btn-outline-dark" type="submit" th:value="Зарегистрироваться"/>
@@ -111,4 +117,9 @@
     </div>
 </div>
 </body>
+<style>
+    .error {
+        color: red;
+    }
+</style>
 </html>

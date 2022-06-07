@@ -3,10 +3,16 @@ server:
     context-path: /
 logging:
   level:
+    org:
+      hibernate:
+        type:
+          nodeValue: TRACE
+          descriptor:
+            sql:
+              BasicBinder: TRACE
+        sql: info
     sql: debug
-    logging:
-      level:
-        root: debug
+    root: info
 spring:
   h2:
     console:

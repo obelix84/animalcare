@@ -53,7 +53,7 @@ public class UserValidator implements Validator {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "error.not_empty");
 
         if (userService.checkByEmail(user.getEmail())) {
-            errors.rejectValue("email", "register.error.duplicated.email","email is invalid"
+            errors.rejectValue("email", "register.error.duplicated.email","email is in use"
             );
         }
         if (!CustomEmailValidator.getInstance().isValid(user.getEmail())) {
@@ -68,4 +68,5 @@ public class UserValidator implements Validator {
             errors.rejectValue("contactNumber","register.error.number","contact number is invalid");
         }
     }
+
 }
