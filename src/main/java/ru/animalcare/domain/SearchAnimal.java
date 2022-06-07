@@ -13,12 +13,12 @@ import lombok.Setter;
 public class SearchAnimal {
 
     private String gender;
-//    private int age;
+    private int age;
     private String type;
 
-    public SearchAnimal(String gender, String type) {
+    public SearchAnimal(String gender, int age, String type) {
         this.gender = gender;
-//        this.age = age;
+        this.age = age;
         this.type = type;
 
     }

@@ -229,9 +229,9 @@ public class AnimalService {
 
         return StreamSupport.stream(animalRepository.findAll().spliterator(), false)
                 .filter(Animal::getActive)
-                .filter(Animal -> (Animal.getAnimalGender().equals(animal.getGender())) && (Animal.getAnimalType().getName().equals(animal.getType())))
-//                .filter(Animal -> Animal.getAge() == animalDto.getAge())
-//                .filter(Animal -> Animal.getAnimalType().getName().equals(animal.getType()))
+                .filter(Animal -> (Animal.getAnimalGender().equals(animal.getGender()))
+                        && (Animal.getAnimalType().getName().equals(animal.getType()))
+                        && (Animal.getAge() == animal.getAge()))
                 .map(AnimalDto::new)
                 .collect(Collectors.toList());
 
