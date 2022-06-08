@@ -31,89 +31,79 @@
      loading="default">
     <span class="mask bg-gradient-dark opacity-6"></span>
     <div class="container my-auto">
-<!--        <div class="row">-->
-            <div class="col-lg-4 col-md-12 col-12 mx-auto">
-                <div class="card z-index-0 fadeIn3 fadeInBottom">
-                    <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-                        <div class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
-                            <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">Регистрация</h4>
-                        </div>
+        <!--        <div class="row">-->
+        <div class="col-lg-4 col-md-16 col-16 mx-auto">
+            <div class="card z-index-0 fadeIn3 fadeInBottom">
+                <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                    <div class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
+                        <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">Регистрация</h4>
                     </div>
-                    <div class="card-body">
-                        <form autocomplete="off" th:action="@{register}" th:object="${userForm}"
-                              method="POST">
-                            <fieldset>
-                                <div class="font-weight-normal mb-2">
-                                    <span class="text-danger">*</span> Поля обазательные к заполению
-                                </div>
-                                    <div class="col-md-6">
-                                        <div class="input-group input-group-static mb-3">
-                                            <div class="form-group">
-                                                <label>Имя <span class="text-danger">*</span></label>
-                                                <input type="text" th:field="*{firstName}" class="form-control input-lg"
-                                                       title="firstName"  required/>
-                                                <div class="alert alert-danger error-alert"
-                                                     th:if="${#fields.hasErrors('firstName')}"
-                                                     th:errors="*{firstName}"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="input-group input-group-static mb-3">
-                                            <label>Фамилия <span class="text-danger">*</span></label>
-                                            <input type="text" th:field="*{lastName}" class="form-control input-lg"
-                                                   title="lastName"  required/>
-                                            <div class="alert alert-danger error-alert"
-                                                 th:if="${#fields.hasErrors('lastName')}"
-                                                 th:errors="*{lastName}"></div>
-                                        </div>
-                                    </div>
-                                <div class="col-md-12">
-                                    <div class="input-group input-group-static mb-3">
-                                        <label>Электронная почта <span class="text-danger">*</span></label>
-                                        <input type="email" th:field="*{email}" class="form-control input-lg"
-                                               title="email" required/>
-                                        <p th:if="${#fields.hasErrors('email')}"
-                                           th:class="${#fields.hasErrors('email')}? error">Попробуйте так: 'sample@example.com'</p>
-
-                                        <!--                                        <div class="alert alert-danger error-alert"-->
-<!--                                             th:if="${#fields.hasErrors('email')}"-->
-<!--                                             th:errors="*{email}"> <h4>Ошибка</h4> </div>-->
+                </div>
+                <div class="card-body">
+                    <form autocomplete="off" th:action="@{register}" th:object="${userForm}" method="POST">
+                        <fieldset>
+                            <div class="font-weight-normal mb-2">
+                                <span class="text-danger">*</span> Поля обазательные к заполению
+                            </div>
+                            <div class="col-md-6">
+                                <div class="input-group input-group-static mb-3">
+                                    <div class="form-group">
+                                        <label>Имя <span class="text-danger">*</span></label>
+                                        <input type="text" th:field="*{firstName}" class="form-control input-lg"
+                                               title="firstName" required/>
+                                        <div class="alert alert-danger error-alert"
+                                             th:if="${#fields.hasErrors('firstName')}"
+                                             th:errors="*{firstName}"></div>
                                     </div>
                                 </div>
-                                <div class="col-md-12">
-                                    <div class="input-group input-group-static mb-3">
-                                        <label>Пароль <span class="text-danger">*</span></label>
-                                        <input type="password" th:field="*{password}" class="form-control input-lg"
-                                               title="password"
-                                               required/>
-<!--                                        class="alert alert-danger error-alert"-->
-                                        <p th:if="${#fields.hasErrors('password')}"
-                                           th:class="${#fields.hasErrors('password')}? error">Пароль не подойдёт</p>
-<!--                                             th:if="${#fields.hasErrors('password')}" th:errors="*{password}">-->
-                                        </p>
-                                    </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="input-group input-group-static mb-3">
+                                    <label>Фамилия <span class="text-danger">*</span></label>
+                                    <input type="text" th:field="*{lastName}" class="form-control input-lg"
+                                           title="lastName" required/>
+                                    <div class="alert alert-danger error-alert"
+                                         th:if="${#fields.hasErrors('lastName')}"
+                                         th:errors="*{lastName}"></div>
                                 </div>
-                                    <div class="col-md-6">
-                                        <div class="input-group input-group-static mb-3">
-                                            <label>Номер Телефона <span class="text-danger">*</span></label>
-                                            <input type="text" th:field="*{contactNumber}" class="form-control input-lg"
-                                                   title="contact_number"
-                                                   required/>
-                                            <p th:if="${#fields.hasErrors('contactNumber')}"
-                                               th:class="${#fields.hasErrors('contactNumber')}? error">подск.+7xxxyyykkll или 8хxxyyykkll </p>
-<!--                                            <div class="alert alert-danger error-alert"-->
-<!--                                                 th:if="${#fields.hasErrors('ContactNumber')}" th:errors="*{contactNumber}"></div>div-->
-                                        </div>
-                                    </div>
-                                <input class="btn btn-outline-dark" type="submit" th:value="Зарегистрироваться"/>
-                            </fieldset>
-                        </form>
-                    </div>
-
+                            </div>
+                            <div class="col-md-12">
+                                <div class="input-group input-group-static mb-3">
+                                    <label>Электронная почта <span class="text-danger">*</span></label>
+                                    <input type="email" th:field="*{email}" class="form-control input-lg"
+                                           title="email" required/>
+                                    <p th:if="${#fields.hasErrors('email')}"
+                                       th:class="${#fields.hasErrors('email')}? error">Формат: 'sample@example.com'</p>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="input-group input-group-static mb-3">
+                                    <label>Пароль <span class="text-danger">*</span></label>
+                                    <input type="password" th:field="*{password}" class="form-control input-lg"
+                                           title="password"
+                                           required/>
+                                    <p th:if="${#fields.hasErrors('password')}"
+                                       th:class="${#fields.hasErrors('password')}? error">Пароль не подойдёт</p>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="input-group input-group-static mb-3">
+                                    <label>Номер Телефона <span class="text-danger">*</span></label>
+                                    <input type="text" th:field="*{contactNumber}" class="form-control input-lg"
+                                           title="contact_number"
+                                           required/>
+                                    <p th:if="${#fields.hasErrors('contactNumber')}"
+                                       th:class="${#fields.hasErrors('contactNumber')}? error">подск.+7********** или 8********** </p>
+                                </div>
+                            </div>
+                            <input class="btn btn-outline-success" type="submit" th:value="Зарегистрироваться"/>
+<!--                            <input class="btn btn-outline-danger" type="button" href="/public" th:value="Вернуться"/>-->
+                        </fieldset>
+                    </form>
                 </div>
             </div>
-<!--        </div>-->
+        </div>
     </div>
 </div>
 </body>
@@ -121,5 +111,6 @@
     .error {
         color: red;
     }
+
 </style>
 </html>
