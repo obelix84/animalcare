@@ -9,7 +9,7 @@
         <li class="nav-item dropdown dropdown-hover mx-2">
             <a class="nav-link ps-2 d-flex cursor-pointer align-items-center" id="dropdownMenuPages" data-bs-toggle="dropdown" aria-expanded="false">
                 Каталоги
-                <img src="img/down-arrow-dark.svg" alt="down-arrow" class="arrow ms-auto ms-md-2">
+                <img src="/img/down-arrow-dark.svg" alt="down-arrow" class="arrow ms-auto ms-md-2">
             </a>
             <div class="dropdown-menu dropdown-menu-animation ms-n3 dropdown-md p-3 border-radius-xl mt-0 mt-lg-3" aria-labelledby="dropdownMenuPages">
                 <div class="d-none d-lg-block">
@@ -19,10 +19,10 @@
                     <a href="/animals" class="dropdown-item border-radius-md">
                         <span>Все животные</span>
                     </a>
-                    <a href="/cats" class="dropdown-item border-radius-md">
+                    <a href="/animals/type/Cat" class="dropdown-item border-radius-md">
                         <span>Кошки</span>
                     </a>
-                    <a href="/dogs" class="dropdown-item border-radius-md">
+                    <a href="/animals/type/Dog" class="dropdown-item border-radius-md">
                         <span>Собаки</span>
                     </a>
                     <a href="/search" class="dropdown-item border-radius-md">
@@ -35,13 +35,13 @@
                         Каталоги животных
                     </h6>
 
-                    <a href="animals" class="dropdown-item border-radius-md">
+                    <a href="/animals" class="dropdown-item border-radius-md">
                         <span>Все животные</span>
                     </a>
-                    <a href="cats" class="dropdown-item border-radius-md">
+                    <a href="/animals/type/Cat" class="dropdown-item border-radius-md">
                         <span>Кошки</span>
                     </a>
-                    <a href="dogs" class="dropdown-item border-radius-md">
+                    <a href="/animals/type/Dog" class="dropdown-item border-radius-md">
                         <span>Собаки</span>
                     </a>
                     <a href="search" class="dropdown-item border-radius-md">
@@ -56,7 +56,7 @@
         <li class="nav-item dropdown dropdown-hover mx-2">
             <a class="nav-link ps-2 d-flex cursor-pointer align-items-center" id="dropdownMenuAd" data-bs-toggle="dropdown" aria-expanded="false">
                 Подать объявления
-                <img src="img/down-arrow-dark.svg" alt="down-arrow" class="arrow ms-auto ms-md-2">
+                <img src="/img/down-arrow-dark.svg" alt="down-arrow" class="arrow ms-auto ms-md-2">
             </a>
             <div class="dropdown-menu dropdown-menu-animation ms-n3 dropdown-md p-3 border-radius-xl mt-0 mt-lg-3" aria-labelledby="dropdownMenuPages">
                 <div class="d-none d-lg-block">
@@ -94,6 +94,11 @@
 
         <li class="nav-item ms-lg-auto">
             <a sec:authorize="isAuthenticated()" class="nav-link nav-link-icon me-2" th:href="@{/profile}" th:object="${userdto}">
+                <i class="bi bi-person-circle"></i>
+                <p th:text="${userDto.firstName} + ' ' + ${userDto.lastName}" class="d-inline text-sm z-index-1 font-weight-bold" data-bs-toggle="tooltip"
+                   data-bs-placement="bottom" title="Личный кабинет"></p>
+            </a>
+            <a sec:authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')" class="nav-link nav-link-icon me-2" th:href="@{/profile/manager}" th:object="${userdto}">
                 <i class="bi bi-person-circle"></i>
                 <p th:text="${userDto.firstName} + ' ' + ${userDto.lastName}" class="d-inline text-sm z-index-1 font-weight-bold" data-bs-toggle="tooltip"
                    data-bs-placement="bottom" title="Личный кабинет"></p>

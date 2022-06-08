@@ -36,7 +36,6 @@ public class AnimalDto {
                     .replace(".jpg", "");
         }
         this.type = animal.getAnimalType().getName();
-//        this.userId = animal.getUser().getId();
         this.active = animal.getActive();
     }
 }

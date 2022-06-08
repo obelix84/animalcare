@@ -1,5 +1,6 @@
 package ru.animalcare.service;
 
+import com.sun.xml.bind.v2.runtime.output.SAXOutput;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -21,4 +22,11 @@ public class UserService {
                 .orElseThrow( ()-> new NoSuchElementException("Account with email " + email + " does not exist"));
         return this.modelMapper.map(user, UserDto.class);
     }
+
+    public User findUserById(Long id){
+        User user = userRepository.findById(id)
+                .orElseThrow( ()-> new NoSuchElementException("User with id " + id + " isn\'t exist"));
+        return user;
+    }
+
 }
