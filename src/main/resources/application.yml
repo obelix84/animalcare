@@ -4,14 +4,7 @@ server:
 logging:
   level:
     org:
-      hibernate:
-        type:
-          nodeValue: TRACE
-          descriptor:
-            sql:
-              BasicBinder: TRACE
-        sql: info
-    sql: debug
+        sql: debug
     root: info
 spring:
   h2:

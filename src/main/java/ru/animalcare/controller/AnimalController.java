@@ -11,7 +11,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.animalcare.domain.Animal;
 import ru.animalcare.dto.AnimalDto;
 import ru.animalcare.dto.AnimalRegistrationDto;
 import ru.animalcare.dto.UserDto;
@@ -23,9 +22,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.Principal;
-
-
-
 import static ru.animalcare.common.Settings.PATH_TO_ANIMAL_PHOTO_DIRECTORY;
 
 @Controller
@@ -38,13 +34,11 @@ public class AnimalController {
     private final UserService userService;
     private final ModelMapper modelMapper;
 
-
-
     @ModelAttribute(name = "userDto")
     public UserDto getUserDto(Principal principal) {
         if (principal != null) {
-            UserDto userDto = userService.findUserByName(principal.getName());
-            return userService.findUserByName(principal.getName());
+            UserDto userDto = userService.findUserByEmail(principal.getName());
+            return userService.findUserByEmail(principal.getName());
         }
         return null;
     }
