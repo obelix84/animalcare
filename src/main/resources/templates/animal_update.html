@@ -51,6 +51,7 @@
                     <li class="breadcrumb-item active" aria-current="page">Редактирование объявления</li>
                 </ol>
             </nav>
+            <p><span class="text-danger">*</span> - поля, обязательные для заполнения.</p>
         </div>
         <div class="col-md-3"></div>
     </div>
@@ -60,14 +61,14 @@
             <div class="col-md-3"></div>
             <div class="col-md-3">
                 <div class="mb-3 input-group input-group-static">
-                    <label for="inputName">*Name:</label>
-                    <input type="text" th:field="*{name}" th:placeholder="${currentAnimal.name}" class="form-control input-lg" id="inputName">
+                    <label for="inputName">* Name:</label>
+                    <input type="text" th:value="${currentAnimal.name}" class="form-control input-lg" id="inputName">
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="mb-3 input-group input-group-static">
                     <label for="inputGender">*Gender:</label>
-                    <select class="form-control input-lg" th:field="*{gender}" th:placeholder="${currentAnimal.gender}" id="inputGender">
+                    <select class="form-control input-lg" th:text="*{gender}" id="inputGender">
                         <option th:each="g : ${animalGenders}"
                                 th:value="${g.name}"
                                 th:utext="${g.name}"/>
@@ -86,7 +87,7 @@
             </div>
             <div class="col-md-3">
                 <div class="mb-3 input-group input-group-static">
-                    <label for="inputCondition">*Condition:</label>
+                    <label for="inputCondition">* Condition:</label>
                     <input type="text" th:field="*{condition}" th:placeholder="${currentAnimal.condition}" class="form-control input-lg" id="inputCondition">
                 </div>
             </div>
@@ -131,8 +132,6 @@
             </div>
             <div class="col-md-3"></div>
         </div>
-        <p>* - поля, обязательные для заполнения.</p>
-
     </form>
 </div>
 
