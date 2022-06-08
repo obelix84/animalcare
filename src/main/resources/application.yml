@@ -1,12 +1,11 @@
 server:
   servlet:
     context-path: /
-logging:
-  level:
-    org:
-        sql: info
-    root: info
+
 spring:
+  output:
+    ansi:
+      enabled: always
   h2:
     console:
       enabled: true
