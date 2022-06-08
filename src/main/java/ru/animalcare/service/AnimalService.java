@@ -5,10 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.animalcare.domain.Animal;
-import ru.animalcare.domain.AnimalGender;
-import ru.animalcare.domain.AnimalPhoto;
-import ru.animalcare.domain.AnimalType;
+import ru.animalcare.domain.*;
 import ru.animalcare.domain.paging.Paged;
 import ru.animalcare.domain.paging.Paging;
 import org.springframework.data.domain.Page;
@@ -19,6 +16,7 @@ import ru.animalcare.dto.AnimalRegistrationDto;
 import ru.animalcare.dto.UserDto;
 import ru.animalcare.repository.AnimalRepository;
 import ru.animalcare.repository.UserRepository;
+
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -181,11 +179,9 @@ public class AnimalService {
     }
 
 
-
-
     public void archiveAd(long id) {
         Animal animal = animalRepository.findById(id).orElseThrow(
-                ()-> new NoSuchElementException("Animal with id " + id + " isnt exist!"));
+                () -> new NoSuchElementException("Animal with id " + id + " isnt exist!"));
         animal.setActive(false);
         animalRepository.save(animal);
     }
@@ -225,5 +221,19 @@ public class AnimalService {
                 .filter(Animal -> Animal.getAnimalType().getName().equals(type))
                 .map(AnimalDto::new)
                 .collect(Collectors.toList());
+    }
+
+
+    public List<AnimalDto> getAnimalBySearch(SearchAnimal animal) {
+
+
+        return StreamSupport.stream(animalRepository.findAll().spliterator(), false)
+                .filter(Animal::getActive)
+                .filter(Animal -> Animal.getAnimalGender().getName().equals(animal.getGender()))
+                .filter(Animal -> Animal.getAnimalType().getName().equals(animal.getType()))
+                .filter(Animal -> Animal.getAge() == animal.getAge())
+                .map(AnimalDto::new)
+                .collect(Collectors.toList());
+
     }
 }

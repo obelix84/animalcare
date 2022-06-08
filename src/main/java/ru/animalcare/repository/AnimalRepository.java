@@ -10,8 +10,13 @@ import java.util.List;
 @Repository
 public interface AnimalRepository extends PagingAndSortingRepository<Animal, Long> {
     List<Animal> findAnimalsByUserId(Long id);
+
     List<Animal> findAnimalsByUserIdAndActiveIsTrue(Long id, Pageable pageable);
+
     List<Animal> findAnimalsByUserIdAndActiveIsFalse(Long id, Pageable pageable);
+
     Long countAnimalsByUserIdAndActiveTrue(Long id);
+
     Long countAnimalsByUserIdAndActiveFalse(Long id);
+
 }
