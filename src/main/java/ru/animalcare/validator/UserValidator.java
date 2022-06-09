@@ -10,6 +10,7 @@ import ru.animalcare.domain.User;
 import ru.animalcare.service.UserDetailsServiceImpl;
 import org.apache.commons.validator.routines.EmailValidator;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -24,7 +25,7 @@ public class UserValidator implements Validator {
 
     //phone number pattern: +7xxxyyyzzjj or 8xxxyyyzzjj
     private static final String NUMBER_PATTERN = "^(\\+?7{1}|8{1})[ -]?\\(?[0-9]{0,3}\\)?[ -]?[0-9]{3}[ -]?[0-9]{2}[ -]?[0-9]{2}$";
-    private static final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,32}$";
+    private static final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–_[{}]:;',?/*~$^+=<>]).{8,32}$";
 
 
     private static final Pattern password_pattern = Pattern.compile(PASSWORD_PATTERN);
