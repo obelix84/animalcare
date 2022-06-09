@@ -4,9 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -15,13 +12,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import ru.animalcare.domain.Animal;
 import ru.animalcare.domain.SearchAnimal;
 import ru.animalcare.dto.AnimalDto;
 import ru.animalcare.dto.AnimalRegistrationDto;
 import ru.animalcare.dto.UserDto;
 import ru.animalcare.service.*;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -44,12 +39,11 @@ public class AnimalController {
     private final UserService userService;
     private final ModelMapper modelMapper;
 
-
     @ModelAttribute(name = "userDto")
     public UserDto getUserDto(Principal principal) {
         if (principal != null) {
-            UserDto userDto = userService.findUserByName(principal.getName());
-            return userService.findUserByName(principal.getName());
+            UserDto userDto = userService.findUserByEmail(principal.getName());
+            return userService.findUserByEmail(principal.getName());
         }
         return null;
     }

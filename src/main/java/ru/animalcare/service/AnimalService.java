@@ -156,7 +156,7 @@ public class AnimalService {
 //=======
 //
 ////  todo подумать, нужно ли возвращать UserDto из метода findUserByName, чтобы несколько раз поиск не проводить, если нужна сущность User
-//        UserDto userDto = userService.findUserByName(username);
+//        UserDto userDto = userService.findUserByEmail(username);
 //        User user = userService.findUserById(userDto.getId());
 //        if (user != null) {
 //            animal.setUser(user);

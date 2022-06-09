@@ -3,6 +3,9 @@ server:
     context-path: /
 
 spring:
+  output:
+    ansi:
+      enabled: always
   h2:
     console:
       enabled: true
