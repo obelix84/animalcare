@@ -54,7 +54,7 @@ public class RegistrationController {
         authority.setId(1L);
         userForm.setAuthorities(List.of(authority));
         userForm.setEnabled(true);
-        emailService.sendEmail("some email","some otp");
+        emailService.sendEmail("<receiver email>","<OTP>");
         if (userService.save(userForm)) {
             userService.loadUserByUsername(userForm.getEmail());
             return "redirect:/register/confirm";

@@ -1,22 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>One last step, and you're ready to go...</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="76x76" href="img/apple-icon.png">
+    <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+    <!--     Bootstrap icons     -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css"
+          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700"/>
+    <!-- Nucleo Icons -->
+    <link href="css/nucleo-icons.css" rel="stylesheet"/>
+    <link href="css/nucleo-svg.css" rel="stylesheet"/>
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <!-- CSS Files -->
+    <link id="pagestyle" href="/css/material-kit.css?v=3.0.2" rel="stylesheet"/>
+    <title></title>
+
 </head>
 <body>
-<div class="container">
-    <div class="row" style="margin-top:20px">
-        <form class="form-signin" autocomplete="off" th:action="@{register}" th:object="${OTP}" method="POST">
-            <fieldset>
-                <h1 th:text="Confirm your E-mail address"></h1>
-                <div class="form-group">
-                    <label th:text="Confirmation + code + '*'"></label>
-                    <input type="password" class="form-control input-lg" title="email" required/>
-                <input class="btn btn-outline-dark" type="submit" th:value="Confirm"/>
+<!-- Navbar Blur -->
+<div th:insert="chunks/navbar_transparent :: navbar"></div>
+<!-- End Navbar -->
+<div class="page-header align-items-start min-vh-100" style="background-image: url('img/family_background.jpg');"
+     loading="default">
+    <span class="mask bg-gradient-dark opacity-6"></span>
+    <div class="container my-auto">
+        <div class="col-lg-4 col-md-16 col-16 mx-auto">
+            <div class="card z-index-0 fadeIn3 fadeInBottom">
+                <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                    <div class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
+                        <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">
+                            Подтвердите учетную запись
+                        </h4>
+                    </div>
                 </div>
-            </fieldset>
-        </form>
+                <div class="card-body height-200">
+                    <form autocomplete="off" th:action="@{register}" th:object="${OTP}" method="POST">
+                        <fieldset>
+                            <h6 class="font-weight-normal mb-2">
+                                Мы отправили одноразовый пароль на вашу электронную почту, введите этот код ниже
+                            </h6>
+                            <div class="col-md-6">
+                                <div class="input-group input-group-static mb-3">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control input-lg"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <input class="btn btn-outline-success" type="submit" th:value="Зарегистрироваться"/>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 </body>

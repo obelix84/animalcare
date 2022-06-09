@@ -26,7 +26,7 @@ public class EmailServiceImpl implements EmailService {
     //Оптравка через javaMailSender
     public void sendEmail(String receiver,String OTP) {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
-        String senderAddress = "our email";
+        String senderAddress = "<sender email>";
         mailMessage.setFrom(senderAddress);
         mailMessage.setTo(receiver);
         mailMessage.setText(defaultMessage(receiver,OTP));
