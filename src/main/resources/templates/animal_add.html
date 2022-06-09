@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Animal add form</title>
+</head>
+<body>
+
+<h1 class="text-center">Animal add form</h1>
+
+<div class="container my-auto">
+    <form th:action="@{add}" th:object="${animalRegistration}" method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="inputName" class="form-label">Name:</label>
+            <input type="text" th:field="*{name}" class="form-control" id="inputName">
+        </div>
+        <div class="mb-3">
+            <label for="inputGender" class="form-label">Gender:</label>
+            <select class="form-select form-select-sm" th:field="*{gender}" id="inputGender">
+                <option th:each="g : ${animalGenders}"
+                        th:value="${g.name}"
+                        th:utext="${g.name}"/>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="inputAge" class="form-label">Age:</label>
+            <input type="number" th:field="*{age}" class="form-control" id="inputAge">
+        </div>
+        <div class="mb-3">
+            <label for="inputCondition" class="form-label">Condition:</label>
+            <input type="text" th:field="*{condition}" class="form-control" id="inputCondition">
+        </div>
+        <div class="mb-3">
+            <label for="inputDescription" class="form-label">Description:</label>
+            <input type="text" th:field="*{description}" class="form-control" id="inputDescription">
+        </div>
+        <div class="mb-3">
+            <label for="inputType" class="form-label">Type:</label>
+            <select class="form-select form-select-sm" th:field="*{type}" id="inputType">
+                <option th:each="t : ${animalTypes}"
+                        th:value="${t.name}"
+                        th:utext="${t.name}"/>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="inputFile" class="form-label">Photo:</label>
+            <input type="file" th:field="*{multipartFile}" multiple="multiple" id="inputFile">
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary">Add animal</button>
+            <button type="reset" class="btn btn-danger">Reset</button>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>
+
+<!--<h1>Add animal</h1>&ndash;&gt;-->
+
+<!--<form th:action="@{add}" th:object="${animalRegistration}" method="post" enctype="multipart/form-data">-->
+<!--    <table>-->
+<!--        <tr>-->
+<!--            <td>Name:</td>-->
+<!--            <td><input type="text" th:field="*{name}"/></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td>Gender:</td>-->
+<!--            <td>-->
+<!--                <select class="form-select form-select-sm" th:field="*{gender}">-->
+<!--                    <option th:each="g : ${animalGenders}"-->
+<!--                            th:value="${g.name}"-->
+<!--                            th:utext="${g.name}"/>-->
+<!--                </select>-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td>Age:</td>-->
+<!--            <td><input type="number" th:field="*{age}"/>-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td>Condition:</td>-->
+<!--            <td><input type="text" th:field="*{condition}"/></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td>Description:</td>-->
+<!--            <td><input type="text" th:field="*{description}"/></td>-->
+<!--        </tr>-->
+
+<!--        <tr>-->
+<!--            <td>Type:</td>-->
+<!--            <td>-->
+<!--                <select class="form-select form-select-sm" th:field="*{type}">-->
+<!--                    <option th:each="t : ${animalTypes}"-->
+<!--                            th:value="${t.name}"-->
+<!--                            th:utext="${t.name}"/>-->
+<!--                </select>-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td>Photo:</td>-->
+<!--            <td>-->
+<!--                <p><input type="file" th:field="*{multipartFile}" multiple="multiple"/>-->
+<!--            </td>-->
+<!--        </tr>-->
+
+<!--        <tr>-->
+<!--            <td>-->
+<!--                <input type="submit" value="Add animal"/>-->
+<!--            </td>-->
+<!--            <td>-->
+<!--                <input type="reset" value="Reset"/>-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--    </table>-->
+<!--</form>-->
