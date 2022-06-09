@@ -28,14 +28,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     @Transactional
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<User> optUser = userRepo.findByUsername(username);
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Optional<User> optUser = userRepo.findByEmail(email);
         if (optUser.isEmpty()) {
-            throw new UsernameNotFoundException(username);
+            throw new UsernameNotFoundException(email);
         }
         User appUser = optUser.get();
         return org.springframework.security.core.userdetails.User.builder()
-                .username(appUser.getUsername())
+                .username(appUser.getEmail())
                 .password(appUser.getPassword())
                 .disabled(!appUser.isEnabled())
                 .authorities(appUser.getAuthorities().stream()

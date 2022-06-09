@@ -13,6 +13,9 @@ server:
     password: "<login password to smtp server>"
     port: '587'
 spring:
+  output:
+    ansi:
+      enabled: always
   h2:
     console:
       enabled: true

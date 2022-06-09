@@ -4,24 +4,17 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import ru.animalcare.domain.Animal;
-import ru.animalcare.domain.SearchAnimal;
 import ru.animalcare.dto.AnimalDto;
 import ru.animalcare.dto.AnimalRegistrationDto;
 import ru.animalcare.dto.UserDto;
 import ru.animalcare.service.*;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -29,9 +22,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.Principal;
-import java.util.List;
-
-
 import static ru.animalcare.common.Settings.PATH_TO_ANIMAL_PHOTO_DIRECTORY;
 
 @Controller
@@ -44,33 +34,32 @@ public class AnimalController {
     private final UserService userService;
     private final ModelMapper modelMapper;
 
-
     @ModelAttribute(name = "userDto")
     public UserDto getUserDto(Principal principal) {
         if (principal != null) {
-            UserDto userDto = userService.findUserByName(principal.getName());
-            return userService.findUserByName(principal.getName());
+            UserDto userDto = userService.findUserByEmail(principal.getName());
+            return userService.findUserByEmail(principal.getName());
         }
         return null;
     }
 
     @GetMapping
     public String showAllAnimalsPage(@RequestParam(value = "pageNumber", required = false, defaultValue = "1") int pageNumber,
-                                     @RequestParam(value = "size", required = false, defaultValue = "3") int size, Model model) {
-        model.addAttribute("animals", animalService.getPage(pageNumber, size));
+                                 @RequestParam(value = "size", required = false, defaultValue = "3") int size, Model model) {
+        model.addAttribute("animals", animalService.getPage(pageNumber,size));
         return "all_animal";
     }
 
-    @GetMapping(value = "type/{type}")
-    public String showAnimalsTypesPage(Model model, @PathVariable String type) {
-        model.addAttribute("animals", animalService.findAllAnimalsTypes(type));
+    @GetMapping(value ="type/{type}")
+    public String showAnimalsTypesPage( Model model, @PathVariable String type) {
+        model.addAttribute("animals", animalService.findAllAnimalsTypes(type) );
         return "animals_type";
     }
 
     @GetMapping("/{id}")
     public String showAnimalById(Model model, @PathVariable Long id) {
         AnimalDto animalDto = new AnimalDto(animalService.findAnimalById(id));
-        model.addAttribute("currentAnimal", animalDto);
+        model.addAttribute("current_animal", animalDto);
         return "profile_animal";
     }
 
@@ -102,8 +91,6 @@ public class AnimalController {
     @GetMapping("/{id}/update")
     public String showUpdateFormAnimal(Model model, @PathVariable Long id) {
         //model.addAttribute("animal", animalService.findAnimalsById(id)) ;
-        AnimalDto animalDto = new AnimalDto(animalService.findAnimalById(id));
-        model.addAttribute("currentAnimal", animalDto);
         model.addAttribute("animalTypes", animalTypeService.findAllAnimalTypes());
         model.addAttribute("animalGenders", animalGenderService.findAllAnimalGenders());
         model.addAttribute("animalRegistration", new AnimalRegistrationDto());
@@ -172,19 +159,5 @@ public class AnimalController {
                 .body(resource);
     }
 
-
-    @PostMapping("/search")
-    public String getAnimalBySearch(Model model, @ModelAttribute("searchAnimal") SearchAnimal searchAnimal, BindingResult result) {
-
-        List<AnimalDto> animals = animalService.getAnimalBySearch(searchAnimal);
-        model.addAttribute("animals", animals );
-        return "result";
-    }
-
-    @GetMapping("/search")
-    public String getAllAnimalBySearch(Model model) {
-        model.addAttribute("searchAnimal", new SearchAnimal());
-        return "search";
-    }
 
 }
