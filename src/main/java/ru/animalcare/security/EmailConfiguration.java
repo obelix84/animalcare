@@ -7,27 +7,28 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 import java.util.Properties;
 
-//Отдельная конфигурация Email
-    @Configuration
-    public class EmailConfiguration {
+//Отдельная конфигурация
+@Configuration
+public class EmailConfiguration {
 
-        @Bean
-        public JavaMailSender getJavaMailSender() {
-            JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-            mailSender.setHost("smtp.gmail.com");
-            mailSender.setPort(587);
+    @Bean
+    public JavaMailSender getJavaMailSender() {
+        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
 
-            mailSender.setUsername("NoReply.AnimalCare@support.com");
-            mailSender.setPassword("'password'");
+        mailSender.setHost("smtp.gmail.com");
+        mailSender.setPort(587);
 
-            Properties props = mailSender.getJavaMailProperties();
-            props.put("mail.transport.protocol", "smtp");
-            props.put("mail.smtp.auth", "true");
-            props.put("mail.smtp.starttls.enable", "true");
-            props.put("mail.debug", "true");
+        mailSender.setUsername("out email");
+        mailSender.setPassword("our app password");
 
-            return mailSender;
-        }
+        Properties props = mailSender.getJavaMailProperties();
+        props.put("mail.transport.protocol", "smtp");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.debug", "true");
 
+        return mailSender;
     }
+
+}
 

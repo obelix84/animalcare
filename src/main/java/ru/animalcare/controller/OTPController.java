@@ -39,7 +39,7 @@ public class OTPController {
         replacements.put("user", username);
         replacements.put("otpnum", String.valueOf(otp));
 
-        emailService.sendEmail("nayanajain854@gmail.com", String.valueOf(otp));
+        emailService.sendEmail("some email", String.valueOf(otp));
 
         return "otppage";
     }

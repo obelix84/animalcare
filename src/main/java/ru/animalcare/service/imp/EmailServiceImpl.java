@@ -16,24 +16,22 @@ import java.util.List;
 @Service
 public class EmailServiceImpl implements EmailService {
 
-    //нужно создать Email 'noreply@animalcare.com' или использовать другую почту
-    private final String senderAddress = "noreply@animalcare.com";
     public JavaMailSender javaMailSender;
 
     @Autowired
-    public EmailServiceImpl(JavaMailSender javaMailSender){
+    public EmailServiceImpl(JavaMailSender javaMailSender) {
         this.javaMailSender = javaMailSender;
     }
 
     //Оптравка через javaMailSender
-    public void sendEmail(String receiver, String message){
+    public void sendEmail(String receiver,String OTP) {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
+        String senderAddress = "our email";
         mailMessage.setFrom(senderAddress);
         mailMessage.setTo(receiver);
-        mailMessage.setText(message);
+        mailMessage.setText(defaultMessage(receiver,OTP));
         javaMailSender.send(mailMessage);
     }
-
 
     //Возможно не будем использовать, пока не знаю.
     @Override
@@ -58,5 +56,13 @@ public class EmailServiceImpl implements EmailService {
 
     }
 
-
+    public String defaultMessage(String receiver, String OTP) {
+        String greeting = "Здравствуйте, " + receiver + "!\n\n\n";
+        String body = "Подтвердите вашу учетную запись! Введите код ниже на сайте animalcare.ru чтобы подтвердить учетную запись\n\n\n";
+        String otp = "Ваш одноразовый код- " + OTP;
+        String ending = "\n\n\nМы рады, что вы выбрали нас и надеемся, что вы найдете питомца\n\n\n\n\n\n\n";
+        String footer = "Пожалуйста, не отвечайте на это сообщение. Письма, отправленные на эту почту, не проверяются";
+        String message = greeting + body + otp + ending + footer;
+        return message;
+    }
 }
