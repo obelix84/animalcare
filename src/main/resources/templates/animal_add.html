@@ -60,13 +60,13 @@
             <div class="col-md-3"></div>
             <div class="col-md-3">
                 <div class="mb-3 input-group input-group-static">
-                    <label for="inputName">Name:</label>
+                    <label for="inputName"><span class="text-danger">*</span> Кличка:</label>
                     <input type="text" th:field="*{name}" class="form-control" id="inputName">
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="mb-3 input-group input-group-static">
-                    <label for="inputGender">Gender:</label>
+                    <label for="inputGender"><span class="text-danger">*</span> Пол:</label>
                     <select class="form-control input-lg" th:field="*{gender}" id="inputGender">
                         <option th:each="g : ${animalGenders}"
                                 th:value="${g.name}"
@@ -80,13 +80,13 @@
             <div class="col-md-3"></div>
             <div class="col-md-3">
                 <div class="mb-3 input-group input-group-static">
-                    <label for="inputAge">Age:</label>
+                    <label for="inputAge"><span class="text-danger">*</span> Возраст:</label>
                     <input type="number" th:field="*{age}" class="form-control" id="inputAge">
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="mb-3 input-group input-group-static">
-                    <label for="inputCondition">Condition:</label>
+                    <label for="inputCondition"><span class="text-danger">*</span> Состояние:</label>
                     <input type="text" th:field="*{condition}" class="form-control" id="inputCondition">
                 </div>
             </div>
@@ -97,13 +97,13 @@
             <div class="col-md-3"></div>
             <div class="col-md-3">
                 <div class="mb-3 input-group input-group-static">
-                    <label for="inputDescription">Description:</label>
+                    <label for="inputDescription"> <span class="text-danger">*</span> Описание:</label>
                     <input type="text" th:field="*{description}" class="form-control" id="inputDescription">
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="mb-3 input-group input-group-static">
-                    <label for="inputType">Type:</label>
+                    <label for="inputType"><span class="text-danger">*</span> Вид животного:</label>
                     <select class="form-control input-lg" th:field="*{type}" id="inputType">
                         <option th:each="t : ${animalTypes}"
                                 th:value="${t.name}"
@@ -117,7 +117,7 @@
             <div class="col-md-3"></div>
             <div class="col-md-6">
                 <div class="mb-3 input-group input-group-static">
-                    <label for="inputFile">Photo:</label>
+                    <label for="inputFile"><span class="text-danger">*</span> Фотография:</label>
                     <input class="form-control input-lg" type="file" th:field="*{multipartFile}" multiple="multiple" id="inputFile">
                 </div>
             </div>
@@ -127,8 +127,8 @@
             <div class="col-md-3"></div>
             <div class="col-md-6">
                 <div>
-                    <button type="submit" class="btn btn-primary">Add animal</button>
-                    <button type="reset" class="btn btn-danger">Reset</button>
+                    <button type="submit" class="btn btn-primary">Добавить</button>
+                    <button type="reset" class="btn btn-danger">Сбросить</button>
                 </div>
             </div>
             <div class="col-md-3"></div>

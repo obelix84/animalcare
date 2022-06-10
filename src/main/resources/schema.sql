@@ -34,6 +34,10 @@ create table USERS_AUTHORITIES
 insert into USERS(first_name, last_name, password, email, enabled, contact_number)
 values ('admin', 'admin', '$2a$10$BoAjnAXDD9xiR34FPSTP2.BMu..hYqhymJp46K/7j9aRzGowlgpBO', 'admin@mail.ru',
         true, '+79001234570');
+
+insert into USERS(first_name, last_name, password, email, enabled, contact_number)
+values ('Иван', 'Иванов', '$2a$10$BoAjnAXDD9xiR34FPSTP2.BMu..hYqhymJp46K/7j9aRzGowlgpBO', 'шмфт@mail.ru',
+        true, '+79111234570');
 -- user password
 insert into USERS(first_name, last_name, password, email, enabled, contact_number)
 values ('Хорн', 'Тревор', '$2a$10$BoAjnAXDD9xiR34FPSTP2.BMu..hYqhymJp46K/7j9aRzGowlgpBO', 'horn@yes.com', true,
