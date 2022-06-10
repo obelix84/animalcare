@@ -36,7 +36,7 @@ values ('admin', 'admin', '$2a$10$BoAjnAXDD9xiR34FPSTP2.BMu..hYqhymJp46K/7j9aRzG
         true, '+79001234570');
 -- user password
 insert into USERS(first_name, last_name, password, email, enabled, contact_number)
-values ('Иванов', 'Иван', '$2a$10$BoAjnAXDD9xiR34FPSTP2.BMu..hYqhymJp46K/7j9aRzGowlgpBO', 'user@mail.ru', true,
+values ('Хорн', 'Тревор', '$2a$10$BoAjnAXDD9xiR34FPSTP2.BMu..hYqhymJp46K/7j9aRzGowlgpBO', 'horn@yes.com', true,
         '+79001234569');
 -- user1 password
 insert into USERS(first_name, last_name, password, email, enabled, contact_number)
@@ -165,11 +165,11 @@ VALUES (1, 2),
 --  MANAGER пользоватьель, может модерировать объявляения, т.е. разрешать их публикацию
 --  ADMIN может назначать роли другим пользователям
 insert into AUTHORITIES (authority)
-values ('ADMIN');
-insert into AUTHORITIES (authority)
 values ('USER');
 insert into AUTHORITIES (authority)
 values ('MANAGER');
+insert into AUTHORITIES (authority)
+values ('ADMIN');
 
 insert into USERS_AUTHORITIES
 values (1, 1);

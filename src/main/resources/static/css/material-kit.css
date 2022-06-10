@@ -5620,7 +5620,6 @@ fieldset:disabled .btn {
 .card-body {
   flex: 1 1 auto;
   padding: 1rem 1rem;
-  height: 500px;
 }
 
 .card-title {
@@ -27295,10 +27294,6 @@ pre[class*="language-"] {
   .ps {
     overflow: auto !important;
   }
-}
-.container {
-  padding-top: 15px;
-  padding-bottom: 8px;
 }
 
 /*# sourceMappingURL=kit-free.css.map */

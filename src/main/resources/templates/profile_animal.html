@@ -47,86 +47,68 @@
 </div>
 
 <header class="header-2">
-    <div class="page-header min-vh-75 relative" style="background-image: url('/img/dog_dark.jpg')">
+    <div class="page-header min-vh-25 relative">
         <span class="mask bg-gradient-primary opacity-4"></span>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-7 text-center mx-auto">
-                    <h1 class="text-white pt-3 mt-n5">Animal Care</h1>
-                    <p class="lead text-white mt-3">Сервис для поиска любящих хозяев <br/> для домашних животных. </p>
+    </div>
+</header>
+
+
+<div class="card blur shadow-blur mx-3 mx-md-4 mt-n6">
+    <div class="container">
+        <section>
+            <div class="card mb-5 mt-5">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img th:src="@{image/} + ${currentAnimal.pathPhoto}" class="img-fluid rounded-start"
+                             alt="animal picture" style="max-width: 300px;">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${currentAnimal.name}"></h5>
+                            <p class="card-text">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item" th:inline="text"><strong>Пол: </strong>
+                                    [[${currentAnimal.gender}]]
+                                <li class="list-group-item" th:inline="text"><strong>Возраст: </strong>
+                                    [[${currentAnimal.age}]]
+                                    года
+                                <li class="list-group-item" th:inline="text"><strong>Состояние: </strong>
+                                    [[${currentAnimal.condition}]]
+                                <li class="list-group-item" th:inline="text"><strong>Описание: </strong>
+                                    [[${currentAnimal.description}]]
+                            </ul>
+                            </p>
+                            <p>
+                            <a id="buttonId" href="" class="btn btn-primary" onclick="showContacts(); return false;">Показать контакты</a><br>
+                            <span class="my-1" id="contactsId" style="visibility: hidden" th:inline="text">
+                                <strong>[[${currentAnimal.firstName}]] [[${currentAnimal.lastName}]]</strong> [[${currentAnimal.phone}]]</span>
+                            </p>
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </div>
+</div>
+
+
+<footer class="footer pt-5 mt-5">
+    <div class="container">
+        <div class=" row">
+            <div class="col-12">
+                <div class="text-center">
+                    <p class="text-dark my-4 text-sm font-weight-normal">
+                        AnimalCare. Copyright © <script>document.write(new Date().getFullYear())</script> Сервис поиска хозяев для безнадзорных животных.
+                    </p>
                 </div>
             </div>
         </div>
     </div>
-</header>
-
-<!--<body class="index-page bg-gray-200">-->
-
-<!--<p>-->
-<!--    <a th:href="@{/}">Return to the homepage</a>-->
-<!--    <br>-->
-
-<!--    <a th:href="@{/animals}">Return to all Animals</a>-->
-<!--</p>-->
-
-<!--<h3 class="text-center">Profile Animal</h3>-->
-
-<div class="container">
-    <section class="my-5 py-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-10 mt-5 mb-5">
-                    <table id="posts" class="table table-hover">
-                        <thead>
-                        <tr>
-                            <th scope="col">Photo</th>
-                            <th scope="col">ID</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Gender</th>
-                            <th scope="col">Age</th>
-                            <th scope="col">Condition</th>
-                            <th scope="col">Description</th>
-                        </tr>
-                        </thead>
-                        <th scope="row">
-                            <p>
-                                <img th:src="@{image/} + ${currentAnimal.pathPhoto}" width="250" height="250"/>
-                            </p>
-                        </th>
-                        <td class="text-center" th:text="${currentAnimal.id}"></td>
-                        <td class="text-center" th:text="${currentAnimal.name}"></td>
-                        <td class="text-center" th:text="${currentAnimal.gender}"></td>
-                        <td class="text-center" th:text="${currentAnimal.age}"></td>
-                        <td class="text-center" th:text="${currentAnimal.condition}"></td>
-                        <td class="text-center" th:text="${currentAnimal.description}"></td>
-<!--                        -->
-<!--                        <td>-->
-<!--                            <p th:utext="${current_animal.id}">-->
-<!--                        </td>-->
-<!--                        <td>-->
-<!--                            <p th:utext="${current_animal.name}">-->
-<!--                        </td>-->
-<!--                        <td>-->
-<!--                            <p th:utext="${current_animal.gender}">-->
-<!--                        </td>-->
-<!--                        <td>-->
-<!--                            <p th:utext="${current_animal.age}">-->
-<!--                        </td>-->
-<!--                        <td>-->
-<!--                            <p th:utext="${current_animal.condition}">-->
-<!--                        </td>-->
-<!--                        <td>-->
-<!--                            <p th:utext="${current_animal.description}">-->
-<!--                        </td>-->
-                    </table>
-                </div>
-            </div>
-        </div>
-
-    </section>
-
-</div>
-
+</footer>
 
 <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
 <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
@@ -163,31 +145,14 @@
 
 <script type="text/javascript">
 
-    if (document.getElementById('state1')) {
-        const countUp = new CountUp('state1', document.getElementById("state1").getAttribute("countTo"));
-        if (!countUp.error) {
-            countUp.start();
-        } else {
-            console.error(countUp.error);
-        }
+    function showContacts() {
+        let el = document.getElementById('contactsId');
+        el.style.visibility = "visible";
+        let btn = document.getElementById('buttonId');
+        btn.className = "btn btn-outline-success";
     }
-    if (document.getElementById('state2')) {
-        const countUp1 = new CountUp('state2', document.getElementById("state2").getAttribute("countTo"));
-        if (!countUp1.error) {
-            countUp1.start();
-        } else {
-            console.error(countUp1.error);
-        }
-    }
-    if (document.getElementById('state3')) {
-        const countUp2 = new CountUp('state3', document.getElementById("state3").getAttribute("countTo"));
-        if (!countUp2.error) {
-            countUp2.start();
-        } else {
-            console.error(countUp2.error);
-        }
-        ;
-    }
+
+
 
 </script>
 

@@ -18,6 +18,9 @@ public class AnimalDto {
     private String pathPhoto;
     private String type;
     private Long userId;
+    private String firstName;
+    private String lastName;
+    private String phone;
     private Boolean active;
 
     public AnimalDto(Animal animal) {
@@ -37,5 +40,8 @@ public class AnimalDto {
         }
         this.type = animal.getAnimalType().getName();
         this.active = animal.getActive();
+        this.firstName = animal.getUser().getFirstName();
+        this.lastName = animal.getUser().getLastName();
+        this.phone = animal.getUser().getContactNumber();
     }
 }

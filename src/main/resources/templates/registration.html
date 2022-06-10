@@ -69,13 +69,27 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-12">
-                                <div class="input-group input-group-static mb-3">
-                                    <label>Электронная почта <span class="text-danger">*</span></label>
-                                    <input type="email" th:field="*{email}" class="form-control input-lg"
-                                           title="email" required/>
-                                    <p th:if="${#fields.hasErrors('email')}"
-                                       th:class="${#fields.hasErrors('email')}? error">Формат: 'sample@example.com'</p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="input-group input-group-static mb-3">
+                                        <label>Электронная почта <span class="text-danger">*</span></label>
+                                        <input type="email" th:field="*{email}" class="form-control input-lg"
+                                               title="email" required/>
+                                        <p th:if="${#fields.hasErrors('email')}"
+                                           th:class="${#fields.hasErrors('email')}? error">Формат:
+                                            'sample@example.com'</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-group input-group-static mb-3">
+                                        <label>Номер Телефона <span class="text-danger">*</span></label>
+                                        <input type="text" th:field="*{contactNumber}" class="form-control input-lg"
+                                               title="contact_number"
+                                               required/>
+                                        <p th:if="${#fields.hasErrors('contactNumber')}"
+                                           th:class="${#fields.hasErrors('contactNumber')}? error">подск.+7*********
+                                            или 8********** </p>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -87,16 +101,6 @@
                                     <p th:if="${#fields.hasErrors('password')}"
                                        th:class="${#fields.hasErrors('password')}? error">Пароль не подойдёт</p>
                                     </p>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="input-group input-group-static mb-3">
-                                    <label>Номер Телефона <span class="text-danger">*</span></label>
-                                    <input type="text" th:field="*{contactNumber}" class="form-control input-lg"
-                                           title="contact_number"
-                                           required/>
-                                    <p th:if="${#fields.hasErrors('contactNumber')}"
-                                       th:class="${#fields.hasErrors('contactNumber')}? error">подск.+7********** или 8********** </p>
                                 </div>
                             </div>
                             <input class="btn btn-outline-success" type="submit" th:value="Зарегистрироваться"/>
