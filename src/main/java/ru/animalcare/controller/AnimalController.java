@@ -50,7 +50,7 @@ public class AnimalController {
 
     @GetMapping
     public String showAllAnimalsPage(@RequestParam(value = "pageNumber", required = false, defaultValue = "1") int pageNumber,
-                                     @RequestParam(value = "size", required = false, defaultValue = "3") int size, Model model) {
+                                     @RequestParam(value = "size", required = false, defaultValue = "5") int size, Model model) {
         model.addAttribute("animals", animalService.getPage(pageNumber, size));
         return "all_animal";
     }
@@ -178,6 +178,8 @@ public class AnimalController {
     @GetMapping("/search")
     public String getAllAnimalBySearch(Model model) {
         model.addAttribute("searchAnimal", new SearchAnimal());
+        model.addAttribute("animalTypes", animalTypeService.findAllAnimalTypes());
+        model.addAttribute("animalGenders", animalGenderService.findAllAnimalGenders());
         return "search";
     }
 
