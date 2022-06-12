@@ -60,8 +60,8 @@ create table ANIMAL_GENDER
 );
 
 INSERT INTO ANIMAL_GENDER (name)
-VALUES ('Male'),
-       ('Female');
+VALUES ('Мужской'),
+       ('Женский');
 
 CREATE TABLE ANIMAL_PHOTOS
 (
@@ -98,8 +98,8 @@ create table ANIMAL_TYPE
 );
 
 INSERT INTO ANIMAL_TYPE (name)
-VALUES ('Cat'),
-       ('Dog');
+VALUES ('Кошка'),
+       ('Собака');
 
 CREATE TABLE ANIMALS
 (
@@ -119,21 +119,21 @@ CREATE TABLE ANIMALS
 
 INSERT INTO ANIMALS (name, animal_gender_id, age, condition, description, animal_type_id, active, user_id)
 VALUES
-( 'Felix', 1, 5, 'Good', 'Looking for a host', 1, true, 2),
-( 'Kassandra', 2, 4, 'Good', 'Looking for a host', true, 2, 2),
-( 'Rex', 1, 7, 'Good', 'Looking for a host', 2, true, 2),
-( '1Felix', 1, 5, 'Good', 'Looking for a host', 1, true, 2),
-( '1Kassandra', 2, 4, 'Good', 'Looking for a host', 1, true, 2),
-( '1Rex', 1, 7, 'Good', 'Looking for a host', 2, true, 2),
-( '2Felix', 1, 5, 'Good', 'Looking for a host', 1, true, 2),
-( '2Kassandra', 2, 4, 'Good', 'Looking for a host', 1, true, 2),
-( '2Rex', 1, 7, 'Good', 'Looking for a host', 2, true, 2),
-( 'inTRex', 1, 7000, 'Excellent', 'Looking for a host', 2, false, 2),
-( 'inRamon', 1, 17000, 'Excellent', 'Looking for a host', 2, false, 2),
-( 'in1TRex', 1, 7000, 'Excellent', 'Looking for a host', 2, false, 2),
-( 'in2Ramon', 1, 17000, 'Excellent', 'Looking for a host', 2, false, 2),
-( 'in3TRex', 1, 7000, 'Excellent', 'Looking for a host', 2, false, 2),
-( 'in3Ramon', 1, 17000, 'Excellent', 'Looking for a host', 2, false , 2);
+( 'Феликс', 1, 5, 'Хорошее', 'Нуждается в заботливом хозяине', 1, true, 2),
+( 'Кассандра', 2, 4, 'Хорошее', 'Нуждается в заботливом хозяине', 1, true, 2),
+( 'Рекс', 1, 7, 'Хорошее', 'Нуждается в заботливом хозяине', 2, true, 2),
+( 'Август', 1, 5, 'Хорошее', 'Нуждается в заботливом хозяине', 1, true, 2),
+( 'Ника', 2, 4, 'Хорошее', 'Нуждается в заботливом хозяине', 1, true, 2),
+( 'Берг', 1, 7, 'Хорошее', 'Нуждается в заботливом хозяине', 2, true, 2),
+( 'Вульф', 1, 5, 'Хорошее', 'Нуждается в заботливом хозяине', 1, true, 2),
+( 'Адель', 2, 4, 'Хорошее', 'Нуждается в заботливом хозяине', 1, true, 2),
+( 'Дантес', 1, 7, 'Хорошее', 'Нуждается в заботливом хозяине', 2, true, 2),
+( 'Тираннозавр', 1, 7000, 'Превосходное', 'Нуждается в заботливом хозяине', 2, false, 2),
+( 'Трицератопс', 1, 17000, 'Превосходное', 'Нуждается в заботливом хозяине', 2, false, 2),
+( 'Стегозавр', 1, 7000, 'Превосходное', 'Нуждается в заботливом хозяине', 2, false, 2),
+( 'Велоцираптор', 1, 17000, 'Превосходное', 'Нуждается в заботливом хозяине', 2, false, 2),
+( 'Диплодок', 1, 7000, 'Превосходное', 'Нуждается в заботливом хозяине', 2, false, 2),
+( 'Скутеллозавр', 1, 17000, 'Превосходное', 'Нуждается в заботливом хозяине', 2, false, 2);
 
 
 
