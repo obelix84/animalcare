@@ -167,13 +167,18 @@ public class AnimalService {
                 .orElseThrow(() -> new RuntimeException(String.format("Animal type '%s' not found\n", animalRegistrationDto.getType())));
         animal.setAnimalType(animalType);
 
-        if (animalRegistrationDto.getMultipartFile().getSize() != 0) {
-            AnimalPhoto animalPhoto = animalPhotoService.uploadAnimalPhotoToServer(animalRegistrationDto.getMultipartFile());
-            animal.setAnimalPhotoList(new ArrayList<>(Arrays.asList(animalPhoto)));
-        } else {
-            AnimalPhoto animalPhoto = animalPhotoService.findAnimalPhotoByName(ANIMAL_PHOTO_DEFAULT);
-            animal.setAnimalPhotoList(new ArrayList<>(Arrays.asList(animalPhoto)));
+        List<AnimalPhoto> animalPhoto = new ArrayList<>();
+        for (int i = 0; i < animalRegistrationDto.getMultipartFile().size(); i++) {
+            if (animalRegistrationDto.getMultipartFile().get(i).getSize() != 0) {
+               animalPhoto.add(animalPhotoService.uploadAnimalPhotoToServer(animalRegistrationDto.getMultipartFile().get(i)));
+//                animal.setAnimalPhotoList(new ArrayList<>(Arrays.asList(animalPhoto)));
+            } else {
+               animalPhoto.add(animalPhotoService.findAnimalPhotoByName(ANIMAL_PHOTO_DEFAULT));
+//                animal.setAnimalPhotoList(new ArrayList<>(Arrays.asList(animalPhoto)));
+            }
         }
+        animal.setAnimalPhotoList(animalPhoto);
+
 
         return new AnimalDto(animalRepository.save(animal));
     }
@@ -203,10 +208,13 @@ public class AnimalService {
                 .orElseThrow(() -> new RuntimeException(String.format("Animal type '%s' not found\n", animalRegistrationDto.getType())));
         animal.setAnimalType(animalType);
 
-        if (animalRegistrationDto.getMultipartFile().getSize() != 0) {
-            AnimalPhoto animalPhoto = animalPhotoService.uploadAnimalPhotoToServer(animalRegistrationDto.getMultipartFile());
-            animal.setAnimalPhotoList(new ArrayList<>(Arrays.asList(animalPhoto)));
+        for (int i = 0; i < animalRegistrationDto.getMultipartFile().size(); i++) {
+            if (animalRegistrationDto.getMultipartFile().get(i).getSize() != 0) {
+                AnimalPhoto animalPhoto = animalPhotoService.uploadAnimalPhotoToServer(animalRegistrationDto.getMultipartFile().get(i));
+                animal.setAnimalPhotoList(new ArrayList<>(Arrays.asList(animalPhoto)));
+            }
         }
+
 
         return new AnimalDto(animalRepository.save(animal));
     }
@@ -215,14 +223,23 @@ public class AnimalService {
         animalRepository.deleteById(id);
     }
 
+//    public List<AnimalDto> findAllAnimalsTypes(String type) {
+//        return StreamSupport.stream(animalRepository.findAll().spliterator(), false)
+//                .filter(Animal::getActive)
+//                .filter(Animal -> Animal.getAnimalType().getName().equals(type))
+//                .map(AnimalDto::new)
+//                .collect(Collectors.toList());
+//    }
+
     public List<AnimalDto> findAllAnimalsTypes(String type) {
+        Long typeId = Long.valueOf(type);
         return StreamSupport.stream(animalRepository.findAll().spliterator(), false)
                 .filter(Animal::getActive)
-                .filter(Animal -> Animal.getAnimalType().getName().equals(type))
+//                .filter(Animal -> Animal.getAnimalType().getName().equals(type))
+                .filter(Animal -> Animal.getAnimalType().getId().equals(typeId))
                 .map(AnimalDto::new)
                 .collect(Collectors.toList());
     }
-
 
     public List<AnimalDto> getAnimalBySearch(SearchAnimal animal) {
 

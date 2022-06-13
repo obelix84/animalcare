@@ -96,7 +96,10 @@ VALUES ('no_photo.jpg', 3515, '2022-05-28 12:00:00', 'image/jpeg'),
        ('020.jpg', 252409, '2022-05-28 12:00:00', 'image/jpeg'),
        ('021.jpg', 96456, '2022-05-28 12:00:00', 'image/jpeg'),
        ('022.jpg', 1196032, '2022-05-28 12:00:00', 'image/jpeg'),
-       ('023.jpg', 188441, '2022-05-28 12:00:00', 'image/jpeg');
+       ('023.jpg', 188441, '2022-05-28 12:00:00', 'image/jpeg'),
+       ('027.jpg', 655073, '2022-05-28 12:00:00', 'image/jpeg'),
+       ('025.jpg', 718748, '2022-05-28 12:00:00', 'image/jpeg'),
+       ('026.jpg', 936596, '2022-05-28 12:00:00', 'image/jpeg');
 
 create table ANIMAL_TYPE
 (
@@ -105,8 +108,8 @@ create table ANIMAL_TYPE
 );
 
 INSERT INTO ANIMAL_TYPE (name)
-VALUES ('Cat'),
-       ('Dog');
+VALUES ('Кошка'),
+       ('Собака');
 
 CREATE TABLE ANIMALS
 (
@@ -197,7 +200,9 @@ CREATE TABLE ANIMALS_ANIMAL_PHOTOS
 );
 
 INSERT INTO ANIMALS_ANIMAL_PHOTOS (animal_id, animal_photo_id)
-VALUES (1, 2),
+VALUES (1, 27),
+       (1, 25),
+       (1, 26),
        (2, 6),
        (3, 3),
        (4, 4),

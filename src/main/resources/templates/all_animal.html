@@ -76,17 +76,64 @@
                             <section>
                                 <div class="card mb-5 mt-5">
                                     <div class="row g-0">
-                                        <div class="col-md-4">
-                                            <img th:src="@{/animals/image/} + ${animal.pathPhoto}"
-                                                 class="img-fluid rounded-start"
-                                                 alt="animal picture" style="max-width: 300px;">
+                                        <div id="carouselExampleIndicators" class="carousel slide"
+                                             data-bs-ride="carousel"
+                                             data-interval="100"
+                                             data-pause="null" style="width:30%;height:auto;margin:auto;">
+                                            <div class="carousel-indicators">
+                                                <button type="button" data-bs-target="#carouselExampleIndicators"
+                                                        data-bs-slide-to="0" class="active" aria-current="true"
+                                                        aria-label="Slide 1"></button>
+                                                <button type="button" data-bs-target="#carouselExampleIndicators"
+                                                        data-bs-slide-to="1" aria-label="Slide 2"></button>
+                                                <button type="button" data-bs-target="#carouselExampleIndicators"
+                                                        data-bs-slide-to="2" aria-label="Slide 3"></button>
+                                            </div>
+                                            <div class="carousel-inner">
+                                                <div class="carousel-item active">
+                                                    <img th:src="@{/animals/image/} + ${animal.getPathPhoto().get(0)}"
+                                                         class="img-fluid rounded-start"
+                                                         alt="animal picture" style="max-width: 300px;">
+                                                </div>
+                                                <div class="carousel-item" th:if="${animal.getPathPhoto().size()>1}">
+                                                    <img th:src="@{/animals/image/} + ${animal.getPathPhoto().get(1)}"
+                                                         class="img-fluid rounded-start"
+                                                         alt="animal picture" style="max-width: 300px;">
+                                                </div>
+                                                <div class="carousel-item" th:if="${animal.getPathPhoto().size()>2}">
+                                                    <img th:src="@{/animals/image/} + ${animal.getPathPhoto().get(2)}"
+                                                         class="img-fluid rounded-start"
+                                                         alt="animal picture" style="max-width: 300px;">
+                                                </div>
+
+                                                <button class="carousel-control-prev" type="button"
+                                                        data-bs-target="#carouselExampleIndicators"
+                                                        data-bs-slide="prev">
+                                                        <span class="carousel-control-prev-icon"
+                                                              aria-hidden="true"></span>
+                                                    <span class="visually-hidden">Предыдущий</span>
+                                                </button>
+                                                <button class="carousel-control-next" type="button"
+                                                        data-bs-target="#carouselExampleIndicators"
+                                                        data-bs-slide="next">
+                                                        <span class="carousel-control-next-icon"
+                                                              aria-hidden="true"></span>
+                                                    <span class="visually-hidden">Следующий</span>
+                                                </button>
+                                            </div>
                                         </div>
+                                        <!--                                        <div class="col-md-4">-->
+                                        <!--                                            <img th:src="@{/animals/image/} + ${animal.pathPhoto}"-->
+                                        <!--                                                 class="img-fluid rounded-start"-->
+                                        <!--                                                 alt="animal picture" style="max-width: 300px;">-->
+                                        <!--                                        </div>-->
                                         <div class="col-md-8">
                                             <div class="card-body">
                                                 <h5 class="card-title" th:text="${animal.name}"></h5>
                                                 <p class="card-text">
                                                 <ul class="list-group list-group-flush">
-                                                    <li class="list-group-item" th:inline="text"><strong>Пол: </strong>
+                                                    <li class="list-group-item" th:inline="text">
+                                                        <strong>Пол: </strong>
                                                         [[${animal.gender}]]
                                                     <li class="list-group-item" th:inline="text">
                                                         <strong>Возраст: </strong>
@@ -101,7 +148,8 @@
                                                 </ul>
                                                 </p>
                                                 <p><strong>
-                                                    <a th:href="@{/animals/} + ${animal.id}">Показать профиль
+                                                    <a th:href="@{/animals/} + ${animal.id}">Показать
+                                                        профиль
                                                         животного</a>
                                                 </strong>
                                                 </p>
