@@ -50,7 +50,7 @@ public class AnimalController {
 
     @GetMapping
     public String showAllAnimalsPage(@RequestParam(value = "pageNumber", required = false, defaultValue = "1") int pageNumber,
-                                     @RequestParam(value = "size", required = false, defaultValue = "3") int size, Model model) {
+                                     @RequestParam(value = "size", required = false, defaultValue = "5") int size, Model model) {
         model.addAttribute("animals", animalService.getPage(pageNumber, size));
         return "all_animal";
     }
@@ -96,11 +96,13 @@ public class AnimalController {
     @GetMapping("/{id}/update")
     public String showUpdateFormAnimal(Model model, @PathVariable Long id) {
         //model.addAttribute("animal", animalService.findAnimalsById(id)) ;
-        AnimalDto animalDto = new AnimalDto(animalService.findAnimalById(id));
-        model.addAttribute("currentAnimal", animalDto);
+//        AnimalDto animalDto = new AnimalDto(animalService.findAnimalById(id));
+//        model.addAttribute("currentAnimal", animalDto);
+        AnimalRegistrationDto animalRegistrationDto = new AnimalRegistrationDto(animalService.findAnimalById(id));
         model.addAttribute("animalTypes", animalTypeService.findAllAnimalTypes());
         model.addAttribute("animalGenders", animalGenderService.findAllAnimalGenders());
-        model.addAttribute("animalRegistration", new AnimalRegistrationDto());
+//        model.addAttribute("animalRegistration", new AnimalRegistrationDto());
+        model.addAttribute("animalRegistration", animalRegistrationDto);
         return "animal_update";
     }
 
@@ -178,6 +180,8 @@ public class AnimalController {
     @GetMapping("/search")
     public String getAllAnimalBySearch(Model model) {
         model.addAttribute("searchAnimal", new SearchAnimal());
+        model.addAttribute("animalTypes", animalTypeService.findAllAnimalTypes());
+        model.addAttribute("animalGenders", animalGenderService.findAllAnimalGenders());
         return "search";
     }
 

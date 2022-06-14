@@ -33,7 +33,7 @@
     <!-- CSS Files -->
     <link id="pagestyle" href="/css/material-kit.css?v=3.0.2" rel="stylesheet"/>
 
-<!--    <base th:href="@{/}">-->
+    <!--    <base th:href="@{/}">-->
 
 </head>
 
@@ -63,74 +63,132 @@
     </div>
 </header>
 
-<!--<div class="card card-body blur shadow-blur mx-3 mx-md-4 mt-n6">-->
-<div class="container">
-    <section class="my-5 py-5">
-        <div class="container">
-                <div class="row">
-                    <div class="col-lg-10 mt-5 mb-5">
-                        <table id="posts"  class="table table-hover">
-                            <thead>
-                            <tr>
-                                <th scope="col">Photo</th>
-                                <th scope="col">ID</th>
-                                <th scope="col">Animal type</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Gender</th>
-                                <th scope="col">Age</th>
-                                <th scope="col">Condition</th>
-                                <th scope="col">Description</th>
-                                <th scope="col">Action</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr  th:each="animal : ${animals.page}">
-                                <td class=" text-center">
-                                    <img th:src="@{/animals/image/} + ${animal.pathPhoto}" class="card-img-top max-width-200">
-                                </td>
-                                <td class=" text-center" th:text="${animal.id}">id</td>
-                                <td class=" text-center" th:text="${animal.type}">type</td>
-                                <td class="text-center" th:text="${animal.name}">name</td>
-                                <td class=" text-center" th:text="${animal.gender}">gender</td>
-                                <td class=" text-center"  th:text="${animal.age}">age</td>
-                                <td class=" text-center" th:text="${animal.condition}">condition</td>
-                                <td class=" text-center" th:text="${animal.description}">description</td>
-                                <td>
-                                    <a th:href="@{/animals/} + ${animal.id}">Show Profile Animal</a>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
+<div class="card blur shadow-blur mx-3 mx-md-4 mt-n6">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 mt-5 mb-5">
+                <table id="posts" class="table table-hover">
+                    <thead>
+                    </thead>
+                    <tbody>
+                    <tr th:each="animal : ${animals.page}">
+                        <div class="container">
+                            <section>
+                                <div class="card mb-5 mt-5">
+                                    <div class="row g-0">
+                                        <div id="carouselExampleIndicators" class="carousel slide"
+                                             data-bs-ride="carousel"
+                                             data-interval="100"
+                                             data-pause="null" style="width:30%;height:auto;margin:auto;">
+                                            <div class="carousel-indicators">
+                                                <button type="button" data-bs-target="#carouselExampleIndicators"
+                                                        data-bs-slide-to="0" class="active" aria-current="true"
+                                                        aria-label="Slide 1"></button>
+                                                <button type="button" data-bs-target="#carouselExampleIndicators"
+                                                        data-bs-slide-to="1" aria-label="Slide 2"></button>
+                                                <button type="button" data-bs-target="#carouselExampleIndicators"
+                                                        data-bs-slide-to="2" aria-label="Slide 3"></button>
+                                            </div>
+                                            <div class="carousel-inner">
+                                                <div class="carousel-item active">
+                                                    <img th:src="@{/animals/image/} + ${animal.getPathPhoto().get(0)}"
+                                                         class="img-fluid rounded-start"
+                                                         alt="animal picture" style="max-width: 300px;">
+                                                </div>
+                                                <div class="carousel-item" th:if="${animal.getPathPhoto().size()>1}">
+                                                    <img th:src="@{/animals/image/} + ${animal.getPathPhoto().get(1)}"
+                                                         class="img-fluid rounded-start"
+                                                         alt="animal picture" style="max-width: 300px;">
+                                                </div>
+                                                <div class="carousel-item" th:if="${animal.getPathPhoto().size()>2}">
+                                                    <img th:src="@{/animals/image/} + ${animal.getPathPhoto().get(2)}"
+                                                         class="img-fluid rounded-start"
+                                                         alt="animal picture" style="max-width: 300px;">
+                                                </div>
 
-                        <nav aria-label="Page navigation" class="paging">
-                            <ul class="pagination" th:if="${animals.page.totalPages > 1}">
-                                <!--                    <li class="page-item" th:classappend="${!animals.paging.isPrevEnabled()? 'disabled' : 'animals'}">-->
-                                <!--                        <a class="page-link" th:href="@{'/?pageNumber=' + ${animals.paging.pageNumber - 1}}"-->
-                                <!--                           tabindex="-1"><&#45;&#45;</a>-->
-                                <!--                    </li>-->
-                                <th:block th:each="item : ${animals.paging.getItems()}">
-                                    <li class="page-item"
-                                        th:classappend="${item.index == animals.paging.pageNumber? 'active' : ''}"
-                                        th:if="${item.pageItemType.name() == 'PAGE'}">
-                                        <a class="page-link" th:href="@{'?pageNumber=' + ${item.index}}"
-                                           th:text="${item.index}"></a>
-                                    </li>
-                                    <li class="page-item disabled" th:if="${item.pageItemType.name() == 'DOTS'}">
-                                        <a class="page-link" href="#">...</a>
-                                    </li>
-                                </th:block>
-                                <!--                    <li class="page-item" th:classappend="${!animals.paging.isNextEnabled()? 'disabled' : ''}">-->
-                                <!--                        <a class="page-link" th:href="@{'/?pageNumber=' + ${animals.paging.pageNumber + 1}}">&ndash;&gt;</a>-->
-                                <!--                    </li>-->
-                            </ul>
-                        </nav>
+                                                <button class="carousel-control-prev" type="button"
+                                                        data-bs-target="#carouselExampleIndicators"
+                                                        data-bs-slide="prev">
+                                                        <span class="carousel-control-prev-icon"
+                                                              aria-hidden="true"></span>
+                                                    <span class="visually-hidden">Предыдущий</span>
+                                                </button>
+                                                <button class="carousel-control-next" type="button"
+                                                        data-bs-target="#carouselExampleIndicators"
+                                                        data-bs-slide="next">
+                                                        <span class="carousel-control-next-icon"
+                                                              aria-hidden="true"></span>
+                                                    <span class="visually-hidden">Следующий</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <!--                                        <div class="col-md-4">-->
+                                        <!--                                            <img th:src="@{/animals/image/} + ${animal.pathPhoto}"-->
+                                        <!--                                                 class="img-fluid rounded-start"-->
+                                        <!--                                                 alt="animal picture" style="max-width: 300px;">-->
+                                        <!--                                        </div>-->
+                                        <div class="col-md-8">
+                                            <div class="card-body">
+                                                <h5 class="card-title" th:text="${animal.name}"></h5>
+                                                <p class="card-text">
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item" th:inline="text">
+                                                        <strong>Пол: </strong>
+                                                        [[${animal.gender}]]
+                                                    <li class="list-group-item" th:inline="text">
+                                                        <strong>Возраст: </strong>
+                                                        [[${animal.age}]]
+                                                        года
+                                                    <li class="list-group-item" th:inline="text">
+                                                        <strong>Состояние: </strong>
+                                                        [[${animal.condition}]]
+                                                    <li class="list-group-item" th:inline="text">
+                                                        <strong>Описание: </strong>
+                                                        [[${animal.description}]]
+                                                </ul>
+                                                </p>
+                                                <p><strong>
+                                                    <a th:href="@{/animals/} + ${animal.id}">Показать
+                                                        профиль
+                                                        животного</a>
+                                                </strong>
+                                                </p>
+                                                <p>
+                                                    <strong>
+                                                        <a th:href="@{/animals/} + ${animal.id} + @{/update}">Изменить
+                                                            объявление</a>
+                                                    </strong>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                    </div>
-                </div>
+                            </section>
+                        </div>
+                    </tr>
+                    </tbody>
+                </table>
+                <nav aria-label="Page navigation" class="paging">
+                    <ul class="pagination" th:if="${animals.page.totalPages > 1}">
+
+                        <th:block th:each="item : ${animals.paging.getItems()}">
+                            <li class="page-item"
+                                th:classappend="${item.index == animals.paging.pageNumber? 'active' : ''}"
+                                th:if="${item.pageItemType.name() == 'PAGE'}">
+                                <a class="page-link" th:href="@{'?pageNumber=' + ${item.index}}"
+                                   th:text="${item.index}"></a>
+                            </li>
+                            <li class="page-item disabled" th:if="${item.pageItemType.name() == 'DOTS'}">
+                                <a class="page-link" href="#">...</a>
+                            </li>
+                        </th:block>
+
+                    </ul>
+                </nav>
+            </div>
         </div>
-
-    </section>
-
+    </div>
 </div>
 
 
