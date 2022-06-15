@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Navbar main page</title>
+</head>
+<body>
+<nav th:fragment="navbar" class="navbar navbar-expand-lg  blur border-radius-xl top-0 z-index-fixed shadow position-absolute my-3 py-2 start-0 end-0 mx-4">
+    <div class="container-fluid px-0">
+        <a class="navbar-brand font-weight-bolder ms-sm-3" th:href="@{/}" title="Animal Care" data-placement="bottom">
+            Animal Care
+        </a>
+        <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon mt-2">
+        <span class="navbar-toggler-bar bar1"></span>
+        <span class="navbar-toggler-bar bar2"></span>
+        <span class="navbar-toggler-bar bar3"></span>
+      </span>
+        </button>
+        <div th:insert="chunks/navbar_menu :: menu" class="collapse navbar-collapse pt-3 pb-2 py-lg-0 w-100" id="navigation">
+        </div>
+    </div>
+</nav>
+<!-- End Navbar -->
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Navbar transparent</title>
+</head>
+<body>
+    <ul th:fragment="menu" class="navbar-nav navbar-nav-hover ms-auto">
+        <li class="nav-item dropdown dropdown-hover mx-2">
+            <a class="nav-link ps-2 d-flex cursor-pointer align-items-center" id="dropdownMenuPages" data-bs-toggle="dropdown" aria-expanded="false">
+                Каталоги
+                <img src="/img/down-arrow-dark.svg" alt="down-arrow" class="arrow ms-auto ms-md-2">
+            </a>
+            <div class="dropdown-menu dropdown-menu-animation ms-n3 dropdown-md p-3 border-radius-xl mt-0 mt-lg-3" aria-labelledby="dropdownMenuPages">
+                <div class="d-none d-lg-block">
+                    <h6 class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-1">
+                        Каталоги животных
+                    </h6>
+                    <a href="/animals" class="dropdown-item border-radius-md">
+                        <span>Все животные</span>
+                    </a>
+                    <a href="/animals/type/Cat" class="dropdown-item border-radius-md">
+                        <span>Кошки</span>
+                    </a>
+                    <a href="/animals/type/Dog" class="dropdown-item border-radius-md">
+                        <span>Собаки</span>
+                    </a>
+                    <a href="/animals/search" class="dropdown-item border-radius-md">
+                        <span>Поиск</span>
+                    </a>
+                </div>
+
+                <div class="d-lg-none">
+                    <h6 class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-1">
+                        Каталоги животных
+                    </h6>
+
+                    <a href="/animals" class="dropdown-item border-radius-md">
+                        <span>Все животные</span>
+                    </a>
+                    <a href="/animals/type/Cat" class="dropdown-item border-radius-md">
+                        <span>Кошки</span>
+                    </a>
+                    <a href="/animals/type/Dog" class="dropdown-item border-radius-md">
+                        <span>Собаки</span>
+                    </a>
+                    <a href="/animals/search" class="dropdown-item border-radius-md">
+                        <span>Поиск</span>
+                    </a>
+
+                </div>
+
+            </div>
+        </li>
+
+        <li class="nav-item dropdown dropdown-hover mx-2">
+            <a class="nav-link ps-2 d-flex cursor-pointer align-items-center" id="dropdownMenuAd" data-bs-toggle="dropdown" aria-expanded="false">
+                Подать объявления
+                <img src="/img/down-arrow-dark.svg" alt="down-arrow" class="arrow ms-auto ms-md-2">
+            </a>
+            <div class="dropdown-menu dropdown-menu-animation ms-n3 dropdown-md p-3 border-radius-xl mt-0 mt-lg-3" aria-labelledby="dropdownMenuPages">
+                <div class="d-none d-lg-block">
+                    <a href="/animals/add" class="dropdown-item border-radius-md">
+                        <span>Подать объявление</span>
+                    </a>
+                    <a href="/register" class="dropdown-item border-radius-md">
+                        <span>Зарегистрироваться</span>
+                    </a>
+                    <a href="/login" class="dropdown-item border-radius-md">
+                        <span>Войти</span>
+                    </a>
+                </div>
+
+                <div class="d-lg-none">
+                    <h6 class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-1">
+                        Подать объявления
+                    </h6>
+                    <div class="d-none d-lg-block">
+                        <a href="/animals/add" class="dropdown-item border-radius-md">
+                            <span>Подать объявление</span>
+                        </a>
+                        <a href="/register" class="dropdown-item border-radius-md">
+                            <span>Зарегистрироваться</span>
+                        </a>
+                        <a href="/login" class="dropdown-item border-radius-md">
+                            <span>Войти</span>
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+        </li>
+
+        <li class="nav-item ms-lg-auto">
+            <a sec:authorize="isAuthenticated()" class="nav-link nav-link-icon me-2" th:href="@{/profile}" th:object="${userdto}">
+                <i class="bi bi-person-circle"></i>
+                <p th:text="${userDto.firstName} + ' ' + ${userDto.lastName}" class="d-inline text-sm z-index-1 font-weight-bold" data-bs-toggle="tooltip"
+                   data-bs-placement="bottom" title="Личный кабинет"></p>
+            </a>
+<!--            <a sec:authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')" class="nav-link nav-link-icon me-2" th:href="@{/profile/manager}" th:object="${userdto}">-->
+<!--                <i class="bi bi-person-circle"></i>-->
+<!--                <p th:text="${userDto.firstName} + ' ' + ${userDto.lastName}" class="d-inline text-sm z-index-1 font-weight-bold" data-bs-toggle="tooltip"-->
+<!--                   data-bs-placement="bottom" title="Личный кабинет"></p>-->
+<!--            </a>-->
+            <a sec:authorize="!isAuthenticated()" class="nav-link nav-link-icon me-2" th:href="@{/login}">
+                <i class="bi bi-person-circle"></i>
+                <p class="d-inline text-sm z-index-1 font-weight-bold" data-bs-toggle="tooltip"
+                   data-bs-placement="bottom" title="Войдите чтобы продолжить">Войти</p>
+            </a>
+        </li>
+    </ul>
+</body>
+</html>

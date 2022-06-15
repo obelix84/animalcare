@@ -1,0 +1,29 @@
+server:
+  servlet:
+    context-path: /
+
+spring:
+  output:
+    ansi:
+      enabled: always
+  h2:
+    console:
+      enabled: true
+  thymeleaf:
+    enabled: true
+    encoding: UTF-8
+    check-template-location: true
+    prefix: classpath:/templates/
+    suffix: .html
+
+  datasource:
+    url: jdbc:h2:mem:animalcare
+    username: sa
+    password:
+    driverClassName: org.h2.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+
