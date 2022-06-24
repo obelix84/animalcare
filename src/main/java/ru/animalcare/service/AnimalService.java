@@ -215,10 +215,19 @@ public class AnimalService {
         animalRepository.deleteById(id);
     }
 
+//    public List<AnimalDto> findAllAnimalsTypes(String type) {
+//        return StreamSupport.stream(animalRepository.findAll().spliterator(), false)
+//                .filter(Animal::getActive)
+//                .filter(Animal -> Animal.getAnimalType().getName().equals(type))
+//                .map(AnimalDto::new)
+//                .collect(Collectors.toList());
+//    }
+
     public List<AnimalDto> findAllAnimalsTypes(String type) {
+        Long typeId = Long.valueOf(type);
         return StreamSupport.stream(animalRepository.findAll().spliterator(), false)
                 .filter(Animal::getActive)
-                .filter(Animal -> Animal.getAnimalType().getName().equals(type))
+                .filter(Animal -> Animal.getAnimalType().getId().equals(typeId))
                 .map(AnimalDto::new)
                 .collect(Collectors.toList());
     }
@@ -236,4 +245,5 @@ public class AnimalService {
                 .collect(Collectors.toList());
 
     }
+
 }

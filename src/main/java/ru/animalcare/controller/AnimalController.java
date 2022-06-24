@@ -95,12 +95,10 @@ public class AnimalController {
     @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN', 'ROLE_MANAGER')")
     @GetMapping("/{id}/update")
     public String showUpdateFormAnimal(Model model, @PathVariable Long id) {
-        //model.addAttribute("animal", animalService.findAnimalsById(id)) ;
-        AnimalDto animalDto = new AnimalDto(animalService.findAnimalById(id));
-        model.addAttribute("currentAnimal", animalDto);
+        AnimalRegistrationDto animalRegistrationDto = new AnimalRegistrationDto(animalService.findAnimalById(id));
         model.addAttribute("animalTypes", animalTypeService.findAllAnimalTypes());
         model.addAttribute("animalGenders", animalGenderService.findAllAnimalGenders());
-        model.addAttribute("animalRegistration", new AnimalRegistrationDto());
+        model.addAttribute("animalRegistration", animalRegistrationDto);
         return "animal_update";
     }
 

@@ -69,15 +69,15 @@
                     <table id="posts" class="table table-hover">
                         <thead>
                         <tr>
-                            <th scope="col">Photo</th>
-                            <th scope="col">ID</th>
-                            <th scope="col">Animal type</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Gender</th>
-                            <th scope="col">Age</th>
-                            <th scope="col">Condition</th>
-                            <th scope="col">Description</th>
-                            <th scope="col">Action</th>
+                            <th scope="col">Фотография</th>
+                            <th scope="col">Порядковый номер</th>
+                            <th scope="col">Вид животного</th>
+                            <th scope="col">Кличка</th>
+                            <th scope="col">Пол</th>
+                            <th scope="col">Возраст</th>
+                            <th scope="col">Состояние здоровья</th>
+                            <th scope="col">Описание</th>
+                            <th scope="col">Действие</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -93,11 +93,8 @@
                             <td class="text-center" th:text="${animal.condition}"></td>
                             <td class="text-center" th:text="${animal.description}"></td>
                             <td>
-                                <a th:href="@{/animals/} + ${animal.id}">Show Profile Animal</a>
+                                <a th:href="@{/animals/} + ${animal.id}">Посмотреть профиль животного</a>
                             </td>
-<!--                            <td>-->
-<!--                                <a th:href="@{/animals/} + ${animal.id} + @{/update}">Edit Animal</a>-->
-<!--                            </td>-->
                         </tr>
                         </tbody>
                     </table>
